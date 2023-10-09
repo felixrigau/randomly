@@ -1,0 +1,19 @@
+{
+  "name": "randomly",
+  "version": "1.0.0",
+  "description": "manage items and show them randomly",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixrigau/randomly.git"
+  },
+  "author": "Felix Rigau",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/felixrigau/randomly/issues"
+  },
+  "homepage": "https://github.com/felixrigau/randomly#readme"
+}
