@@ -1,7 +1,9 @@
 type User = {
-  name: string,
-}
+  name: string;
+};
 
-const printUserName = (user: User): void => { console.log(user.name) }
+const printUserName = (user: User): void => {
+  console.log(user.name);
+};
 
-printUserName({name: 'felix'})
+printUserName({ name: 'felix' });
