@@ -1,13 +1,13 @@
 import { Item } from "../../model/Item";
 import { ItemRespository } from "../../model/IItemRepository";
-
-const LOCAL_STORAGE_KEY = "randomly_db";
+import { LOCAL_STORAGE_KEY } from "./constants";
+import { DataBaseSchema } from "./types";
 
 export class ItemInMemoryRepository implements ItemRespository {
   save = (item: Item) => {
     const db = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (db) {
-      const randomlyDB = JSON.parse(db) as { items: Item[] };
+      const randomlyDB: DataBaseSchema = JSON.parse(db);
 
       randomlyDB.items.push(item);
 
@@ -15,14 +15,18 @@ export class ItemInMemoryRepository implements ItemRespository {
     }
   };
 
-  delete = (id: string) => {
+  remove = (id: string) => {
     const db = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (db) {
       const randomlyDB = JSON.parse(db);
 
-      randomlyDB.items.filter((item: Item) => item.id !== id);
-
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(randomlyDB));
+      localStorage.setItem(
+        LOCAL_STORAGE_KEY,
+        JSON.stringify({
+          ...randomlyDB,
+          items: randomlyDB.items.filter((item: Item) => item.id !== id),
+        })
+      );
     }
   };
 
@@ -49,13 +53,19 @@ export class ItemInMemoryRepository implements ItemRespository {
     if (db) {
       const randomlyDB = JSON.parse(db);
 
-      return randomlyDB.items.map((item: Item) => {
-        if (item.id === id) {
-          return { ...item, ...updateItem };
-        } else {
-          return item;
-        }
-      });
+      localStorage.setItem(
+        LOCAL_STORAGE_KEY,
+        JSON.stringify({
+          ...randomlyDB,
+          items: randomlyDB.items.map((item: Item) => {
+            if (item.id === id) {
+              return { ...item, ...updateItem };
+            } else {
+              return item;
+            }
+          }),
+        })
+      );
     }
   };
 }
