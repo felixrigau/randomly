@@ -4,7 +4,7 @@ export class Item {
   text?: string;
   isFixed?: boolean;
   order?: number;
-  createdAt: Date;
+  createdAt: string;
 
   constructor(
     title: string,
@@ -17,6 +17,6 @@ export class Item {
     this.text = text;
     this.isFixed = isFixed;
     this.order = order;
-    this.createdAt = new Date();
+    this.createdAt = new Date().toISOString();
   }
 }
