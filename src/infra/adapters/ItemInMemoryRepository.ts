@@ -3,7 +3,7 @@ import { ItemRespository } from "../../model/IItemRepository";
 import { LOCAL_STORAGE_KEY } from "./constants";
 import { DataBaseSchema } from "./types";
 
-const getLocalData = (): DataBaseSchema => {
+const getLocalStorageData = (): DataBaseSchema => {
   const db = localStorage.getItem(LOCAL_STORAGE_KEY);
 
   if (db) {
@@ -16,8 +16,8 @@ const getLocalData = (): DataBaseSchema => {
   }
 };
 
-const updateLocalData = (newData: Partial<DataBaseSchema>) => {
-  const db = getLocalData();
+const updateLocalStorageData = (newData: Partial<DataBaseSchema>) => {
+  const db = getLocalStorageData();
 
   localStorage.setItem(
     LOCAL_STORAGE_KEY,
@@ -27,27 +27,27 @@ const updateLocalData = (newData: Partial<DataBaseSchema>) => {
 
 export class ItemInMemoryRepository implements ItemRespository {
   save = (item: Item) => {
-    const randomlyDB = getLocalData();
+    const randomlyDB = getLocalStorageData();
 
     randomlyDB.items.push(item);
 
-    updateLocalData(randomlyDB);
+    updateLocalStorageData(randomlyDB);
   };
 
   remove = (id: string) => {
-    updateLocalData({
-      items: getLocalData().items.filter((item: Item) => item.id !== id),
+    updateLocalStorageData({
+      items: getLocalStorageData().items.filter((item: Item) => item.id !== id),
     });
   };
 
-  getAll = (): Item[] => getLocalData().items;
+  getAll = (): Item[] => getLocalStorageData().items;
 
   findBy = (id: string): Item =>
-    getLocalData().items.find((item: Item) => item.id === id);
+    getLocalStorageData().items.find((item: Item) => item.id === id);
 
   update = (id: string, updateItem: Partial<Item>): void => {
-    updateLocalData({
-      items: getLocalData().items.map((item: Item) => {
+    updateLocalStorageData({
+      items: getLocalStorageData().items.map((item: Item) => {
         if (item.id === id) {
           return { ...item, ...updateItem };
         } else {
