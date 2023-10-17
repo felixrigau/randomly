@@ -42,6 +42,12 @@ describe("ItemInMemoryRepository", () => {
     ).toBe(0);
   });
 
+  test("remove method should throw a error if the parameter has no value", () => {
+    const repository = new ItemInMemoryRepository();
+
+    expect(() => repository.remove("")).toThrowError();
+  });
+
   test("findBy method should find in localstorage an item by its id", () => {
     const item = new Item("foo");
 
@@ -55,6 +61,25 @@ describe("ItemInMemoryRepository", () => {
     repository.findBy(item.id);
 
     expect(repository.findBy(item.id)).toEqual(item);
+  });
+
+  test("findBy method should return undefined it could not find the element", () => {
+    const item = new Item("foo");
+
+    window.localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({ items: [item] })
+    );
+
+    const repository = new ItemInMemoryRepository();
+
+    expect(repository.findBy("baafoo")).toBeUndefined();
+  });
+
+  test("findBy method should throw a error if the parameter has no value", () => {
+    const repository = new ItemInMemoryRepository();
+
+    expect(() => repository.findBy("")).toThrowError();
   });
 
   test("getAll method should get all items from localstorage", () => {
@@ -97,5 +122,11 @@ describe("ItemInMemoryRepository", () => {
     expect(
       JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)).items[0].title
     ).toBe(newTitle);
+  });
+
+  test("update method should throw a error if the parameter has no value", () => {
+    const repository = new ItemInMemoryRepository();
+
+    expect(() => repository.update("", {})).toThrowError();
   });
 });
