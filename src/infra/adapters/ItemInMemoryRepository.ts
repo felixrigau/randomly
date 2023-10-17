@@ -35,6 +35,10 @@ export class ItemInMemoryRepository implements ItemRespository {
   };
 
   remove = (id: string) => {
+    if (!id)
+      throw new Error(
+        `Error: it was expected a parameter with value, and it got ${id} instead`
+      );
     updateLocalStorageData({
       items: getLocalStorageData().items.filter((item: Item) => item.id !== id),
     });
@@ -42,10 +46,21 @@ export class ItemInMemoryRepository implements ItemRespository {
 
   getAll = (): Item[] => getLocalStorageData().items;
 
-  findBy = (id: string): Item =>
-    getLocalStorageData().items.find((item: Item) => item.id === id);
+  findBy = (id: string): Item | undefined => {
+    if (!id)
+      throw new Error(
+        `Error: it was expected a parameter with value, and it got ${id} instead`
+      );
+
+    return getLocalStorageData().items.find((item: Item) => item.id === id);
+  };
 
   update = (id: string, updateItem: Partial<Item>): void => {
+    if (!id)
+      throw new Error(
+        `Error: it was expected a parameter with value, and it got ${id} instead`
+      );
+
     updateLocalStorageData({
       items: getLocalStorageData().items.map((item: Item) => {
         if (item.id === id) {
