@@ -1,4 +1,4 @@
-import { Item } from "../../model/Item";
+import { Item } from "../../application/model/Item";
 
 export type DataBaseSchema = {
   items: Item[];

@@ -1,5 +1,5 @@
-import { Item } from "../../model/Item";
-import { ItemRespository } from "../../model/IItemRepository";
+import { ItemRespository } from "../../application/model/IItemRepository";
+import { Item } from "../../application/model/Item";
 import { LOCAL_STORAGE_KEY } from "./constants";
 import { DataBaseSchema } from "./types";
 

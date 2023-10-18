@@ -1,7 +1,7 @@
-import { Item } from "../../model/Item";
 import { ItemInMemoryRepository } from "./ItemInMemoryRepository";
 import "../../setupTests/localStorage.mock";
 import { LOCAL_STORAGE_KEY } from "./constants";
+import { Item } from "../../application/model/Item";
 
 describe("ItemInMemoryRepository", () => {
   test("save method should save in localstorage an item", () => {
