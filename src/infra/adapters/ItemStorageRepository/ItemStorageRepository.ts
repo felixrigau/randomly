@@ -1,7 +1,7 @@
-import { ItemRespository } from "../../application/model/IItemRepository";
-import { Item } from "../../application/model/Item";
-import { LOCAL_STORAGE_KEY } from "./constants";
-import { DataBaseSchema } from "./types";
+import { ItemRespository } from "../../../application/model/IItemRepository";
+import { Item } from "../../../application/model/Item";
+import { LOCAL_STORAGE_KEY } from "../constants";
+import { DataBaseSchema } from "../types";
 
 const getLocalStorageData = (): DataBaseSchema => {
   const db = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -25,7 +25,7 @@ const updateLocalStorageData = (newData: Partial<DataBaseSchema>) => {
   );
 };
 
-export class ItemInMemoryRepository implements ItemRespository {
+export class ItemStorageRepository implements ItemRespository {
   save = (item: Item) => {
     const randomlyDB = getLocalStorageData();
 
