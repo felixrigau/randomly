@@ -1,14 +1,11 @@
 import { ItemStorageRepository } from "./ItemStorageRepository";
 import "../../../setupTests/localStorage.mock";
-import { LOCAL_STORAGE_KEY } from "../constants";
+import { DB_STORAGE_KEY } from "../constants";
 import { Item } from "../../../application/model/Item";
 
 describe("ItemStorageRepository", () => {
   test("save method should save in localstorage an item", () => {
-    window.localStorage.setItem(
-      LOCAL_STORAGE_KEY,
-      JSON.stringify({ items: [] })
-    );
+    window.localStorage.setItem(DB_STORAGE_KEY, JSON.stringify({ items: [] }));
 
     const repository = new ItemStorageRepository();
 
@@ -17,7 +14,7 @@ describe("ItemStorageRepository", () => {
     repository.save(item);
 
     expect(
-      JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)).items[0]
+      JSON.parse(window.localStorage.getItem(DB_STORAGE_KEY)).items[0]
     ).toEqual(item);
   });
 
@@ -25,20 +22,20 @@ describe("ItemStorageRepository", () => {
     const item = new Item("foo");
 
     window.localStorage.setItem(
-      LOCAL_STORAGE_KEY,
+      DB_STORAGE_KEY,
       JSON.stringify({ items: [item] })
     );
 
     const repository = new ItemStorageRepository();
 
     expect(
-      JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)).items.length
+      JSON.parse(window.localStorage.getItem(DB_STORAGE_KEY)).items.length
     ).toBe(1);
 
     repository.remove(item.id);
 
     expect(
-      JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)).items.length
+      JSON.parse(window.localStorage.getItem(DB_STORAGE_KEY)).items.length
     ).toBe(0);
   });
 
@@ -52,7 +49,7 @@ describe("ItemStorageRepository", () => {
     const item = new Item("foo");
 
     window.localStorage.setItem(
-      LOCAL_STORAGE_KEY,
+      DB_STORAGE_KEY,
       JSON.stringify({ items: [item] })
     );
 
@@ -67,7 +64,7 @@ describe("ItemStorageRepository", () => {
     const item = new Item("foo");
 
     window.localStorage.setItem(
-      LOCAL_STORAGE_KEY,
+      DB_STORAGE_KEY,
       JSON.stringify({ items: [item] })
     );
 
@@ -89,7 +86,7 @@ describe("ItemStorageRepository", () => {
     const item2 = new Item(title2);
 
     window.localStorage.setItem(
-      LOCAL_STORAGE_KEY,
+      DB_STORAGE_KEY,
       JSON.stringify({ items: [item1, item2] })
     );
 
@@ -107,20 +104,20 @@ describe("ItemStorageRepository", () => {
     const item = new Item(title);
 
     window.localStorage.setItem(
-      LOCAL_STORAGE_KEY,
+      DB_STORAGE_KEY,
       JSON.stringify({ items: [item] })
     );
 
     const repository = new ItemStorageRepository();
 
     expect(
-      JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)).items[0].title
+      JSON.parse(window.localStorage.getItem(DB_STORAGE_KEY)).items[0].title
     ).toBe(title);
 
     repository.update(item.id, { title: newTitle });
 
     expect(
-      JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_KEY)).items[0].title
+      JSON.parse(window.localStorage.getItem(DB_STORAGE_KEY)).items[0].title
     ).toBe(newTitle);
   });
 
