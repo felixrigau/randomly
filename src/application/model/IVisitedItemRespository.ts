@@ -1,4 +1,5 @@
 export interface IVisitedItemRespository {
-  getVisitedIds: () => string[];
+  exist: (id: string) => boolean;
   save: (id: string) => void;
+  clear: () => void;
 }
