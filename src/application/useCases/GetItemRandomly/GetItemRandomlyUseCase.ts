@@ -14,9 +14,11 @@ export class GetItemRandomlyUseCase {
 
     if (!items.length) throw new Error("There is no items");
 
-    const randomIndex = getBoundedRandomNumber(0, items.length);
+    let randomIndex;
 
-    this.visitedItemRespository.exist(items[randomIndex].id);
+    do {
+      randomIndex = getBoundedRandomNumber(0, items.length);
+    } while (this.visitedItemRespository.exist(items[randomIndex].id));
 
     return items[randomIndex];
   }
