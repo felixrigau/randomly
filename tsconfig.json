@@ -7,7 +7,7 @@
     // You might choose to set a lower target if your code is deployed to older environments
     "target": "es6",
     // Controls how JSX constructs are emitted in JavaScript files
-    "jsx": "react",
+    "jsx": "react-jsx",
     // Allow JavaScript files to be imported inside your project
     "allowJs": false,
     // Specify the module resolution strategy

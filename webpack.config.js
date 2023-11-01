@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: path.resolve(__dirname, "./src/index.ts"),
+  entry: path.resolve(__dirname, "./src/index.tsx"),
   plugins: [
     new HtmlWebpackPlugin({
       title: "Randomly",
