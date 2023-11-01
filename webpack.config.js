@@ -1,7 +1,13 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Randomly",
+    }),
+  ],
   module: {
     rules: [
       {
@@ -17,6 +23,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    clean: true,
   },
   mode: "development",
 };
