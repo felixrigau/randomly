@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
+    // Turning on noImplicitAny however TypeScript will issue an error whenever it would have inferred
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
+    // Sets the module system for the program
+    "module": "nodenext",
+    // You might choose to set a lower target if your code is deployed to older environments
+    "target": "es6",
+    // Controls how JSX constructs are emitted in JavaScript files
     "jsx": "react",
-    "allowJs": true,
-    "moduleResolution": "node",
+    // Allow JavaScript files to be imported inside your project
+    "allowJs": false,
+    // Specify the module resolution strategy
+    "moduleResolution": "nodenext",
+    //Do not emit compiler output files like JavaScript source code, source-maps or declarations
     "noEmit": false
   },
   "include": ["src/**/*"]

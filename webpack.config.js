@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.ts",
+  entry: path.resolve(__dirname, "./src/index.ts"),
   plugins: [
     new HtmlWebpackPlugin({
       title: "Randomly",
@@ -19,15 +19,15 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts"],
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "public"),
     filename: "bundle.js",
     clean: true,
   },
   devServer: {
-    static: "./dist",
+    static: path.resolve(__dirname, "public"),
   },
   devtool: "inline-source-map",
 };

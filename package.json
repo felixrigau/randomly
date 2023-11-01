@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "build": "webpack",
-    "start": "webpack serve --open"
+    "start": "webpack serve --mode development"
   },
   "repository": {
     "type": "git",
