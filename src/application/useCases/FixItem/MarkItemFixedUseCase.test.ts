@@ -1,8 +1,8 @@
 import { MarkItemFixedUseCase } from "./MarkItemFixedUseCase";
 import { ItemRepositoryMock } from "../../model/ItemRepository.mock";
 
-describe("remove item use case - tests suite", () => {
-  test("execute method should call the remove repository method receiving the id as a parameter", () => {
+describe("fix item use case - tests suite", () => {
+  test("execute method should update the item and toggle its isFixed property", () => {
     const itemRespository = new ItemRepositoryMock(),
       id = "baa",
       isFixed = true;
