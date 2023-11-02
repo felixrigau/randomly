@@ -15,5 +15,5 @@
     //Do not emit compiler output files like JavaScript source code, source-maps or declarations
     "noEmit": false
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "jest-setup.ts"]
 }
