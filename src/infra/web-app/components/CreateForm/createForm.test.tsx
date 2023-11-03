@@ -2,6 +2,10 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import CreateForm from "./createForm";
+import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
+import { Item } from "../../../../application/model/Item";
+
+jest.mock("../../../../application/useCases/CreateItem/CreateItemUseCase");
 
 describe("createForm - tests suite", () => {
   test("should have a input to write the item title", () => {
@@ -38,5 +42,26 @@ describe("createForm - tests suite", () => {
     await userEvent.type(title, "foo");
 
     expect(button).toBeEnabled();
+  });
+
+  test("when button is clicked should create a new item", async () => {
+    render(<CreateForm />);
+
+    const titleInput = screen.getByLabelText("Title");
+    const descriptionInput = screen.getByLabelText("Description");
+    const fixedCheckbox = screen.getByLabelText("IsFixed");
+    const button = screen.getByRole("button");
+
+    const title = "foo",
+      description = "baa";
+
+    await userEvent.type(titleInput, title);
+    await userEvent.type(descriptionInput, description);
+    await userEvent.click(fixedCheckbox);
+    await userEvent.click(button);
+
+    expect(
+      (CreateItemUseCase as jest.Mock).mock.instances[0].execute
+    ).toBeCalledWith(expect.any(Item));
   });
 });
