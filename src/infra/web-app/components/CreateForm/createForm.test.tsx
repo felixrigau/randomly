@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 
 import CreateForm from "./createForm";
 import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
-import { Item } from "../../../../application/model/Item";
 
 jest.mock("../../../../application/useCases/CreateItem/CreateItemUseCase");
 
@@ -60,8 +59,11 @@ describe("createForm - tests suite", () => {
     await userEvent.click(fixedCheckbox);
     await userEvent.click(button);
 
-    expect(
-      (CreateItemUseCase as jest.Mock).mock.instances[0].execute
-    ).toBeCalledWith(expect.any(Item));
+    const executeMock = (CreateItemUseCase as jest.Mock).mock.instances[0]
+      .execute;
+
+    expect(executeMock).toBeCalledWith(
+      expect.objectContaining({ title, text: description, isFixed: true })
+    );
   });
 });
