@@ -1,4 +1,6 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 import CreateForm from "./createForm";
 
 describe("createForm - tests suite", () => {
@@ -24,5 +26,17 @@ describe("createForm - tests suite", () => {
     render(<CreateForm />);
 
     expect(screen.getByRole("button")).toBeInTheDocument();
+  });
+
+  test("should have the button disabled if title input is empty", async () => {
+    render(<CreateForm />);
+    const button = screen.getByRole("button");
+    const title = screen.getByLabelText("Title");
+
+    expect(button).toBeDisabled();
+
+    await userEvent.type(title, "foo");
+
+    expect(button).toBeEnabled();
   });
 });
