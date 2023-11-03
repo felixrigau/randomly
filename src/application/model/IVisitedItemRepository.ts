@@ -1,4 +1,4 @@
-export interface IVisitedItemRespository {
+export interface IVisitedItemRepository {
   exist: (id: string) => boolean;
   save: (id: string) => void;
   clear: () => void;

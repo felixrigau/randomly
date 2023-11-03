@@ -1,7 +1,7 @@
-import { ItemRespository } from "./IItemRepository";
+import { ItemRepository } from "./IItemRepository";
 import { Item } from "./Item";
 
-export class ItemRepositoryMock implements ItemRespository {
+export class ItemRepositoryMock implements ItemRepository {
   save = jest.fn();
   remove = jest.fn();
   getAll = jest.fn().mockImplementation(() => [new Item("foo")]);

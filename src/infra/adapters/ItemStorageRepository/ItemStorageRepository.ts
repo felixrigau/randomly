@@ -1,11 +1,11 @@
-import { ItemRespository } from "../../../application/model/IItemRepository";
+import { ItemRepository } from "../../../application/model/IItemRepository";
 import { Item } from "../../../application/model/Item";
 import { getLocalStorageData } from "../../utilities/localStorage/getLocalStorageData";
 import { updateLocalStorageData } from "../../utilities/localStorage/updateLocalStorageData";
 import { DB_STORAGE_KEY } from "../constants";
 import { DataBaseSchema } from "../types";
 
-export class ItemStorageRepository implements ItemRespository {
+export class ItemStorageRepository implements ItemRepository {
   save = (item: Item) => {
     const randomlyDB = getLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY);
 

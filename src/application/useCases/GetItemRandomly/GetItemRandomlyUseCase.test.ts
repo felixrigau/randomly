@@ -1,22 +1,21 @@
 import { GetItemRandomlyUseCase } from "./GetItemRandomlyUseCase";
 import { ItemRepositoryMock } from "../../model/ItemRepository.mock";
 import { VisitedItemRepositoryMock } from "../../model/VisitedItemRepository.mock";
-import { ItemRespository } from "../../model/IItemRepository";
+import { ItemRepository } from "../../model/IItemRepository";
 import { Item } from "../../model/Item";
-import { IVisitedItemRespository } from "../../model/IVisitedItemRespository";
+import { IVisitedItemRepository } from "../../model/IVisitedItemRepository";
 
 describe("get all items use case - tests suite", () => {
-  const itemRespository: jest.Mocked<ItemRespository> =
-      new ItemRepositoryMock(),
-    visitedItemRespository: jest.Mocked<IVisitedItemRespository> =
+  const itemRepository: jest.Mocked<ItemRepository> = new ItemRepositoryMock(),
+    visitedItemRepository: jest.Mocked<IVisitedItemRepository> =
       new VisitedItemRepositoryMock();
 
   test("execute method should throw a error if there are not element to return", () => {
-    itemRespository.getAll.mockImplementation(() => []);
+    itemRepository.getAll.mockImplementation(() => []);
 
     const getItemRandomly = new GetItemRandomlyUseCase(
-      itemRespository,
-      visitedItemRespository
+      itemRepository,
+      visitedItemRepository
     );
 
     expect(() => getItemRandomly.execute()).toThrow("There is no items");
@@ -26,15 +25,15 @@ describe("get all items use case - tests suite", () => {
     const item1 = new Item("abc"),
       visitedItem = new Item("foo");
 
-    itemRespository.getAll.mockImplementation(() => [item1, visitedItem]);
+    itemRepository.getAll.mockImplementation(() => [item1, visitedItem]);
 
-    visitedItemRespository.exist.mockImplementation((id: string) => {
+    visitedItemRepository.exist.mockImplementation((id: string) => {
       return id === visitedItem.id;
     });
 
     const getItemRandomly = new GetItemRandomlyUseCase(
-      itemRespository,
-      visitedItemRespository
+      itemRepository,
+      visitedItemRepository
     );
 
     expect(getItemRandomly.execute().id).toBe(item1.id);
@@ -43,7 +42,7 @@ describe("get all items use case - tests suite", () => {
   test("execute method should try many times to get a random item until finding a no visited one", () => {
     const visitedItem = new Item("abc"),
       item = new Item("123");
-    itemRespository.getAll.mockImplementation(() => [
+    itemRepository.getAll.mockImplementation(() => [
       item,
       visitedItem,
       visitedItem,
@@ -52,22 +51,22 @@ describe("get all items use case - tests suite", () => {
       visitedItem,
     ]);
 
-    visitedItemRespository.exist.mockImplementation((id: string) => {
+    visitedItemRepository.exist.mockImplementation((id: string) => {
       return id === visitedItem.id;
     });
 
     const getItemRandomly = new GetItemRandomlyUseCase(
-      itemRespository,
-      visitedItemRespository
+      itemRepository,
+      visitedItemRepository
     );
 
     const randomItem = getItemRandomly.execute();
 
     expect(randomItem.id).toBe(item.id);
     console.log(
-      "visitedItemRespository.exist.mock.calls.length",
-      visitedItemRespository.exist.mock.calls.length
+      "visitedItemRepository.exist.mock.calls.length",
+      visitedItemRepository.exist.mock.calls.length
     );
-    expect(visitedItemRespository.exist.mock.calls.length).toBeGreaterThan(1);
+    expect(visitedItemRepository.exist.mock.calls.length).toBeGreaterThan(1);
   });
 });

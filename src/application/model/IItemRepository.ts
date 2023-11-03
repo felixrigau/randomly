@@ -1,6 +1,6 @@
 import { Item } from "./Item";
 
-export interface ItemRespository {
+export interface ItemRepository {
   save: (item: Item) => void;
   remove: (id: string) => void;
   getAll: () => Item[];

@@ -1,12 +1,12 @@
-import { ItemRespository } from "../../model/IItemRepository";
-import { IVisitedItemRespository } from "../../model/IVisitedItemRespository";
+import { ItemRepository } from "../../model/IItemRepository";
+import { IVisitedItemRepository } from "../../model/IVisitedItemRepository";
 import { Item } from "../../model/Item";
 import { getBoundedRandomNumber } from "../../utilities/getBoundedRandomNumber";
 
 export class GetItemRandomlyUseCase {
   constructor(
-    private itemRepository: ItemRespository,
-    private visitedItemRespository: IVisitedItemRespository
+    private itemRepository: ItemRepository,
+    private visitedItemRepository: IVisitedItemRepository
   ) {}
 
   execute(): Item {
@@ -18,7 +18,7 @@ export class GetItemRandomlyUseCase {
 
     do {
       randomIndex = getBoundedRandomNumber(0, items.length);
-    } while (this.visitedItemRespository.exist(items[randomIndex].id));
+    } while (this.visitedItemRepository.exist(items[randomIndex].id));
 
     return items[randomIndex];
   }

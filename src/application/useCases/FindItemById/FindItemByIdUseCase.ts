@@ -1,7 +1,7 @@
-import { ItemRespository } from "../../model/IItemRepository";
+import { ItemRepository } from "../../model/IItemRepository";
 
 export class FindItemByIdUseCase {
-  constructor(private repository: ItemRespository) {}
+  constructor(private repository: ItemRepository) {}
 
   execute(id: string) {
     return this.repository.findBy(id);

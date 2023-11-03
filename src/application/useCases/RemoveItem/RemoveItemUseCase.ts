@@ -1,7 +1,7 @@
-import { ItemRespository } from "../../model/IItemRepository";
+import { ItemRepository } from "../../model/IItemRepository";
 
 export class RemoveItemUseCase {
-  constructor(private repository: ItemRespository) {}
+  constructor(private repository: ItemRepository) {}
 
   execute(id: string) {
     this.repository.remove(id);

@@ -3,14 +3,14 @@ import { ItemRepositoryMock } from "../../model/ItemRepository.mock";
 
 describe("fix item use case - tests suite", () => {
   test("execute method should update the item and toggle its isFixed property", () => {
-    const itemRespository = new ItemRepositoryMock(),
+    const itemRepository = new ItemRepositoryMock(),
       id = "baa",
       isFixed = true;
 
-    const markItemFixed = new MarkItemFixedUseCase(itemRespository);
+    const markItemFixed = new MarkItemFixedUseCase(itemRepository);
 
     markItemFixed.execute(id, isFixed);
 
-    expect(itemRespository.update).toBeCalledWith(id, { isFixed });
+    expect(itemRepository.update).toBeCalledWith(id, { isFixed });
   });
 });

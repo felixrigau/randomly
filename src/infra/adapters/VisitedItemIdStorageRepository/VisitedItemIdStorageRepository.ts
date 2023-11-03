@@ -1,10 +1,10 @@
-import { IVisitedItemRespository } from "../../../application/model/IVisitedItemRespository";
+import { IVisitedItemRepository } from "../../../application/model/IVisitedItemRepository";
 import { getLocalStorageData } from "../../utilities/localStorage/getLocalStorageData";
 import { updateLocalStorageData } from "../../utilities/localStorage/updateLocalStorageData";
 import { VISITED_ITEMS } from "../constants";
 import { VisitedItemIdsType } from "../types";
 
-export class VisitedItemIdStorageRepository implements IVisitedItemRespository {
+export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
   exist = (id: string): boolean => {
     const storage = getLocalStorageData<VisitedItemIdsType>(VISITED_ITEMS);
     return storage.visitedItemIds.includes(id);
