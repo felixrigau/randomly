@@ -1,7 +1,7 @@
-import CreateForm from "./components/CreateForm/createForm";
+import CreateItem from "./components/createItem/createItem";
 
 export const App = () => (
   <>
-    <CreateForm />
+    <CreateItem />
   </>
 );

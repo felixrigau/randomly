@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import CreateForm from "./createForm";
+import CreateForm from "./createItem";
 import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
 
 jest.mock("../../../../application/useCases/CreateItem/CreateItemUseCase");
