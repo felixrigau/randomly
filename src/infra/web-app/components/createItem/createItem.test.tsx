@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
+import "@testing-library/jest-dom";
 import CreateForm from "./createItem";
 import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
@@ -84,10 +84,10 @@ describe("createForm - tests suite", () => {
     await userEvent.click(fixedCheckbox);
     await userEvent.click(button);
 
-    const executeMock = (CreateItemUseCase as jest.Mock).mock.instances[0]
+    const createItemMock = (CreateItemUseCase as jest.Mock).mock.instances[0]
       .execute;
 
-    expect(executeMock).toBeCalledWith(
+    expect(createItemMock).toBeCalledWith(
       expect.objectContaining({ title, text: description, isFixed: true })
     );
   });
