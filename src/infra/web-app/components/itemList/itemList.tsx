@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { GetAllItemsUseCase } from "../../../../application/useCases/GetAllItems/GetAllItemsUseCase";
 import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/ItemStorageRepository";
-import { Item } from "../../../../application/model/Item";
+import { useItemsContext } from "../../contexts/Items/useItemContext";
 
 const ItemList = () => {
-  const [items, setItems] = useState<Item[]>([]);
+  const { items, setItems } = useItemsContext();
 
   useEffect(() => {
     const getAllItems = new GetAllItemsUseCase(new ItemStorageRepository());

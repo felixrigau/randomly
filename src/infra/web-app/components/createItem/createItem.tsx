@@ -2,17 +2,21 @@ import { useState } from "react";
 import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
 import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/ItemStorageRepository";
 import { Item } from "../../../../application/model/Item";
+import { useItemsContext } from "../../contexts/Items/useItemContext";
 
 const CreateForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isFixed, setIsFixed] = useState(false);
+  const { items, setItems } = useItemsContext();
 
   const handleClick = () => {
     const createItemUseCase = new CreateItemUseCase(
       new ItemStorageRepository()
     );
-    createItemUseCase.execute(new Item(title, description, isFixed));
+    const newItem = new Item(title, description, isFixed);
+    createItemUseCase.execute(newItem);
+    setItems([...items, newItem]);
   };
 
   return (
