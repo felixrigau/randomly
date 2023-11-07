@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import ItemList from "./itemList";
 import { GetAllItemsUseCase } from "../../../../application/useCases/GetAllItems/GetAllItemsUseCase";
 import { Item } from "../../../../application/model/Item";
+import { ItemsProvider } from "../../contexts/Items/itemContext";
 
 jest.mock("../../../../application/useCases/GetAllItems/GetAllItemsUseCase");
 
@@ -13,7 +14,11 @@ describe("itemList - tests suite", () => {
         execute: () => [new Item("foo"), new Item("baa")],
       };
     });
-    render(<ItemList />);
+    render(
+      <ItemsProvider>
+        <ItemList />
+      </ItemsProvider>
+    );
 
     expect(screen.getAllByRole("listitem").length).toBe(2);
   });
@@ -24,7 +29,11 @@ describe("itemList - tests suite", () => {
         execute: (): Item[] => [],
       };
     });
-    render(<ItemList />);
+    render(
+      <ItemsProvider>
+        <ItemList />
+      </ItemsProvider>
+    );
 
     expect(screen.queryAllByRole("listitem").length).toBe(0);
     expect(screen.getByText("There are no items")).toBeInTheDocument();

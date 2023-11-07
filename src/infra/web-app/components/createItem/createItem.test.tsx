@@ -3,36 +3,57 @@ import userEvent from "@testing-library/user-event";
 
 import CreateForm from "./createItem";
 import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
+import { ItemsProvider } from "../../contexts/Items/itemContext";
 
 jest.mock("../../../../application/useCases/CreateItem/CreateItemUseCase");
 
 describe("createForm - tests suite", () => {
   test("should have a input to write the item title", () => {
-    render(<CreateForm />);
+    render(
+      <ItemsProvider>
+        <CreateForm />
+      </ItemsProvider>
+    );
 
     expect(screen.getByLabelText("Title")).toBeInTheDocument();
   });
 
   test("should have a input to write the item description", () => {
-    render(<CreateForm />);
+    render(
+      <ItemsProvider>
+        <CreateForm />
+      </ItemsProvider>
+    );
 
     expect(screen.getByLabelText("Description")).toBeInTheDocument();
   });
 
   test("should have a checkbox to mark the item as fixed", () => {
-    render(<CreateForm />);
+    render(
+      <ItemsProvider>
+        <CreateForm />
+      </ItemsProvider>
+    );
 
     expect(screen.getByLabelText("IsFixed")).toBeInTheDocument();
   });
 
   test("should have a button to create the new button", () => {
-    render(<CreateForm />);
+    render(
+      <ItemsProvider>
+        <CreateForm />
+      </ItemsProvider>
+    );
 
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
   test("should have the button disabled if title input is empty", async () => {
-    render(<CreateForm />);
+    render(
+      <ItemsProvider>
+        <CreateForm />
+      </ItemsProvider>
+    );
     const button = screen.getByRole("button");
     const title = screen.getByLabelText("Title");
 
@@ -44,7 +65,11 @@ describe("createForm - tests suite", () => {
   });
 
   test("when button is clicked should create a new item", async () => {
-    render(<CreateForm />);
+    render(
+      <ItemsProvider>
+        <CreateForm />
+      </ItemsProvider>
+    );
 
     const titleInput = screen.getByLabelText("Title");
     const descriptionInput = screen.getByLabelText("Description");
