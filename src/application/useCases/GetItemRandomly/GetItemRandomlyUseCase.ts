@@ -12,7 +12,7 @@ export class GetItemRandomlyUseCase {
   execute(): Item {
     const items = this.itemRepository.getAll();
 
-    if (!items.length) throw new Error("There is no items");
+    if (!items.length) return null;
 
     let randomIndex;
 

@@ -10,7 +10,7 @@ describe("get all items use case - tests suite", () => {
     visitedItemRepository: jest.Mocked<IVisitedItemRepository> =
       new VisitedItemRepositoryMock();
 
-  test("execute method should throw a error if there are not element to return", () => {
+  test("execute method should return null if there are not element to return", () => {
     itemRepository.getAll.mockImplementation(() => []);
 
     const getItemRandomly = new GetItemRandomlyUseCase(
@@ -18,7 +18,7 @@ describe("get all items use case - tests suite", () => {
       visitedItemRepository
     );
 
-    expect(() => getItemRandomly.execute()).toThrow("There is no items");
+    expect(getItemRandomly.execute()).toBe(null);
   });
 
   test("execute method should return a random item that has not been visited yet", () => {
