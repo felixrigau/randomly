@@ -1,6 +1,6 @@
 import { IVisitedItemRepository } from "../../model/IVisitedItemRepository";
 
-export class CheckLastVisitedItemsDate {
+export class WereItemsVisitedToday {
   constructor(private repository: IVisitedItemRepository) {}
 
   execute(): boolean {
