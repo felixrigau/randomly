@@ -13,6 +13,8 @@ export class GetItemRandomlyUseCase {
     const items = this.itemRepository.getAll();
 
     if (!items.length) return null;
+    if (items.length === this.visitedItemRepository.size())
+      throw new Error("all items are visited");
 
     let randomIndex;
 

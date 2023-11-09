@@ -13,6 +13,8 @@ export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
     return storage.visitedItemIds.includes(id);
   };
 
+  size = (): number => localStorage.getLocalStorageData().visitedItemIds.length;
+
   save = (id: string) => {
     const storage = localStorage.getLocalStorageData();
 
