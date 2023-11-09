@@ -2,6 +2,7 @@ import { ItemRepository } from "../../model/IItemRepository";
 import { IVisitedItemRepository } from "../../model/IVisitedItemRepository";
 import { Item } from "../../model/Item";
 import { getBoundedRandomNumber } from "../../utilities/getBoundedRandomNumber";
+import { NoMoreItemsError } from "./NoMoreItemsError";
 
 export class GetItemRandomlyUseCase {
   constructor(
@@ -14,7 +15,7 @@ export class GetItemRandomlyUseCase {
 
     if (!items.length) return null;
     if (items.length === this.visitedItemRepository.size())
-      throw new Error("all items are visited");
+      throw new NoMoreItemsError();
 
     let randomIndex;
 

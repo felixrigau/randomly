@@ -4,6 +4,7 @@ import { VisitedItemRepositoryMock } from "../../model/VisitedItemRepository.moc
 import { ItemRepository } from "../../model/IItemRepository";
 import { Item } from "../../model/Item";
 import { IVisitedItemRepository } from "../../model/IVisitedItemRepository";
+import { NoMoreItemsError } from "./NoMoreItemsError";
 
 describe("get all items use case - tests suite", () => {
   const itemRepository: jest.Mocked<ItemRepository> = new ItemRepositoryMock(),
@@ -83,7 +84,7 @@ describe("get all items use case - tests suite", () => {
     expect(visitedItemRepository.save).toBeCalledWith(item.id);
   });
 
-  test("execute method should throw a error if all items are visited", () => {
+  test("execute method should throw a NoMoreItemsError error if all items are visited", () => {
     const visitedItem1 = new Item("abc"),
       visitedItem2 = new Item("123");
     const items = [visitedItem1, visitedItem2];
@@ -100,8 +101,6 @@ describe("get all items use case - tests suite", () => {
       visitedItemRepository
     );
 
-    expect(() => getItemRandomly.execute()).toThrow(
-      new Error("all items are visited")
-    );
+    expect(() => getItemRandomly.execute()).toThrowError(NoMoreItemsError);
   });
 });
