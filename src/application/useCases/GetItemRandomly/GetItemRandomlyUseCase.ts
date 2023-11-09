@@ -20,6 +20,9 @@ export class GetItemRandomlyUseCase {
       randomIndex = getBoundedRandomNumber(0, items.length);
     } while (this.visitedItemRepository.exist(items[randomIndex].id));
 
-    return items[randomIndex];
+    const item = items[randomIndex];
+    this.visitedItemRepository.save(item.id);
+
+    return item;
   }
 }
