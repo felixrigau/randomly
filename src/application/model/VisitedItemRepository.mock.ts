@@ -5,4 +5,5 @@ export class VisitedItemRepositoryMock implements IVisitedItemRepository {
   save = jest.fn();
   clear = jest.fn();
   size = jest.fn();
+  getLastDate = jest.fn();
 }
