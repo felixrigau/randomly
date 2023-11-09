@@ -1,25 +1,28 @@
 import { IVisitedItemRepository } from "../../../application/model/IVisitedItemRepository";
-import { getLocalStorageData } from "../../utilities/localStorage/getLocalStorageData";
-import { updateLocalStorageData } from "../../utilities/localStorage/updateLocalStorageData";
+import { LocalStorage } from "../../utilities/localStorage/LocalStorage";
 import { VISITED_ITEMS } from "../constants";
 import { VisitedItemIdsType } from "../types";
 
+const localStorage = new LocalStorage<VisitedItemIdsType>(VISITED_ITEMS, {
+  visitedItemIds: [],
+});
+
 export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
   exist = (id: string): boolean => {
-    const storage = getLocalStorageData<VisitedItemIdsType>(VISITED_ITEMS);
+    const storage = localStorage.getLocalStorageData();
     return storage.visitedItemIds.includes(id);
   };
 
   save = (id: string) => {
-    const storage = getLocalStorageData<VisitedItemIdsType>(VISITED_ITEMS);
+    const storage = localStorage.getLocalStorageData();
 
     storage.visitedItemIds.push(id);
 
-    updateLocalStorageData<VisitedItemIdsType>(VISITED_ITEMS, storage);
+    localStorage.updateLocalStorageData(storage);
   };
 
   clear = () => {
-    updateLocalStorageData<VisitedItemIdsType>(VISITED_ITEMS, {
+    localStorage.updateLocalStorageData({
       visitedItemIds: [],
     });
   };

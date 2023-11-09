@@ -63,10 +63,6 @@ describe("get all items use case - tests suite", () => {
     const randomItem = getItemRandomly.execute();
 
     expect(randomItem.id).toBe(item.id);
-    console.log(
-      "visitedItemRepository.exist.mock.calls.length",
-      visitedItemRepository.exist.mock.calls.length
-    );
     expect(visitedItemRepository.exist.mock.calls.length).toBeGreaterThan(1);
   });
 });

@@ -1,17 +1,20 @@
 import { ItemRepository } from "../../../application/model/IItemRepository";
 import { Item } from "../../../application/model/Item";
-import { getLocalStorageData } from "../../utilities/localStorage/getLocalStorageData";
-import { updateLocalStorageData } from "../../utilities/localStorage/updateLocalStorageData";
+import { LocalStorage } from "../../utilities/localStorage/LocalStorage";
 import { DB_STORAGE_KEY } from "../constants";
 import { DataBaseSchema } from "../types";
 
+const localStorage = new LocalStorage<DataBaseSchema>(DB_STORAGE_KEY, {
+  items: [],
+});
+
 export class ItemStorageRepository implements ItemRepository {
   save = (item: Item) => {
-    const randomlyDB = getLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY);
+    const randomlyDB = localStorage.getLocalStorageData();
 
     randomlyDB.items.push(item);
 
-    updateLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY, randomlyDB);
+    localStorage.updateLocalStorageData(randomlyDB);
   };
 
   remove = (id: string) => {
@@ -19,15 +22,14 @@ export class ItemStorageRepository implements ItemRepository {
       throw new Error(
         `Error: it was expected a parameter with value, and it got ${id} instead`
       );
-    updateLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY, {
-      items: getLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY).items.filter(
-        (item: Item) => item.id !== id
-      ),
+    localStorage.updateLocalStorageData({
+      items: localStorage
+        .getLocalStorageData()
+        .items.filter((item: Item) => item.id !== id),
     });
   };
 
-  getAll = (): Item[] =>
-    getLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY).items;
+  getAll = (): Item[] => localStorage.getLocalStorageData().items;
 
   findBy = (id: string): Item | undefined => {
     if (!id)
@@ -35,9 +37,9 @@ export class ItemStorageRepository implements ItemRepository {
         `Error: it was expected a parameter with value, and it got ${id} instead`
       );
 
-    return getLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY).items.find(
-      (item: Item) => item.id === id
-    );
+    return localStorage
+      .getLocalStorageData()
+      .items.find((item: Item) => item.id === id);
   };
 
   update = (id: string, updateItem: Partial<Item>): void => {
@@ -46,16 +48,14 @@ export class ItemStorageRepository implements ItemRepository {
         `Error: it was expected a parameter with value, and it got ${id} instead`
       );
 
-    updateLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY, {
-      items: getLocalStorageData<DataBaseSchema>(DB_STORAGE_KEY).items.map(
-        (item: Item) => {
-          if (item.id === id) {
-            return { ...item, ...updateItem };
-          } else {
-            return item;
-          }
+    localStorage.updateLocalStorageData({
+      items: localStorage.getLocalStorageData().items.map((item: Item) => {
+        if (item.id === id) {
+          return { ...item, ...updateItem };
+        } else {
+          return item;
         }
-      ),
+      }),
     });
   };
 }
