@@ -5,6 +5,7 @@ import { ItemsProvider } from "../../contexts/Items/itemContext";
 import { GetItemRandomlyUseCase } from "../../../../application/useCases/GetItemRandomly/GetItemRandomlyUseCase";
 import { Item } from "../../../../application/model/Item";
 import userEvent from "@testing-library/user-event";
+import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
 
 jest.mock(
   "../../../../application/useCases/GetItemRandomly/GetItemRandomlyUseCase"
@@ -63,5 +64,26 @@ describe("itemList - tests suite", () => {
 
     expect(getItemRandomlyMock).toBeCalled();
     expect(screen.getByText("Marie")).toBeInTheDocument();
+  });
+
+  test("should show a message when there is no more items to show", async () => {
+    const getItemRandomlyMock = jest.fn().mockImplementation(() => {
+      throw new NoMoreItemsError();
+    });
+    (GetItemRandomlyUseCase as jest.Mock).mockImplementation(() => ({
+      execute: getItemRandomlyMock,
+    }));
+
+    render(
+      <ItemsProvider>
+        <ShowItem />
+      </ItemsProvider>
+    );
+
+    await userEvent.click(
+      screen.getByRole("button", { name: "get next item" })
+    );
+
+    expect(screen.getByText("No more items to show")).toBeInTheDocument();
   });
 });
