@@ -56,7 +56,7 @@ describe("VisitedItemIdStorageRepository", () => {
     ).toBe(0);
   });
 
-  test("getLastRequestDate method should return the last request date", () => {
+  test("getLastRequestDate method should return the last requested date", () => {
     const lastRequestDate = new Date(2022, 11, 31);
     window.localStorage.setItem(
       VISITED_ITEMS,
@@ -65,8 +65,9 @@ describe("VisitedItemIdStorageRepository", () => {
 
     const repository = new VisitedItemIdStorageRepository();
 
-    expect(repository.getLastRequestDate()).toBe(
-      JSON.parse(window.localStorage.getItem(VISITED_ITEMS)).lastRequestDate
-    );
+    const date = repository.getLastRequestDate();
+
+    expect(date).toEqual(lastRequestDate);
+    expect(date).toBeInstanceOf(Date);
   });
 });
