@@ -4,4 +4,7 @@ export type DataBaseSchema = {
   items: Item[];
 };
 
-export type VisitedItemIdsType = { visitedItemIds: string[] };
+export type VisitedItemIdsType = {
+  visitedItemIds: string[];
+  lastRequestDate: Date;
+};
