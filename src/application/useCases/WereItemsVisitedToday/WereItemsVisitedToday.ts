@@ -5,7 +5,8 @@ export class WereItemsVisitedToday {
 
   execute(): boolean {
     return (
-      this.repository.getLastDate().toDateString() === new Date().toDateString()
+      this.repository.getLastRequestDate().toDateString() ===
+      new Date().toDateString()
     );
   }
 }
