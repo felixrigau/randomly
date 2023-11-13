@@ -5,6 +5,7 @@ import { VisitedItemIdsType } from "../types";
 
 const localStorage = new LocalStorage<VisitedItemIdsType>(VISITED_ITEMS, {
   visitedItemIds: [],
+  lastRequestDate: new Date(),
 });
 
 export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
@@ -24,8 +25,12 @@ export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
   };
 
   clear = () => {
-    localStorage.updateLocalStorageData({
-      visitedItemIds: [],
-    });
+    const storage = localStorage.getLocalStorageData();
+
+    localStorage.updateLocalStorageData({ ...storage, visitedItemIds: [] });
+  };
+
+  getLastRequestDate = (): Date => {
+    return localStorage.getLocalStorageData().lastRequestDate;
   };
 }

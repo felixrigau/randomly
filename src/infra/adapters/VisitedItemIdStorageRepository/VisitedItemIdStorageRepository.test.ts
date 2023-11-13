@@ -55,4 +55,18 @@ describe("VisitedItemIdStorageRepository", () => {
         .length
     ).toBe(0);
   });
+
+  test("getLastRequestDate method should return the last request date", () => {
+    const lastRequestDate = new Date(2022, 11, 31);
+    window.localStorage.setItem(
+      VISITED_ITEMS,
+      JSON.stringify({ lastRequestDate })
+    );
+
+    const repository = new VisitedItemIdStorageRepository();
+
+    expect(repository.getLastRequestDate()).toBe(
+      JSON.parse(window.localStorage.getItem(VISITED_ITEMS)).lastRequestDate
+    );
+  });
 });
