@@ -24,6 +24,19 @@ export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
     localStorage.updateLocalStorageData(storage);
   };
 
+  remove = (id: string) => {
+    const storage = localStorage.getLocalStorageData();
+
+    const listWhitoutItem = storage.visitedItemIds.filter(
+      (itemId) => itemId != id
+    );
+
+    localStorage.updateLocalStorageData({
+      ...storage,
+      visitedItemIds: listWhitoutItem,
+    });
+  };
+
   clear = () => {
     const storage = localStorage.getLocalStorageData();
 
