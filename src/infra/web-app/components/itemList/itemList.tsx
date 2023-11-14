@@ -3,14 +3,18 @@ import { GetAllItemsUseCase } from "../../../../application/useCases/GetAllItems
 import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/ItemStorageRepository";
 import { useItemsContext } from "../../contexts/Items/useItemContext";
 import { RemoveItemUseCase } from "../../../../application/useCases/RemoveItem/RemoveItemUseCase";
+import { VisitedItemIdStorageRepository } from "../../../adapters/VisitedItemIdStorageRepository/VisitedItemIdStorageRepository";
+import { RemoveVisitedItemIdUseCase } from "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase";
 
 const itemRepository = new ItemStorageRepository();
+const visitedItemRepository = new VisitedItemIdStorageRepository();
 
 const ItemList = () => {
   const { items, setItems } = useItemsContext();
   const useCases = useRef({
     getAllItems: new GetAllItemsUseCase(itemRepository),
     removeItem: new RemoveItemUseCase(itemRepository),
+    removeVisitedItemId: new RemoveVisitedItemIdUseCase(visitedItemRepository),
   });
 
   const getAllItems = () => {
@@ -23,6 +27,7 @@ const ItemList = () => {
 
   const removeItemBy = (id: string) => {
     useCases.current.removeItem.execute(id);
+    useCases.current.removeVisitedItemId.execute(id);
     getAllItems();
   };
 
