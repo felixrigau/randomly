@@ -9,5 +9,5 @@ export const useItemsContext = () => {
       "You are trying to access a context without being inside its scope"
     );
 
-  return { ...contextValue };
+  return { ...contextValue, existItems: contextValue.items.length !== 0 };
 };
