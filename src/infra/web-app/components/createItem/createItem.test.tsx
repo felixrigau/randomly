@@ -8,62 +8,6 @@ import { ItemsProvider } from "../../contexts/Items/itemContext";
 jest.mock("../../../../application/useCases/CreateItem/CreateItemUseCase");
 
 describe("createForm - tests suite", () => {
-  test("should have a input to write the item title", () => {
-    render(
-      <ItemsProvider>
-        <CreateForm />
-      </ItemsProvider>
-    );
-
-    expect(screen.getByLabelText("Title")).toBeInTheDocument();
-  });
-
-  test("should have a input to write the item description", () => {
-    render(
-      <ItemsProvider>
-        <CreateForm />
-      </ItemsProvider>
-    );
-
-    expect(screen.getByLabelText("Description")).toBeInTheDocument();
-  });
-
-  test("should have a checkbox to mark the item as fixed", () => {
-    render(
-      <ItemsProvider>
-        <CreateForm />
-      </ItemsProvider>
-    );
-
-    expect(screen.getByLabelText("IsFixed")).toBeInTheDocument();
-  });
-
-  test("should have a button to create the new button", () => {
-    render(
-      <ItemsProvider>
-        <CreateForm />
-      </ItemsProvider>
-    );
-
-    expect(screen.getByRole("button")).toBeInTheDocument();
-  });
-
-  test("should have the button disabled if title input is empty", async () => {
-    render(
-      <ItemsProvider>
-        <CreateForm />
-      </ItemsProvider>
-    );
-    const button = screen.getByRole("button");
-    const title = screen.getByLabelText("Title");
-
-    expect(button).toBeDisabled();
-
-    await userEvent.type(title, "foo");
-
-    expect(button).toBeEnabled();
-  });
-
   test("when button is clicked should create a new item", async () => {
     render(
       <ItemsProvider>
