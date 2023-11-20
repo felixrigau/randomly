@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import { App } from "./App";
 import { WereItemsVisitedToday } from "../../application/useCases/WereItemsVisitedToday/WereItemsVisitedToday";
 import { ClearPreviousVisitedItems } from "../../application/useCases/ClearPreviousVisitedItems/ClearPreviousVisitedItems";
+import { ItemsProvider } from "./contexts/Items/itemContext";
 
 jest.mock(
   "../../application/useCases/WereItemsVisitedToday/WereItemsVisitedToday"
@@ -12,7 +13,11 @@ jest.mock(
 
 describe("App tests suite", () => {
   test("should check items were visited today when redered", () => {
-    render(<App />);
+    render(
+      <ItemsProvider>
+        <App />
+      </ItemsProvider>
+    );
     const wereItemsVisitedTodayMock = (WereItemsVisitedToday as jest.Mock).mock
       .instances[0].execute;
 
@@ -25,7 +30,11 @@ describe("App tests suite", () => {
       execute: () => itemsWereVisitedToday,
     }));
 
-    render(<App />);
+    render(
+      <ItemsProvider>
+        <App />
+      </ItemsProvider>
+    );
 
     const clearPreviousVisitedItemsMock = (
       ClearPreviousVisitedItems as jest.Mock
@@ -40,7 +49,11 @@ describe("App tests suite", () => {
       execute: () => itemsWereVisitedToday,
     }));
 
-    render(<App />);
+    render(
+      <ItemsProvider>
+        <App />
+      </ItemsProvider>
+    );
     const clearPreviousVisitedItemsMock = (
       ClearPreviousVisitedItems as jest.Mock
     ).mock.instances[0].execute;
