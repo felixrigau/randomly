@@ -46,4 +46,13 @@ export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
   getLastRequestDate = (): Date => {
     return new Date(localStorage.getLocalStorageData().lastRequestDate);
   };
+
+  saveLastRequestDate = (currentDate: Date) => {
+    const storage = localStorage.getLocalStorageData();
+
+    localStorage.updateLocalStorageData({
+      ...storage,
+      lastRequestDate: currentDate,
+    });
+  };
 }

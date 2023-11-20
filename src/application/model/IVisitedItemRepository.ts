@@ -5,4 +5,5 @@ export interface IVisitedItemRepository {
   clear: () => void;
   size: () => number;
   getLastRequestDate: () => Date;
+  saveLastRequestDate: (currentDate: Date) => void;
 }

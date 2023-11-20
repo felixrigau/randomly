@@ -88,4 +88,15 @@ describe("VisitedItemIdStorageRepository", () => {
     expect(date).toEqual(lastRequestDate);
     expect(date).toBeInstanceOf(Date);
   });
+
+  test("saveLastRequestDate method should save the current requested date", () => {
+    const current = new Date(2022, 11, 31);
+    window.localStorage.setItem(VISITED_ITEMS, JSON.stringify({}));
+
+    const repository = new VisitedItemIdStorageRepository();
+
+    repository.saveLastRequestDate(current);
+
+    expect(repository.getLastRequestDate()).toEqual(current);
+  });
 });
