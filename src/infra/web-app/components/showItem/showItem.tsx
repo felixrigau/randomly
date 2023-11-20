@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Item } from "../../../../application/model/Item";
 import { GetItemRandomlyUseCase } from "../../../../application/useCases/GetItemRandomly/GetItemRandomlyUseCase";
 import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/ItemStorageRepository";
@@ -24,10 +24,6 @@ const ShowItem = () => {
       }
     }
   };
-
-  useEffect(() => {
-    getItem();
-  }, []);
 
   return (
     <section>
