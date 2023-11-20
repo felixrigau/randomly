@@ -72,6 +72,8 @@ describe("itemList - tests suite", () => {
       screen.getByRole("button", { name: "get next item" })
     );
 
-    expect(screen.getByText("No more items to show")).toBeInTheDocument();
+    expect(
+      screen.getByText("All items were visited today")
+    ).toBeInTheDocument();
   });
 });

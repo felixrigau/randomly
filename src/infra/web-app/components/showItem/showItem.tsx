@@ -28,7 +28,7 @@ const ShowItem = () => {
   return (
     <section>
       {item && hasMoreItems && <p>{item.title}</p>}
-      {!hasMoreItems && <p>No more items to show</p>}
+      {!hasMoreItems && <p>All items were visited today</p>}
       <button onClick={getItem} aria-label="get next item">
         Next
       </button>
