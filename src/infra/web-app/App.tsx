@@ -6,6 +6,7 @@ import { WereItemsVisitedToday } from "../../application/useCases/WereItemsVisit
 import { VisitedItemIdStorageRepository } from "../adapters/VisitedItemIdStorageRepository/VisitedItemIdStorageRepository";
 import { ClearPreviousVisitedItems } from "../../application/useCases/ClearPreviousVisitedItems/ClearPreviousVisitedItems";
 import { useItemsContext } from "./contexts/Items/useItemContext";
+import { SaveLastVisitDate } from "../../application/useCases/UpdateLastVisitDate/SaveLastVisitDate";
 
 const respository = new VisitedItemIdStorageRepository();
 
@@ -14,6 +15,7 @@ export const App = () => {
   const useCases = useRef({
     wereItemsVisitedToday: new WereItemsVisitedToday(respository),
     clearPreviousVisitedItems: new ClearPreviousVisitedItems(respository),
+    saveLastVisitDate: new SaveLastVisitDate(respository),
   });
 
   useEffect(() => {
@@ -22,6 +24,7 @@ export const App = () => {
 
     if (!wereItemsVisitedToday) {
       useCases.current.clearPreviousVisitedItems.execute();
+      useCases.current.saveLastVisitDate.execute(new Date());
     }
   }, []);
 
