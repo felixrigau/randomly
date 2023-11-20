@@ -24,22 +24,6 @@ describe("itemList - tests suite", () => {
     ).toBeInTheDocument();
   });
 
-  test("should get an element right when it is rendered and show it", () => {
-    const item = new Item("Paul");
-    const getItemRandomlyMock = jest.fn().mockReturnValue(item);
-    (GetItemRandomlyUseCase as jest.Mock).mockImplementation(() => ({
-      execute: getItemRandomlyMock,
-    }));
-    render(
-      <ItemsProvider>
-        <ShowItem />
-      </ItemsProvider>
-    );
-
-    expect(getItemRandomlyMock).toBeCalled();
-    expect(screen.getByText("Paul")).toBeInTheDocument();
-  });
-
   test("should get an element when button is clicked", async () => {
     const item = new Item("Paul"),
       item2 = new Item("Marie");
@@ -56,14 +40,18 @@ describe("itemList - tests suite", () => {
         <ShowItem />
       </ItemsProvider>
     );
+
+    const button = screen.getByRole("button", { name: "get next item" });
+
+    await userEvent.click(button);
+
     expect(screen.getByText("Paul")).toBeInTheDocument();
 
-    await userEvent.click(
-      screen.getByRole("button", { name: "get next item" })
-    );
+    await userEvent.click(button);
 
-    expect(getItemRandomlyMock).toBeCalled();
     expect(screen.getByText("Marie")).toBeInTheDocument();
+
+    expect(getItemRandomlyMock).toBeCalledTimes(2);
   });
 
   test("should show a message when there is no more items to show", async () => {
