@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Item } from "../../../../application/model/Item";
 type ItemFormType = {
   buttonText: string;
@@ -10,6 +10,12 @@ const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
   const [title, setTitle] = useState(item?.title ?? "");
   const [description, setDescription] = useState(item?.text ?? "");
   const [isFixed, setIsFixed] = useState(Boolean(item?.isFixed));
+
+  useEffect(() => {
+    setTitle(item?.title ?? "");
+    setDescription(item?.text ?? "");
+    setIsFixed(Boolean(item?.isFixed));
+  }, [item]);
 
   return (
     <div>

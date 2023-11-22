@@ -8,6 +8,8 @@ import {
 import { Item } from "../../../../application/model/Item";
 
 type ItemsContextType = {
+  item: Item;
+  setItem: Dispatch<SetStateAction<Item>>;
   items: Item[];
   setItems: Dispatch<SetStateAction<Item[]>>;
 };
@@ -20,9 +22,10 @@ type OnlyChildren = {
 
 export const ItemsProvider = ({ children }: OnlyChildren) => {
   const [items, setItems] = useState<Item[]>([]);
+  const [item, setItem] = useState<Item | null>(null);
 
   return (
-    <ItemContext.Provider value={{ items, setItems }}>
+    <ItemContext.Provider value={{ items, setItems, item, setItem }}>
       {children}
     </ItemContext.Provider>
   );

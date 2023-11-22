@@ -7,6 +7,7 @@ import { VisitedItemIdStorageRepository } from "../adapters/VisitedItemIdStorage
 import { ClearPreviousVisitedItems } from "../../application/useCases/ClearPreviousVisitedItems/ClearPreviousVisitedItems";
 import { useItemsContext } from "./contexts/Items/useItemContext";
 import { SaveLastVisitDate } from "../../application/useCases/UpdateLastVisitDate/SaveLastVisitDate";
+import UpdateItem from "./components/updateItem/updateItem";
 
 const respository = new VisitedItemIdStorageRepository();
 
@@ -34,6 +35,7 @@ export const App = () => {
       <span>
         <CreateItem />
         <ItemList />
+        <UpdateItem />
       </span>
     </>
   );

@@ -10,7 +10,7 @@ const itemRepository = new ItemStorageRepository();
 const visitedItemRepository = new VisitedItemIdStorageRepository();
 
 const ItemList = () => {
-  const { items, setItems } = useItemsContext();
+  const { items, setItems, setItem } = useItemsContext();
   const useCases = useRef({
     getAllItems: new GetAllItemsUseCase(itemRepository),
     removeItem: new RemoveItemUseCase(itemRepository),
@@ -42,6 +42,9 @@ const ItemList = () => {
             onClick={() => removeItemBy(item.id)}
           >
             X
+          </button>
+          <button aria-label="edit item" onClick={() => setItem(item)}>
+            Edit
           </button>
         </div>
       ))}
