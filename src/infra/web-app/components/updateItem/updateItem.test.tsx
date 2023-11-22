@@ -1,17 +1,20 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import CreateItem from "./createItem";
-import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
+import UpdateItem from "./updateItem";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
+import { UpdateItemUseCase } from "../../../../application/useCases/UpdateItem/UpdateItemUseCase";
+import { GetAllItemsUseCase } from "../../../../application/useCases/GetAllItems/GetAllItemsUseCase";
+import { Item } from "../../../../application/model/Item";
 
-jest.mock("../../../../application/useCases/CreateItem/CreateItemUseCase");
+jest.mock("../../../../application/useCases/UpdateItem/UpdateItemUseCase");
+jest.mock("../../../../application/useCases/GetAllItems/GetAllItemsUseCase");
 
-describe("createItem - tests suite", () => {
+describe("updateItem - tests suite", () => {
   test("when button is clicked should create a new item", async () => {
     render(
       <ItemsProvider>
-        <CreateItem />
+        <UpdateItem itemId="123" />
       </ItemsProvider>
     );
 
@@ -28,11 +31,17 @@ describe("createItem - tests suite", () => {
     await userEvent.click(fixedCheckbox);
     await userEvent.click(button);
 
-    const createItemMock = (CreateItemUseCase as jest.Mock).mock.instances[0]
+    const updateItemMock = (UpdateItemUseCase as jest.Mock).mock.instances[0]
+      .execute;
+    const getAllItemsMock = (GetAllItemsUseCase as jest.Mock).mock.instances[0]
       .execute;
 
-    expect(createItemMock).toBeCalledWith(
+    getAllItemsMock.mockImplementation((): Item[] => []);
+
+    expect(updateItemMock).toBeCalledWith(
+      "123",
       expect.objectContaining({ title, text: description, isFixed: true })
     );
+    expect(getAllItemsMock).toBeCalled();
   });
 });
