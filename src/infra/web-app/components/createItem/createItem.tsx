@@ -4,7 +4,7 @@ import { Item } from "../../../../application/model/Item";
 import { useItemsContext } from "../../contexts/Items/useItemContext";
 import ItemForm from "../itemForm/itemForm";
 
-const CreateForm = () => {
+const CreateItem = () => {
   const { items, setItems } = useItemsContext();
 
   const handleClick = ({ title, text, isFixed }: Partial<Item>) => {
@@ -19,4 +19,4 @@ const CreateForm = () => {
   return <ItemForm buttonText="Create" onButtonClick={handleClick} />;
 };
 
-export default CreateForm;
+export default CreateItem;

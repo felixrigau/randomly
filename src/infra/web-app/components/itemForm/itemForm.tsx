@@ -3,12 +3,13 @@ import { Item } from "../../../../application/model/Item";
 type ItemFormType = {
   buttonText: string;
   onButtonClick: (item: Partial<Item>) => void;
+  item?: Item;
 };
 
-const ItemForm = ({ buttonText, onButtonClick }: ItemFormType) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [isFixed, setIsFixed] = useState(false);
+const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
+  const [title, setTitle] = useState(item?.title ?? "");
+  const [description, setDescription] = useState(item?.text ?? "");
+  const [isFixed, setIsFixed] = useState(Boolean(item?.isFixed));
 
   return (
     <div>
