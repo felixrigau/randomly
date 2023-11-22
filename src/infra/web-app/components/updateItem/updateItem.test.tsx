@@ -12,6 +12,11 @@ jest.mock("../../../../application/useCases/GetAllItems/GetAllItemsUseCase");
 
 describe("updateItem - tests suite", () => {
   test("when button is clicked should create a new item", async () => {
+    const getAllItemsMock = jest.fn().mockImplementation((): Item[] => []);
+    (GetAllItemsUseCase as jest.Mock).mockImplementation(() => ({
+      execute: getAllItemsMock,
+    }));
+
     render(
       <ItemsProvider>
         <UpdateItem itemId="123" />
@@ -33,10 +38,6 @@ describe("updateItem - tests suite", () => {
 
     const updateItemMock = (UpdateItemUseCase as jest.Mock).mock.instances[0]
       .execute;
-    const getAllItemsMock = (GetAllItemsUseCase as jest.Mock).mock.instances[0]
-      .execute;
-
-    getAllItemsMock.mockImplementation((): Item[] => []);
 
     expect(updateItemMock).toBeCalledWith(
       "123",
