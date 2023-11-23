@@ -9,5 +9,16 @@ export const useItemsContext = () => {
       "You are trying to access a context without being inside its scope"
     );
 
-  return { ...contextValue, existItems: contextValue.items.length !== 0 };
+  const { items, setItems, item, setItem, isSideBarOpen, setIsSideBarOpen } =
+    contextValue;
+
+  return {
+    items,
+    setItems,
+    item,
+    setItem,
+    isSideBarOpen,
+    existItems: items.length !== 0,
+    toggleSideBar: () => setIsSideBarOpen(!isSideBarOpen),
+  };
 };

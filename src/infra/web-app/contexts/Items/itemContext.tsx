@@ -12,6 +12,8 @@ type ItemsContextType = {
   setItem: Dispatch<SetStateAction<Item>>;
   items: Item[];
   setItems: Dispatch<SetStateAction<Item[]>>;
+  isSideBarOpen: boolean;
+  setIsSideBarOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const ItemContext = createContext<ItemsContextType>(null);
@@ -23,9 +25,19 @@ type OnlyChildren = {
 export const ItemsProvider = ({ children }: OnlyChildren) => {
   const [items, setItems] = useState<Item[]>([]);
   const [item, setItem] = useState<Item | null>(null);
+  const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false);
 
   return (
-    <ItemContext.Provider value={{ items, setItems, item, setItem }}>
+    <ItemContext.Provider
+      value={{
+        items,
+        setItems,
+        item,
+        setItem,
+        isSideBarOpen,
+        setIsSideBarOpen,
+      }}
+    >
       {children}
     </ItemContext.Provider>
   );
