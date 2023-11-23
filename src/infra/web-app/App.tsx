@@ -8,11 +8,13 @@ import { ClearPreviousVisitedItems } from "../../application/useCases/ClearPrevi
 import { useItemsContext } from "./contexts/Items/useItemContext";
 import { SaveLastVisitDate } from "../../application/useCases/UpdateLastVisitDate/SaveLastVisitDate";
 import UpdateItem from "./components/updateItem/updateItem";
+import SideBar from "./components/sideBar/sideBar";
+import { Button } from "./components/menuButton/menuButton";
 
 const respository = new VisitedItemIdStorageRepository();
 
 export const App = () => {
-  const { existItems } = useItemsContext();
+  const { existItems, toggleSideBar, isSideBarOpen } = useItemsContext();
   const useCases = useRef({
     wereItemsVisitedToday: new WereItemsVisitedToday(respository),
     clearPreviousVisitedItems: new ClearPreviousVisitedItems(respository),
@@ -30,13 +32,14 @@ export const App = () => {
   }, []);
 
   return (
-    <>
+    <div>
       <span>{existItems && <ShowItem />}</span>
-      <span>
+      <Button onClick={toggleSideBar}>menu</Button>
+      <SideBar isOpen={isSideBarOpen}>
         <CreateItem />
         <ItemList />
         <UpdateItem />
-      </span>
-    </>
+      </SideBar>
+    </div>
   );
 };
