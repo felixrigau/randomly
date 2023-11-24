@@ -10,6 +10,7 @@ import { SaveLastVisitDate } from "../../application/useCases/UpdateLastVisitDat
 import UpdateItem from "./components/updateItem/updateItem";
 import SideBar from "./components/sideBar/sideBar";
 import { Button } from "./components/menuButton/menuButton";
+import { ResetStyles } from "./App.styled";
 
 const respository = new VisitedItemIdStorageRepository();
 
@@ -32,14 +33,15 @@ export const App = () => {
   }, []);
 
   return (
-    <div>
-      <span>{existItems && <ShowItem />}</span>
+    <>
+      <ResetStyles />
+      <ShowItem />
       <Button onClick={toggleSideBar}>menu</Button>
       <SideBar isOpen={isSideBarOpen}>
         <CreateItem />
         <ItemList />
         <UpdateItem />
       </SideBar>
-    </div>
+    </>
   );
 };
