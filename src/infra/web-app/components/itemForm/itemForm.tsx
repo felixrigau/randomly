@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Item } from "../../../../application/model/Item";
+import { StyledForm } from "./itemForm.styled";
 type ItemFormType = {
   buttonText: string;
   onButtonClick: (item: Partial<Item>) => void;
@@ -18,7 +19,7 @@ const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
   }, [item]);
 
   return (
-    <div>
+    <StyledForm>
       <label htmlFor="title">Title</label>
       <input
         id="title"
@@ -51,7 +52,7 @@ const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
       >
         {buttonText}
       </button>
-    </div>
+    </StyledForm>
   );
 };
 
