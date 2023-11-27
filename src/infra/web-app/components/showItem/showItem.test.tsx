@@ -6,13 +6,19 @@ import { GetItemRandomlyUseCase } from "../../../../application/useCases/GetItem
 import { Item } from "../../../../application/model/Item";
 import userEvent from "@testing-library/user-event";
 import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
+import { useItemsContext } from "../../contexts/Items/useItemContext";
 
 jest.mock(
   "../../../../application/useCases/GetItemRandomly/GetItemRandomlyUseCase"
 );
+jest.mock("../../contexts/Items/useItemContext");
 
 describe("itemList - tests suite", () => {
   test("should render a button", () => {
+    (useItemsContext as jest.Mock).mockImplementation(() => ({
+      existItems: true,
+    }));
+
     render(
       <ItemsProvider>
         <ShowItem />
@@ -33,6 +39,10 @@ describe("itemList - tests suite", () => {
       .mockReturnValueOnce(item2);
     (GetItemRandomlyUseCase as jest.Mock).mockImplementation(() => ({
       execute: getItemRandomlyMock,
+    }));
+
+    (useItemsContext as jest.Mock).mockImplementation(() => ({
+      existItems: true,
     }));
 
     render(
@@ -61,6 +71,9 @@ describe("itemList - tests suite", () => {
     (GetItemRandomlyUseCase as jest.Mock).mockImplementation(() => ({
       execute: getItemRandomlyMock,
     }));
+    (useItemsContext as jest.Mock).mockImplementation(() => ({
+      existItems: true,
+    }));
 
     render(
       <ItemsProvider>
@@ -74,6 +87,22 @@ describe("itemList - tests suite", () => {
 
     expect(
       screen.getByText("All items were visited today")
+    ).toBeInTheDocument();
+  });
+
+  test("should show a message when there is no items", async () => {
+    (useItemsContext as jest.Mock).mockImplementation(() => ({
+      existItems: false,
+    }));
+
+    render(
+      <ItemsProvider>
+        <ShowItem />
+      </ItemsProvider>
+    );
+
+    expect(
+      screen.getByText("Create at least one item, please")
     ).toBeInTheDocument();
   });
 });
