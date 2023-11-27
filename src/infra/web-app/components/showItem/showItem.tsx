@@ -5,7 +5,7 @@ import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/I
 import { VisitedItemIdStorageRepository } from "../../../adapters/VisitedItemIdStorageRepository/VisitedItemIdStorageRepository";
 import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
 import { useItemsContext } from "../../contexts/Items/useItemContext";
-import { StyledItem } from "./showItem.styled";
+import { StyledItem, Title } from "./showItem.styled";
 
 const ShowItem = () => {
   const { existItems } = useItemsContext();
@@ -30,9 +30,10 @@ const ShowItem = () => {
 
   return (
     <StyledItem>
-      {existItems && item && hasMoreItems && <p>{item.title}</p>}
+      <div></div>
+      {existItems && item && hasMoreItems && <Title>{item.title}</Title>}
       {!hasMoreItems && <p>All items were visited today</p>}
-      {!existItems && <p>All items were visited today</p>}
+      {!existItems && <p>Create at least one item, please</p>}
       <button onClick={getItem} aria-label="get next item">
         Next
       </button>

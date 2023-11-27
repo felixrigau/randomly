@@ -9,3 +9,7 @@ export const StyledItem = styled.section`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const Title = styled.p`
+  font-size: 48px;
+`;
