@@ -8,7 +8,9 @@ export const ManageItems = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
-      <ItemList />
+      <ItemList>
+        {(items) => items.map((item) => <ItemList.Row item={item} />)}
+      </ItemList>
       <UpdateItem />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <CreateItem />
