@@ -23,7 +23,7 @@ const ItemList = ({ children }: ItemListType) => {
 
   return (
     <div role="list">
-      {items.length === 0 && <p>There are no items</p>}
+      {items.length === 0 && <p key="messagex">There are no items</p>}
       {children(items)}
     </div>
   );

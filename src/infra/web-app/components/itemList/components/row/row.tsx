@@ -29,7 +29,7 @@ const Row = ({ item }: RowType) => {
   };
 
   return (
-    <div key={item.id} role="listitem">
+    <div role="listitem">
       {item.title}
       <button aria-label="remove item" onClick={() => removeItemBy(item.id)}>
         X

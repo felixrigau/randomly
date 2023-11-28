@@ -24,7 +24,9 @@ describe("itemList - tests suite", () => {
     render(
       <ItemsProvider>
         <ItemList>
-          {(items) => items.map((item) => <ItemList.Row item={item} />)}
+          {(items) =>
+            items.map((item) => <ItemList.Row key={item.id} item={item} />)
+          }
         </ItemList>
       </ItemsProvider>
     );
@@ -41,7 +43,9 @@ describe("itemList - tests suite", () => {
     render(
       <ItemsProvider>
         <ItemList>
-          {(items) => items.map((item) => <ItemList.Row item={item} />)}
+          {(items) =>
+            items.map((item) => <ItemList.Row key={item.id} item={item} />)
+          }
         </ItemList>
       </ItemsProvider>
     );
@@ -68,7 +72,9 @@ describe("itemList - tests suite", () => {
     render(
       <ItemsProvider>
         <ItemList>
-          {(items) => items.map((item) => <ItemList.Row item={item} />)}
+          {(items) =>
+            items.map((item) => <ItemList.Row key={item.id} item={item} />)
+          }
         </ItemList>
       </ItemsProvider>
     );
@@ -98,7 +104,9 @@ describe("itemList - tests suite", () => {
     render(
       <ItemsProvider>
         <ItemList>
-          {(items) => items.map((item) => <ItemList.Row item={item} />)}
+          {(items) =>
+            items.map((item) => <ItemList.Row key={item.id} item={item} />)
+          }
         </ItemList>
       </ItemsProvider>
     );

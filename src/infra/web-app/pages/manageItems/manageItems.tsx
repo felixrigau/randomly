@@ -9,7 +9,9 @@ export const ManageItems = () => {
   return (
     <>
       <ItemList>
-        {(items) => items.map((item) => <ItemList.Row item={item} />)}
+        {(items) =>
+          items.map((item) => <ItemList.Row key={item.id} item={item} />)
+        }
       </ItemList>
       <UpdateItem />
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
