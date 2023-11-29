@@ -12,6 +12,12 @@ const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
   const [description, setDescription] = useState(item?.text ?? "");
   const [isFixed, setIsFixed] = useState(Boolean(item?.isFixed));
 
+  const clearForm = () => {
+    setTitle("");
+    setDescription("");
+    setIsFixed(false);
+  };
+
   useEffect(() => {
     setTitle(item?.title ?? "");
     setDescription(item?.text ?? "");
@@ -48,7 +54,10 @@ const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
       />
       <button
         disabled={!title}
-        onClick={() => onButtonClick({ title, text: description, isFixed })}
+        onClick={() => {
+          clearForm();
+          onButtonClick({ title, text: description, isFixed });
+        }}
       >
         {buttonText}
       </button>
