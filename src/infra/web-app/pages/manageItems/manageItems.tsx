@@ -9,13 +9,13 @@ import { Item } from "../../../../application/model/Item";
 
 export const ManageItems = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { items, setItems } = useItemsContext();
   const { create } = useItemCRUD();
+  const { addItem } = useItemsContext();
 
   const handleCreateClick = ({ title, text, isFixed }: Partial<Item>) => {
     const newItem = new Item(title, text, isFixed);
     create(newItem);
-    setItems([...items, newItem]);
+    addItem(newItem);
     setIsModalOpen(false);
   };
 
@@ -27,10 +27,10 @@ export const ManageItems = () => {
         }
       </ItemList>
       <UpdateItem />
+      <button onClick={() => setIsModalOpen(true)}>Create</button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ItemForm buttonText="Create" onButtonClick={handleCreateClick} />
       </Modal>
-      <button onClick={() => setIsModalOpen(true)}>Create</button>
     </>
   );
 };
