@@ -5,6 +5,7 @@ import { RemoveVisitedItemIdUseCase } from "../../../../application/useCases/Rem
 import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/ItemStorageRepository";
 import { VisitedItemIdStorageRepository } from "../../../adapters/VisitedItemIdStorageRepository/VisitedItemIdStorageRepository";
 import { Item } from "../../../../application/model/Item";
+import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
 
 const itemRepository = new ItemStorageRepository();
 const visitedItemRepository = new VisitedItemIdStorageRepository();
@@ -13,6 +14,7 @@ const useItemCRUD = () => {
   const useCases = useRef({
     getAllItems: new GetAllItemsUseCase(itemRepository),
     removeItem: new RemoveItemUseCase(itemRepository),
+    createItem: new CreateItemUseCase(itemRepository),
     removeVisitedItemId: new RemoveVisitedItemIdUseCase(visitedItemRepository),
   });
 
@@ -21,8 +23,11 @@ const useItemCRUD = () => {
     useCases.current.removeItem.execute(id);
     useCases.current.removeVisitedItemId.execute(id);
   };
+  const create = (item: Item): void => {
+    useCases.current.createItem.execute(item);
+  };
 
-  return { getAll, remove };
+  return { getAll, remove, create };
 };
 
 export default useItemCRUD;
