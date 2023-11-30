@@ -2,23 +2,19 @@ import { render, screen } from "@testing-library/react";
 
 import ShowItem from "./showItem";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
-import { GetItemRandomlyUseCase } from "../../../../application/useCases/GetItemRandomly/GetItemRandomlyUseCase";
 import { Item } from "../../../../application/model/Item";
 import userEvent from "@testing-library/user-event";
 import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
-import { useItemsContext } from "../../contexts/Items/useItemContext";
+import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
 
-jest.mock(
-  "../../../../application/useCases/GetItemRandomly/GetItemRandomlyUseCase"
-);
+jest.mock("../../hooks/useItemCRUD/useItemCRUD");
 jest.mock("../../contexts/Items/useItemContext");
 
 describe("itemList - tests suite", () => {
-  test("should render a button", () => {
-    (useItemsContext as jest.Mock).mockImplementation(() => ({
-      existItems: true,
+  test("should render a button if it exists at least one item", () => {
+    (useItemCRUD as jest.Mock).mockImplementation(() => ({
+      getAll: () => [new Item("John")],
     }));
-
     render(
       <ItemsProvider>
         <ShowItem />
@@ -30,19 +26,34 @@ describe("itemList - tests suite", () => {
     ).toBeInTheDocument();
   });
 
+  test("should not render a button if it does not exist a item", () => {
+    (useItemCRUD as jest.Mock).mockImplementation(() => ({
+      getAll: (): Item[] => [],
+    }));
+    render(
+      <ItemsProvider>
+        <ShowItem />
+      </ItemsProvider>
+    );
+
+    expect(
+      screen.queryByRole("button", { name: "get next item" })
+    ).not.toBeInTheDocument();
+  });
+
   test("should get an element when button is clicked", async () => {
     const item = new Item("Paul"),
-      item2 = new Item("Marie");
-    const getItemRandomlyMock = jest
+      item2 = new Item("Marie"),
+      item3 = new Item("Luke");
+
+    const getRandomMock = jest
       .fn()
       .mockReturnValueOnce(item)
       .mockReturnValueOnce(item2);
-    (GetItemRandomlyUseCase as jest.Mock).mockImplementation(() => ({
-      execute: getItemRandomlyMock,
-    }));
 
-    (useItemsContext as jest.Mock).mockImplementation(() => ({
-      existItems: true,
+    (useItemCRUD as jest.Mock).mockImplementation(() => ({
+      getAll: () => [item3],
+      getRandom: getRandomMock,
     }));
 
     render(
@@ -61,18 +72,16 @@ describe("itemList - tests suite", () => {
 
     expect(screen.getByText("Marie")).toBeInTheDocument();
 
-    expect(getItemRandomlyMock).toBeCalledTimes(2);
+    expect(getRandomMock).toBeCalledTimes(2);
   });
 
   test("should show a message when there is no more items to show", async () => {
-    const getItemRandomlyMock = jest.fn().mockImplementation(() => {
+    const getRandomMock = jest.fn().mockImplementation(() => {
       throw new NoMoreItemsError();
     });
-    (GetItemRandomlyUseCase as jest.Mock).mockImplementation(() => ({
-      execute: getItemRandomlyMock,
-    }));
-    (useItemsContext as jest.Mock).mockImplementation(() => ({
-      existItems: true,
+    (useItemCRUD as jest.Mock).mockImplementation(() => ({
+      getAll: () => [new Item("")],
+      getRandom: getRandomMock,
     }));
 
     render(
@@ -91,8 +100,8 @@ describe("itemList - tests suite", () => {
   });
 
   test("should show a message when there is no items", async () => {
-    (useItemsContext as jest.Mock).mockImplementation(() => ({
-      existItems: false,
+    (useItemCRUD as jest.Mock).mockImplementation(() => ({
+      getAll: (): Item[] => [],
     }));
 
     render(
