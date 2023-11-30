@@ -14,7 +14,6 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
       modalRef.current.showModal();
       document.body.style.overflow = "hidden";
     } else {
-      console.log("modalRef.current", modalRef.current.close);
       modalRef.current.close?.();
       document.body.style.overflow = "scroll";
     }
@@ -25,7 +24,6 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
   }, [isOpen]);
 
   const handleClick = (event: MouseEvent) => {
-    console.log(typeof event.target);
     if (modalRef.current.contains(event.target as Node)) return;
     modalRef.current.close();
   };

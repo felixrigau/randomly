@@ -6,28 +6,36 @@ import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/I
 import { VisitedItemIdStorageRepository } from "../../../adapters/VisitedItemIdStorageRepository/VisitedItemIdStorageRepository";
 import { Item } from "../../../../application/model/Item";
 import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
+import { UpdateItemUseCase } from "../../../../application/useCases/UpdateItem/UpdateItemUseCase";
 
 const itemRepository = new ItemStorageRepository();
 const visitedItemRepository = new VisitedItemIdStorageRepository();
 
 const useItemCRUD = () => {
   const useCases = useRef({
+    createItem: new CreateItemUseCase(itemRepository),
     getAllItems: new GetAllItemsUseCase(itemRepository),
     removeItem: new RemoveItemUseCase(itemRepository),
-    createItem: new CreateItemUseCase(itemRepository),
     removeVisitedItemId: new RemoveVisitedItemIdUseCase(visitedItemRepository),
+    updateItem: new UpdateItemUseCase(itemRepository),
   });
 
+  const create = (item: Item): void => {
+    useCases.current.createItem.execute(item);
+  };
   const getAll = (): Item[] => useCases.current.getAllItems.execute();
   const remove = (id: string): void => {
     useCases.current.removeItem.execute(id);
     useCases.current.removeVisitedItemId.execute(id);
   };
-  const create = (item: Item): void => {
-    useCases.current.createItem.execute(item);
+  const update = (
+    id: string,
+    { title, text, isFixed }: Partial<Item>
+  ): void => {
+    useCases.current.updateItem.execute(id, { title, text, isFixed });
   };
 
-  return { getAll, remove, create };
+  return { create, getAll, remove, update };
 };
 
 export default useItemCRUD;
