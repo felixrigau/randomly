@@ -7,6 +7,7 @@ import { VisitedItemIdStorageRepository } from "../../../adapters/VisitedItemIdS
 import { Item } from "../../../../application/model/Item";
 import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
 import { UpdateItemUseCase } from "../../../../application/useCases/UpdateItem/UpdateItemUseCase";
+import { GetItemRandomlyUseCase } from "../../../../application/useCases/GetItemRandomly/GetItemRandomlyUseCase";
 
 const itemRepository = new ItemStorageRepository();
 const visitedItemRepository = new VisitedItemIdStorageRepository();
@@ -18,12 +19,17 @@ const useItemCRUD = () => {
     removeItem: new RemoveItemUseCase(itemRepository),
     removeVisitedItemId: new RemoveVisitedItemIdUseCase(visitedItemRepository),
     updateItem: new UpdateItemUseCase(itemRepository),
+    getItemRandomly: new GetItemRandomlyUseCase(
+      itemRepository,
+      visitedItemRepository
+    ),
   });
 
   const create = (item: Item): void => {
     useCases.current.createItem.execute(item);
   };
   const getAll = (): Item[] => useCases.current.getAllItems.execute();
+  const getRandom = (): Item => useCases.current.getItemRandomly.execute();
   const remove = (id: string): void => {
     useCases.current.removeItem.execute(id);
     useCases.current.removeVisitedItemId.execute(id);
@@ -35,7 +41,7 @@ const useItemCRUD = () => {
     useCases.current.updateItem.execute(id, { title, text, isFixed });
   };
 
-  return { create, getAll, remove, update };
+  return { create, getAll, getRandom, remove, update };
 };
 
 export default useItemCRUD;
