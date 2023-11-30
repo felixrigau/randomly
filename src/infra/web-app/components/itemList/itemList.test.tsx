@@ -6,10 +6,6 @@ import { Item } from "../../../../application/model/Item";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
 
 jest.mock("../../../../application/useCases/GetAllItems/GetAllItemsUseCase");
-jest.mock("../../../../application/useCases/RemoveItem/RemoveItemUseCase");
-jest.mock(
-  "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase"
-);
 
 describe("itemList - tests suite", () => {
   test("should show as many items exist", () => {
