@@ -14,7 +14,8 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
       modalRef.current.showModal();
       document.body.style.overflow = "hidden";
     } else {
-      modalRef.current.close();
+      console.log("modalRef.current", modalRef.current.close);
+      modalRef.current.close?.();
       document.body.style.overflow = "scroll";
     }
 

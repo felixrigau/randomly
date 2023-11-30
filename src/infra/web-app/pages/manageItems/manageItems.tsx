@@ -9,8 +9,8 @@ import { Item } from "../../../../application/model/Item";
 
 export const ManageItems = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { create } = useItemCRUD();
-  const { addItem } = useItemsContext();
+  const { create, remove, getAll } = useItemCRUD();
+  const { addItem, setItems, setItem } = useItemsContext();
 
   const handleCreateClick = ({ title, text, isFixed }: Partial<Item>) => {
     const newItem = new Item(title, text, isFixed);
@@ -19,11 +19,28 @@ export const ManageItems = () => {
     setIsModalOpen(false);
   };
 
+  const removeItemBy = (id: string) => {
+    remove(id);
+    setItems(getAll());
+  };
+
   return (
     <>
       <ItemList>
         {(items) =>
-          items.map((item) => <ItemList.Row key={item.id} item={item} />)
+          items.map((item) => (
+            <ItemList.Row key={item.id} item={item}>
+              <button
+                aria-label="remove item"
+                onClick={() => removeItemBy(item.id)}
+              >
+                X
+              </button>
+              <button aria-label="edit item" onClick={() => setItem(item)}>
+                Edit
+              </button>
+            </ItemList.Row>
+          ))
         }
       </ItemList>
       <UpdateItem />
