@@ -31,9 +31,11 @@ const ShowItem = () => {
       {existItems && item && hasMoreItems && <Title>{item.title}</Title>}
       {!hasMoreItems && <p>All items were visited today</p>}
       {!existItems && <p>Create at least one item, please</p>}
-      <button onClick={getItem} aria-label="get next item">
-        Next
-      </button>
+      {existItems && (
+        <button onClick={getItem} aria-label="get next item">
+          Next
+        </button>
+      )}
     </StyledItem>
   );
 };
