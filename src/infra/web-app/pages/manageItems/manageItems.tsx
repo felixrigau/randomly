@@ -9,6 +9,7 @@ import { Item } from "../../../../application/model/Item";
 export const ManageItems = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const { create, update, remove, getAll } = useItemCRUD();
   const { addItem, setItems, setItem, item } = useItemsContext();
 
@@ -28,11 +29,17 @@ export const ManageItems = () => {
   const removeItemBy = (id: string) => {
     remove(id);
     setItems(getAll());
+    setIsDeleteModalOpen(false);
+  };
+
+  const openDeleteConfirmationModal = (item: Item) => {
+    setIsDeleteModalOpen(true);
+    setItem(item);
   };
 
   const editItem = (item: Item) => {
-    setItem(item);
     setIsUpdateModalOpen(true);
+    setItem(item);
   };
 
   return (
@@ -43,7 +50,7 @@ export const ManageItems = () => {
             <ItemList.Row key={item.id} item={item}>
               <button
                 aria-label="remove item"
-                onClick={() => removeItemBy(item.id)}
+                onClick={() => openDeleteConfirmationModal(item)}
               >
                 X
               </button>
@@ -71,6 +78,16 @@ export const ManageItems = () => {
           item={item}
           onButtonClick={handleUpdateClick}
         />
+      </Modal>
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+      >
+        <p>Are you sure about deleting {item?.title} ?</p>
+        <div>
+          <button onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
+          <button onClick={() => removeItemBy(item.id)}>Confirm</button>
+        </div>
       </Modal>
     </>
   );
