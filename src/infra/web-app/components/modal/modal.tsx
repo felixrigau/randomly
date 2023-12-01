@@ -11,7 +11,7 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
 
   useEffect(() => {
     if (isOpen) {
-      modalRef.current.showModal();
+      modalRef.current.showModal?.();
       document.body.style.overflow = "hidden";
     } else {
       modalRef.current.close?.();
