@@ -67,12 +67,14 @@ export const ManageItems = () => {
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
       >
+        <Modal.Header hasCloseButton>Create Item</Modal.Header>
         <ItemForm buttonText="Create" onButtonClick={handleCreateClick} />
       </Modal>
       <Modal
         isOpen={isUpdateModalOpen}
         onClose={() => setIsUpdateModalOpen(false)}
       >
+        <Modal.Header hasCloseButton>Update Item</Modal.Header>
         <ItemForm
           buttonText="Update"
           item={item}
@@ -83,6 +85,7 @@ export const ManageItems = () => {
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
       >
+        <Modal.Header hasCloseButton> Delete confirmation </Modal.Header>
         <p>Are you sure about deleting {item?.title} ?</p>
         <div>
           <button
