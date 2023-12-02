@@ -49,7 +49,7 @@ export const ManageItems = () => {
           items.map((item) => (
             <ItemList.Row key={item.id} item={item}>
               <button
-                aria-label="remove item"
+                aria-label="open remove modal"
                 onClick={() => openDeleteConfirmationModal(item)}
               >
                 X
@@ -85,8 +85,18 @@ export const ManageItems = () => {
       >
         <p>Are you sure about deleting {item?.title} ?</p>
         <div>
-          <button onClick={() => setIsDeleteModalOpen(false)}>Cancel</button>
-          <button onClick={() => removeItemBy(item.id)}>Confirm</button>
+          <button
+            aria-label="cancel deletion"
+            onClick={() => setIsDeleteModalOpen(false)}
+          >
+            Cancel
+          </button>
+          <button
+            aria-label="remove item"
+            onClick={() => removeItemBy(item.id)}
+          >
+            Confirm
+          </button>
         </div>
       </Modal>
     </>

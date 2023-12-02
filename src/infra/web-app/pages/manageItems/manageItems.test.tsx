@@ -44,7 +44,7 @@ describe("itemList - tests suite", () => {
     expect(removeItemMock).toBeCalledWith(item.id);
   });
 
-  test("clicking remove item button should remove the item id", async () => {
+  test("should remove item button clicking the delete button and then the confirm one", async () => {
     const item = new Item("abc");
     const removeVisitedItemIdMock = jest.fn();
     (RemoveVisitedItemIdUseCase as jest.Mock).mockImplementation(() => {
@@ -64,7 +64,15 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    const removeButton = screen.getByRole("button", { name: "remove item" });
+    const openModalButton = screen.getByRole("button", {
+      name: "open remove modal",
+    });
+
+    await userEvent.click(openModalButton);
+
+    const removeButton = screen.getByRole("button", {
+      name: "remove item",
+    });
 
     await userEvent.click(removeButton);
 
