@@ -14,3 +14,9 @@ export const StyledBackground = styled.div`
 export const StyledModal = styled.div`
   background: #fff;
 `;
+
+export const StyledHeaderContainer = styled.div`
+  padding: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+`;

@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import { MouseEvent, PropsWithChildren, useEffect } from "react";
 import { StyledBackground, StyledModal } from "./modal.styled";
 import { modalContext } from "./context/modalContext";
+import { Header } from "./components/header";
 
 type ModalType = {
   isOpen: boolean;
@@ -39,5 +40,7 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
     )
   );
 };
+
+Modal.Header = Header;
 
 export default Modal;
