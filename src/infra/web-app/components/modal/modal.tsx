@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { MouseEvent, PropsWithChildren, useEffect } from "react";
 import { StyledBackground, StyledModal } from "./modal.styled";
 
@@ -24,10 +25,12 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
   };
 
   return (
-    isOpen && (
+    isOpen &&
+    createPortal(
       <StyledBackground onClick={onClose}>
         <StyledModal onClick={handleModalClick}>{children}</StyledModal>
-      </StyledBackground>
+      </StyledBackground>,
+      document.getElementById("app")
     )
   );
 };
