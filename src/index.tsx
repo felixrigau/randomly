@@ -10,5 +10,6 @@ const root = createRoot(document.getElementById("app"));
 root.render(
   <ItemsProvider>
     <App />
+    <div id="modal" />
   </ItemsProvider>
 );

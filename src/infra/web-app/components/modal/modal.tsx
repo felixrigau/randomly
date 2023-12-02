@@ -35,7 +35,7 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
           <StyledModal onClick={handleModalClick}>{children}</StyledModal>
         </StyledBackground>
       </Provider>,
-      document.getElementById("app")
+      document.getElementById("modal")
     )
   );
 };
