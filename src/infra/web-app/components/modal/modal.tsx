@@ -1,5 +1,5 @@
-import { MouseEvent, PropsWithChildren, useEffect, useRef } from "react";
-import { Dialog } from "./modal.styled";
+import { MouseEvent, PropsWithChildren, useEffect } from "react";
+import { StyledBackground, StyledModal } from "./modal.styled";
 
 type ModalType = {
   isOpen: boolean;
@@ -7,14 +7,10 @@ type ModalType = {
 };
 
 const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
-  const modalRef = useRef<HTMLDialogElement>();
-
   useEffect(() => {
     if (isOpen) {
-      modalRef.current.showModal?.();
       document.body.style.overflow = "hidden";
     } else {
-      modalRef.current.close?.();
       document.body.style.overflow = "scroll";
     }
 
@@ -23,15 +19,16 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
     };
   }, [isOpen]);
 
-  const handleClick = (event: MouseEvent) => {
-    if (modalRef.current.contains(event.target as Node)) return;
-    modalRef.current.close();
+  const handleModalClick = (event: MouseEvent) => {
+    event.stopPropagation();
   };
 
   return (
-    <Dialog ref={modalRef} onClick={handleClick} onClose={onClose}>
-      {children}
-    </Dialog>
+    isOpen && (
+      <StyledBackground onClick={onClose}>
+        <StyledModal onClick={handleModalClick}>{children}</StyledModal>
+      </StyledBackground>
+    )
   );
 };
 
