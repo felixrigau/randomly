@@ -1,11 +1,14 @@
 import { createPortal } from "react-dom";
 import { MouseEvent, PropsWithChildren, useEffect } from "react";
 import { StyledBackground, StyledModal } from "./modal.styled";
+import { modalContext } from "./context/modalContext";
 
 type ModalType = {
   isOpen: boolean;
   onClose: () => void;
 };
+
+const { Provider } = modalContext;
 
 const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
   useEffect(() => {
@@ -27,9 +30,11 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
   return (
     isOpen &&
     createPortal(
-      <StyledBackground onClick={onClose}>
-        <StyledModal onClick={handleModalClick}>{children}</StyledModal>
-      </StyledBackground>,
+      <Provider value={{ isOpen, onClose }}>
+        <StyledBackground onClick={onClose}>
+          <StyledModal onClick={handleModalClick}>{children}</StyledModal>
+        </StyledBackground>
+      </Provider>,
       document.getElementById("app")
     )
   );
