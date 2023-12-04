@@ -7,6 +7,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "Randomly",
+      template: path.resolve(__dirname, "public/template.html"),
     }),
   ],
   module: {
@@ -22,12 +23,12 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     clean: true,
   },
   devServer: {
-    static: path.resolve(__dirname, "public"),
+    static: path.resolve(__dirname, "dist"),
   },
   devtool: "inline-source-map",
 };
