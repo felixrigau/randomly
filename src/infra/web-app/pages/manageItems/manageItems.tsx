@@ -5,6 +5,7 @@ import { useItemsContext } from "../../contexts/Items/useItemContext";
 import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
 import ItemForm from "../../components/itemForm/itemForm";
 import { Item } from "../../../../application/model/Item";
+import { StyledModalContainer } from "../../components/modal/modal.styled";
 
 export const ManageItems = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -68,39 +69,45 @@ export const ManageItems = () => {
         onClose={() => setIsCreateModalOpen(false)}
       >
         <Modal.Header hasCloseButton>Create Item</Modal.Header>
-        <ItemForm buttonText="Create" onButtonClick={handleCreateClick} />
+        <StyledModalContainer>
+          <ItemForm buttonText="Create" onButtonClick={handleCreateClick} />
+        </StyledModalContainer>
       </Modal>
       <Modal
         isOpen={isUpdateModalOpen}
         onClose={() => setIsUpdateModalOpen(false)}
       >
         <Modal.Header hasCloseButton>Update Item</Modal.Header>
-        <ItemForm
-          buttonText="Update"
-          item={item}
-          onButtonClick={handleUpdateClick}
-        />
+        <StyledModalContainer>
+          <ItemForm
+            buttonText="Update"
+            item={item}
+            onButtonClick={handleUpdateClick}
+          />
+        </StyledModalContainer>
       </Modal>
       <Modal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
       >
         <Modal.Header hasCloseButton> Delete confirmation </Modal.Header>
-        <p>Are you sure about deleting {item?.title} ?</p>
-        <div>
-          <button
-            aria-label="cancel deletion"
-            onClick={() => setIsDeleteModalOpen(false)}
-          >
-            Cancel
-          </button>
-          <button
-            aria-label="remove item"
-            onClick={() => removeItemBy(item.id)}
-          >
-            Confirm
-          </button>
-        </div>
+        <StyledModalContainer>
+          <p>Are you sure about deleting {item?.title} ?</p>
+          <div>
+            <button
+              aria-label="cancel deletion"
+              onClick={() => setIsDeleteModalOpen(false)}
+            >
+              Cancel
+            </button>
+            <button
+              aria-label="remove item"
+              onClick={() => removeItemBy(item.id)}
+            >
+              Confirm
+            </button>
+          </div>
+        </StyledModalContainer>
       </Modal>
     </>
   );
