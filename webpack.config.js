@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -8,6 +9,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Randomly",
       template: path.resolve(__dirname, "public/template.html"),
+    }),
+    new CopyPlugin({
+      patterns: [{ from: path.resolve(__dirname, "public/css") }],
     }),
   ],
   module: {
