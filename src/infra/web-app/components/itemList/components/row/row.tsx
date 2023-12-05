@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { Item } from "../../../../../../application/model/Item";
+import { StyledRow } from "./row.styled";
 
 type RowType = {
   item: Item;
@@ -7,10 +8,10 @@ type RowType = {
 
 const Row = ({ children, item }: PropsWithChildren<RowType>) => {
   return (
-    <div role="listitem">
+    <StyledRow role="listitem">
       {item.title}
-      {children}
-    </div>
+      <div>{children}</div>
+    </StyledRow>
   );
 };
 
