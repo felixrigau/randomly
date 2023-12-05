@@ -6,6 +6,8 @@ import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
 import ItemForm from "../../components/itemForm/itemForm";
 import { Item } from "../../../../application/model/Item";
 import { StyledModalContainer } from "../../components/modal/modal.styled";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from "@mui/icons-material/Edit";
 
 export const ManageItems = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -53,10 +55,10 @@ export const ManageItems = () => {
                 aria-label="open remove modal"
                 onClick={() => openDeleteConfirmationModal(item)}
               >
-                X
+                <DeleteOutlineIcon />
               </button>
               <button aria-label="edit item" onClick={() => editItem(item)}>
-                Edit
+                <EditIcon />
               </button>
             </ItemList.Row>
           ))
@@ -98,13 +100,13 @@ export const ManageItems = () => {
               aria-label="cancel deletion"
               onClick={() => setIsDeleteModalOpen(false)}
             >
-              Cancel
+              No
             </button>
             <button
               aria-label="remove item"
               onClick={() => removeItemBy(item.id)}
             >
-              Confirm
+              Yes
             </button>
           </div>
         </StyledModalContainer>
