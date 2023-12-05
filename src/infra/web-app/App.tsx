@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { GlobalStyles } from "./App.styled";
+import { GlobalStyles, StyledApp } from "./App.styled";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { MainPage } from "./pages/main/main";
 import { ManageItems } from "./pages/manageItems/manageItems";
@@ -18,8 +18,10 @@ const router = createBrowserRouter([
 export const App = () => {
   return (
     <StrictMode>
-      <GlobalStyles />
-      <RouterProvider router={router} />
+      <StyledApp>
+        <GlobalStyles />
+        <RouterProvider router={router} />
+      </StyledApp>
     </StrictMode>
   );
 };

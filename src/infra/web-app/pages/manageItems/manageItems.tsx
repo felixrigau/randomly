@@ -8,6 +8,7 @@ import { Item } from "../../../../application/model/Item";
 import { StyledModalContainer } from "../../components/modal/modal.styled";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
+import { StyledContainer } from "./manageItems.styled";
 
 export const ManageItems = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -46,7 +47,7 @@ export const ManageItems = () => {
   };
 
   return (
-    <>
+    <StyledContainer>
       <ItemList>
         {(items) =>
           items.map((item) => (
@@ -111,6 +112,6 @@ export const ManageItems = () => {
           </div>
         </StyledModalContainer>
       </Modal>
-    </>
+    </StyledContainer>
   );
 };
