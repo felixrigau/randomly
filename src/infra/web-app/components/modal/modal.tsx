@@ -32,7 +32,7 @@ const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
     isOpen &&
     createPortal(
       <Provider value={{ isOpen, onClose }}>
-        <StyledBackground onClick={onClose}>
+        <StyledBackground onClick={onClose} aria-label="background modal">
           <StyledModal onClick={handleModalClick}>{children}</StyledModal>
         </StyledBackground>
       </Provider>,
