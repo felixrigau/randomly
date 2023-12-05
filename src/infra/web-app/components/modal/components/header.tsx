@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { useModalContext } from "../context/useModalContext";
 import { StyledHeaderContainer } from "../modal.styled";
+import CloseIcon from "@mui/icons-material/Close";
 
 type HeaderType = {
   hasCloseButton: boolean;
@@ -14,7 +15,11 @@ export const Header = ({
   return (
     <StyledHeaderContainer>
       {children}
-      {hasCloseButton && <button onClick={onClose}>x</button>}
+      {hasCloseButton && (
+        <button onClick={onClose}>
+          <CloseIcon />
+        </button>
+      )}
     </StyledHeaderContainer>
   );
 };
