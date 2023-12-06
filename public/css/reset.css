@@ -134,4 +134,6 @@ table {
 button {
   background: none;
   border: none;
+  padding-block: 0;
+  padding-inline: 0;
 }
