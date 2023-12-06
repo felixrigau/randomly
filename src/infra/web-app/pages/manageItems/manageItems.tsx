@@ -8,6 +8,8 @@ import { Item } from "../../../../application/model/Item";
 import { StyledModalContainer } from "../../components/modal/modal.styled";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
+
 import {
   StyledButton,
   StyledButtonContainer,
@@ -71,7 +73,7 @@ export const ManageItems = () => {
       </ItemList>
       <StyledButtonContainer>
         <StyledButton onClick={() => setIsCreateModalOpen(true)}>
-          Create
+          <AddIcon />
         </StyledButton>
       </StyledButtonContainer>
       <Modal
