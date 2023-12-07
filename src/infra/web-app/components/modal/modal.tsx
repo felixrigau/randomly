@@ -12,6 +12,20 @@ type ModalType = {
 const { Provider } = modalContext;
 
 const Modal = ({ children, isOpen, onClose }: PropsWithChildren<ModalType>) => {
+  const handleScapeKeyPress = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", handleScapeKeyPress);
+
+    return () => {
+      document.removeEventListener("keyup", handleScapeKeyPress);
+    };
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
