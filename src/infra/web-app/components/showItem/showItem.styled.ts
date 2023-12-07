@@ -6,7 +6,7 @@ export const StyledItem = styled.section`
   background: #fff1c6;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
