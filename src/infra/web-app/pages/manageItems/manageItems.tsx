@@ -5,12 +5,12 @@ import { useItemsContext } from "../../contexts/Items/useItemContext";
 import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
 import ItemForm from "../../components/itemForm/itemForm";
 import { Item } from "../../../../application/model/Item";
-import { StyledModalContainer } from "../../components/modal/modal.styled";
+import { StyledModalContent } from "../../components/modal/modal.styled";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import { StyledContainer } from "./manageItems.styled";
-import { StyledButtonContainer } from "../shared/styles.styled";
+import { ButtonsContainer, StyledContainer } from "./manageItems.styled";
+import { StyledButton, StyledButtonContainer } from "../shared/styles.styled";
 
 export const ManageItems = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -77,45 +77,45 @@ export const ManageItems = () => {
         onClose={() => setIsCreateModalOpen(false)}
       >
         <Modal.Header hasCloseButton>Create Item</Modal.Header>
-        <StyledModalContainer>
+        <StyledModalContent>
           <ItemForm buttonText="Create" onButtonClick={handleCreateClick} />
-        </StyledModalContainer>
+        </StyledModalContent>
       </Modal>
       <Modal
         isOpen={isUpdateModalOpen}
         onClose={() => setIsUpdateModalOpen(false)}
       >
         <Modal.Header hasCloseButton>Update Item</Modal.Header>
-        <StyledModalContainer>
+        <StyledModalContent>
           <ItemForm
             buttonText="Update"
             item={item}
             onButtonClick={handleUpdateClick}
           />
-        </StyledModalContainer>
+        </StyledModalContent>
       </Modal>
       <Modal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
       >
         <Modal.Header hasCloseButton> Delete confirmation </Modal.Header>
-        <StyledModalContainer>
+        <StyledModalContent>
           <p>Are you sure about deleting {item?.title} ?</p>
-          <div>
-            <button
-              aria-label="cancel deletion"
-              onClick={() => setIsDeleteModalOpen(false)}
-            >
-              No
-            </button>
-            <button
-              aria-label="remove item"
-              onClick={() => removeItemBy(item.id)}
-            >
-              Yes
-            </button>
-          </div>
-        </StyledModalContainer>
+        </StyledModalContent>
+        <ButtonsContainer>
+          <StyledButton
+            aria-label="cancel deletion"
+            onClick={() => setIsDeleteModalOpen(false)}
+          >
+            No
+          </StyledButton>
+          <StyledButton
+            aria-label="remove item"
+            onClick={() => removeItemBy(item.id)}
+          >
+            Yes
+          </StyledButton>
+        </ButtonsContainer>
       </Modal>
     </StyledContainer>
   );

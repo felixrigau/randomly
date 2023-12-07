@@ -6,3 +6,9 @@ export const StyledContainer = styled.div`
   height: 100vh;
   width: 100vw;
 `;
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-top: 1px solid #bebebe;
+`;

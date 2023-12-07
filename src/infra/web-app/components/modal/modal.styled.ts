@@ -15,8 +15,12 @@ export const StyledModal = styled.div`
   background: #fff;
 `;
 
-export const StyledModalContainer = styled.div`
+export const StyledModalContent = styled.div`
   padding: 1rem;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const StyledHeaderContainer = styled.div`
