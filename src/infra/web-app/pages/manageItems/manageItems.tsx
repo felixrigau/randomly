@@ -9,12 +9,8 @@ import { StyledModalContainer } from "../../components/modal/modal.styled";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-
-import {
-  StyledButton,
-  StyledButtonContainer,
-  StyledContainer,
-} from "./manageItems.styled";
+import { StyledContainer } from "./manageItems.styled";
+import { StyledButtonContainer } from "../shared/styles.styled";
 
 export const ManageItems = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -72,9 +68,9 @@ export const ManageItems = () => {
         }
       </ItemList>
       <StyledButtonContainer>
-        <StyledButton onClick={() => setIsCreateModalOpen(true)}>
+        <button onClick={() => setIsCreateModalOpen(true)}>
           <AddIcon />
-        </StyledButton>
+        </button>
       </StyledButtonContainer>
       <Modal
         isOpen={isCreateModalOpen}

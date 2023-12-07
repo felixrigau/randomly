@@ -3,6 +3,8 @@ import { Item } from "../../../../application/model/Item";
 import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
 import { StyledItem, Title } from "./showItem.styled";
 import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
+import { StyledButtonContainer } from "../../pages/shared/styles.styled";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const ShowItem = () => {
   const [existItems, setExistItems] = useState<boolean>(false);
@@ -32,9 +34,11 @@ const ShowItem = () => {
       {!hasMoreItems && <p>All items were visited today</p>}
       {!existItems && <p>Create at least one item, please</p>}
       {existItems && (
-        <button onClick={getItem} aria-label="get next item">
-          Next
-        </button>
+        <StyledButtonContainer>
+          <button onClick={getItem} aria-label="get next item">
+            <ArrowForwardIosIcon />
+          </button>
+        </StyledButtonContainer>
       )}
     </StyledItem>
   );

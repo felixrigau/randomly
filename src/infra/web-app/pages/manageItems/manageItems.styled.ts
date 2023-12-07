@@ -6,15 +6,3 @@ export const StyledContainer = styled.div`
   height: 100vh;
   width: 100vw;
 `;
-
-export const StyledButtonContainer = styled.div`
-  position: fixed;
-  bottom: 3rem;
-  left: 0;
-  width: 100%;
-  display: flex;
-`;
-
-export const StyledButton = styled.button`
-  margin: auto;
-`;
