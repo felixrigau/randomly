@@ -3,7 +3,7 @@ import { Item } from "../../../../application/model/Item";
 import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
 import { StyledItem, Title } from "./showItem.styled";
 import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
-import { StyledButtonContainer } from "../../pages/shared/styles.styled";
+import { StyledFixedButtonContainer } from "../../pages/shared/styles.styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const ShowItem = () => {
@@ -34,11 +34,11 @@ const ShowItem = () => {
       {!hasMoreItems && <p>All items were visited today</p>}
       {!existItems && <p>Create at least one item, please</p>}
       {existItems && (
-        <StyledButtonContainer>
+        <StyledFixedButtonContainer>
           <button onClick={getItem} aria-label="get next item">
             <ArrowForwardIosIcon />
           </button>
-        </StyledButtonContainer>
+        </StyledFixedButtonContainer>
       )}
     </StyledItem>
   );
