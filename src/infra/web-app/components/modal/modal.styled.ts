@@ -16,7 +16,7 @@ export const StyledModal = styled.div`
 `;
 
 export const StyledModalContent = styled.div`
-  padding: 1rem;
+  padding: 2rem;
   min-height: 100px;
   display: flex;
   align-items: center;

@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
-  padding: 0.75rem;
+  padding: 2rem;
   position: relative;
   height: 100vh;
   width: 100vw;
 `;
+
 export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
