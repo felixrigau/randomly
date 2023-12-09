@@ -137,3 +137,7 @@ button {
   padding-block: 0;
   padding-inline: 0;
 }
+
+input[type="checkbox" i] {
+  margin: 0;
+}
