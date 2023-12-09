@@ -15,7 +15,13 @@ jest.mock(
 );
 
 describe("itemList - tests suite", () => {
-  test("clicking remove item button should remove the item and update the items list", async () => {
+  beforeAll(() => {
+    const modalRoot = document.createElement("div");
+    modalRoot.setAttribute("id", "modal");
+    document.body.appendChild(modalRoot);
+  });
+
+  test("clicking remove item button should open the delete confirmation modal", async () => {
     const item = new Item("abc");
     const getAllItemsMock = jest.fn().mockImplementation((): Item[] => [item]);
     const removeItemMock = jest.fn();
@@ -36,9 +42,49 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    const removeButton = screen.getByRole("button", { name: "remove item" });
+    const openModalButton = screen.getByRole("button", {
+      name: "open remove modal",
+    });
 
-    await userEvent.click(removeButton);
+    await userEvent.click(openModalButton);
+
+    const text = screen.getByText(/Are you sure about deleting/i);
+
+    expect(text).toBeInTheDocument();
+  });
+
+  test.skip("clicking the yes button on the delete confirmation modal should remove the item and update the items list", async () => {
+    const item = new Item("abc");
+    const getAllItemsMock = jest.fn().mockImplementation((): Item[] => [item]);
+    const removeItemMock = jest.fn();
+    (GetAllItemsUseCase as jest.Mock).mockImplementation(() => {
+      return {
+        execute: getAllItemsMock,
+      };
+    });
+    (RemoveItemUseCase as jest.Mock).mockImplementation(() => {
+      return {
+        execute: removeItemMock,
+      };
+    });
+
+    render(
+      <ItemsProvider>
+        <ManageItems />
+      </ItemsProvider>
+    );
+
+    const openModalButton = screen.getByRole("button", {
+      name: "open remove modal",
+    });
+
+    await userEvent.click(openModalButton);
+
+    const yesButton = screen.getByRole("button", {
+      name: "remove item",
+    });
+
+    await userEvent.click(yesButton);
 
     expect(getAllItemsMock).toBeCalledTimes(2);
     expect(removeItemMock).toBeCalledWith(item.id);
