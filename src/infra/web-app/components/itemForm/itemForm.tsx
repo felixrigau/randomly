@@ -36,22 +36,23 @@ const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
         }}
       />
       <label htmlFor="description">Description</label>
-      <input
+      <textarea
         id="description"
-        type="text"
         value={description}
         onChange={(e) => {
           setDescription(e.target.value);
         }}
       />
-      <label htmlFor="isFixed">IsFixed</label>
-      <input
-        id="isFixed"
-        type="checkbox"
-        onChange={(e) => {
-          setIsFixed(e.target.checked);
-        }}
-      />
+      <label htmlFor="isFixed">
+        <input
+          id="isFixed"
+          type="checkbox"
+          onChange={(e) => {
+            setIsFixed(e.target.checked);
+          }}
+        />
+        IsFixed
+      </label>
       <button
         disabled={!title}
         onClick={() => {
