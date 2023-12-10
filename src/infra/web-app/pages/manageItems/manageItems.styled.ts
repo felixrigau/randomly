@@ -20,3 +20,10 @@ export const ButtonsContainer = styled.div`
     margin-left: 0.5rem;
   }
 `;
+
+export const StyledHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #bebebe;
+`;
