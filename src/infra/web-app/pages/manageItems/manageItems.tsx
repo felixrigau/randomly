@@ -81,8 +81,22 @@ export const ManageItems = () => {
       >
         <Modal.Header hasCloseButton>Create Item</Modal.Header>
         <StyledModalContent>
-          <ItemForm buttonText="Create" onButtonClick={handleCreateClick} />
+          <ItemForm />
         </StyledModalContent>
+        <ButtonsContainer>
+          <StyledButton
+            disabled={!item.title}
+            onClick={() => {
+              handleCreateClick({
+                title: item.title,
+                text: item.text,
+                isFixed: item.isFixed,
+              });
+            }}
+          >
+            Create
+          </StyledButton>
+        </ButtonsContainer>
       </Modal>
       <Modal
         isOpen={isUpdateModalOpen}
@@ -90,12 +104,22 @@ export const ManageItems = () => {
       >
         <Modal.Header hasCloseButton>Update Item</Modal.Header>
         <StyledModalContent>
-          <ItemForm
-            buttonText="Update"
-            item={item}
-            onButtonClick={handleUpdateClick}
-          />
+          <ItemForm />
         </StyledModalContent>
+        <ButtonsContainer>
+          <StyledButton
+            disabled={!item.title}
+            onClick={() => {
+              handleUpdateClick({
+                title: item.title,
+                text: item.text,
+                isFixed: item.isFixed,
+              });
+            }}
+          >
+            Update
+          </StyledButton>
+        </ButtonsContainer>
       </Modal>
       <Modal
         isOpen={isDeleteModalOpen}
