@@ -10,14 +10,11 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {
-  ButtonsContainer,
-  StyledContainer,
-  StyledHeader,
-} from "./manageItems.styled";
+import { ButtonsContainer, StyledContainer } from "./manageItems.styled";
 import {
   StyledButton,
   StyledFixedButtonContainer,
+  StyledHeader,
 } from "../shared/styles.styled";
 import { Link } from "react-router-dom";
 
