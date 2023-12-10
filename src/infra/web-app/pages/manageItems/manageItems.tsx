@@ -85,7 +85,7 @@ export const ManageItems = () => {
         </StyledModalContent>
         <ButtonsContainer>
           <StyledButton
-            disabled={!item.title}
+            disabled={!item?.title}
             onClick={() => {
               handleCreateClick({
                 title: item.title,
@@ -108,7 +108,7 @@ export const ManageItems = () => {
         </StyledModalContent>
         <ButtonsContainer>
           <StyledButton
-            disabled={!item.title}
+            disabled={!item?.title}
             onClick={() => {
               handleUpdateClick({
                 title: item.title,

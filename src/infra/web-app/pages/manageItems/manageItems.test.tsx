@@ -53,7 +53,7 @@ describe("itemList - tests suite", () => {
     expect(text).toBeInTheDocument();
   });
 
-  test.skip("clicking the yes button on the delete confirmation modal should remove the item and update the items list", async () => {
+  test("clicking the yes button on the delete confirmation modal should remove the item and update the items list", async () => {
     const item = new Item("abc");
     const getAllItemsMock = jest.fn().mockImplementation((): Item[] => [item]);
     const removeItemMock = jest.fn();
