@@ -1,32 +1,8 @@
-import { ReactNode, useEffect, useState } from "react";
-import { Item } from "../../../../application/model/Item";
 import { StyledForm } from "./itemForm.styled";
-type ItemFormType = {
-  children?: (item: Partial<Item>) => ReactNode;
-  buttonText: string;
-  onButtonClick: (item: Partial<Item>) => void;
-  previousItem?: Item;
-};
+import { useItemsContext } from "../../contexts/Items/useItemContext";
 
-const initialState: Partial<Item> = { title: "", text: "", isFixed: false };
-
-const ItemForm = ({
-  children,
-  buttonText,
-  onButtonClick,
-  previousItem,
-}: ItemFormType) => {
-  const [item, setItem] = useState<Partial<Item>>(initialState);
-
-  const clearForm = () => {
-    setItem(initialState);
-  };
-
-  useEffect(() => {
-    if (previousItem) {
-      setItem(previousItem);
-    }
-  }, [previousItem]);
+const ItemForm = () => {
+  const { item, setItem } = useItemsContext();
 
   return (
     <StyledForm>
@@ -34,7 +10,7 @@ const ItemForm = ({
       <input
         id="title"
         type="text"
-        value={item.title}
+        value={item?.title}
         onChange={(e) => {
           setItem((item) => ({ ...item, title: e.target.value }));
         }}
@@ -42,7 +18,7 @@ const ItemForm = ({
       <label htmlFor="text">Text</label>
       <textarea
         id="text"
-        value={item.text}
+        value={item?.text}
         onChange={(e) => {
           setItem((item) => ({ ...item, text: e.target.value }));
         }}
@@ -51,26 +27,13 @@ const ItemForm = ({
         <input
           id="isFixed"
           type="checkbox"
+          checked={Boolean(item?.isFixed)}
           onChange={(e) => {
             setItem((item) => ({ ...item, isFixed: e.target.checked }));
           }}
         />
         IsFixed
       </label>
-      <button
-        disabled={!item.title}
-        onClick={() => {
-          clearForm();
-          onButtonClick({
-            title: item.title,
-            text: item.text,
-            isFixed: item.isFixed,
-          });
-        }}
-      >
-        {buttonText}
-      </button>
-      {children(item)}
     </StyledForm>
   );
 };
