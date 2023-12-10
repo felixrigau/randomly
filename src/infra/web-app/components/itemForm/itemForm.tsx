@@ -4,25 +4,25 @@ import { StyledForm } from "./itemForm.styled";
 type ItemFormType = {
   buttonText: string;
   onButtonClick: (item: Partial<Item>) => void;
-  item?: Item;
+  previousItem?: Item;
 };
 
-const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
-  const [title, setTitle] = useState(item?.title ?? "");
-  const [description, setDescription] = useState(item?.text ?? "");
-  const [isFixed, setIsFixed] = useState(Boolean(item?.isFixed));
+const initialState: Partial<Item> = { title: "", text: "", isFixed: false };
+
+const ItemForm = ({
+  buttonText,
+  onButtonClick,
+  previousItem,
+}: ItemFormType) => {
+  const [item, setItem] = useState<Partial<Item>>(initialState);
 
   const clearForm = () => {
-    setTitle("");
-    setDescription("");
-    setIsFixed(false);
+    setItem(initialState);
   };
 
   useEffect(() => {
-    setTitle(item?.title ?? "");
-    setDescription(item?.text ?? "");
-    setIsFixed(Boolean(item?.isFixed));
-  }, [item]);
+    setItem(previousItem);
+  }, [previousItem]);
 
   return (
     <StyledForm>
@@ -30,17 +30,17 @@ const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
       <input
         id="title"
         type="text"
-        value={title}
+        value={item.title}
         onChange={(e) => {
-          setTitle(e.target.value);
+          setItem((item) => ({ ...item, title: e.target.value }));
         }}
       />
-      <label htmlFor="description">Description</label>
+      <label htmlFor="text">Description</label>
       <textarea
-        id="description"
-        value={description}
+        id="text"
+        value={item.text}
         onChange={(e) => {
-          setDescription(e.target.value);
+          setItem((item) => ({ ...item, text: e.target.value }));
         }}
       />
       <label htmlFor="isFixed">
@@ -48,16 +48,20 @@ const ItemForm = ({ buttonText, onButtonClick, item }: ItemFormType) => {
           id="isFixed"
           type="checkbox"
           onChange={(e) => {
-            setIsFixed(e.target.checked);
+            setItem((item) => ({ ...item, isFixed: e.target.checked }));
           }}
         />
         IsFixed
       </label>
       <button
-        disabled={!title}
+        disabled={!item.title}
         onClick={() => {
           clearForm();
-          onButtonClick({ title, text: description, isFixed });
+          onButtonClick({
+            title: item.title,
+            text: item.text,
+            isFixed: item.isFixed,
+          });
         }}
       >
         {buttonText}
