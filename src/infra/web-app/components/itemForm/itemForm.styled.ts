@@ -7,6 +7,8 @@ export const StyledForm = styled.div`
   & > input,
   & > textarea {
     margin-top: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #aeaeae;
   }
 
   & > label:first-child {
