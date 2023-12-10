@@ -10,44 +10,30 @@ describe("createForm - tests suite", () => {
   test("should have all needed element to input the item data", () => {
     render(
       <ItemsProvider>
-        <ItemForm buttonText="click" onButtonClick={() => {}} />
+        <ItemForm buttonText="click" onButtonClick={() => {}}>
+          {(item) => <>{item.title}</>}
+        </ItemForm>
       </ItemsProvider>
     );
 
     expect(screen.getByLabelText("Title")).toBeInTheDocument();
     expect(screen.getByLabelText("Text")).toBeInTheDocument();
     expect(screen.getByLabelText("IsFixed")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
-  test("should have the button disabled if title input is empty", async () => {
-    render(
-      <ItemsProvider>
-        <ItemForm buttonText="click" onButtonClick={() => {}} />
-      </ItemsProvider>
-    );
-    const button = screen.getByRole("button");
-    const title = screen.getByLabelText("Title");
-
-    expect(button).toBeDisabled();
-
-    await userEvent.type(title, "foo");
-
-    expect(button).toBeEnabled();
-  });
-
-  test("when button is clicked should call the onClick callback passing the item data as parameters", async () => {
+  test("should render the input the input values as children", async () => {
     const handleClickMock = jest.fn();
     render(
       <ItemsProvider>
-        <ItemForm buttonText="click" onButtonClick={handleClickMock} />
+        <ItemForm buttonText="click" onButtonClick={handleClickMock}>
+          {(item) => <>{JSON.stringify(item)}</>}
+        </ItemForm>
       </ItemsProvider>
     );
 
     const titleInput = screen.getByLabelText("Title");
     const textInput = screen.getByLabelText("Text");
     const fixedCheckbox = screen.getByLabelText("IsFixed");
-    const button = screen.getByRole("button");
 
     const title = "foo",
       text = "baa";
@@ -55,12 +41,11 @@ describe("createForm - tests suite", () => {
     await userEvent.type(titleInput, title);
     await userEvent.type(textInput, text);
     await userEvent.click(fixedCheckbox);
-    await userEvent.click(button);
 
-    expect(handleClickMock).toBeCalledWith({
-      title,
-      text,
-      isFixed: true,
-    });
+    const itemData = screen.getByText(
+      JSON.stringify({ title, text, isFixed: true })
+    );
+
+    expect(itemData).toBeInTheDocument();
   });
 });

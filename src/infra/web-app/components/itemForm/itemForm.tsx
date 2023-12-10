@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Item } from "../../../../application/model/Item";
 import { StyledForm } from "./itemForm.styled";
 type ItemFormType = {
+  children?: (item: Partial<Item>) => ReactNode;
   buttonText: string;
   onButtonClick: (item: Partial<Item>) => void;
   previousItem?: Item;
@@ -10,6 +11,7 @@ type ItemFormType = {
 const initialState: Partial<Item> = { title: "", text: "", isFixed: false };
 
 const ItemForm = ({
+  children,
   buttonText,
   onButtonClick,
   previousItem,
@@ -68,6 +70,7 @@ const ItemForm = ({
       >
         {buttonText}
       </button>
+      {children(item)}
     </StyledForm>
   );
 };
