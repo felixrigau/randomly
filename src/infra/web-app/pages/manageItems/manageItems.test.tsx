@@ -7,6 +7,7 @@ import { RemoveItemUseCase } from "../../../../application/useCases/RemoveItem/R
 import userEvent from "@testing-library/user-event";
 import { RemoveVisitedItemIdUseCase } from "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase";
 import { ManageItems } from "./manageItems";
+import { MemoryRouter } from "react-router-dom";
 
 jest.mock("../../../../application/useCases/GetAllItems/GetAllItemsUseCase");
 jest.mock("../../../../application/useCases/RemoveItem/RemoveItemUseCase");
@@ -38,7 +39,9 @@ describe("itemList - tests suite", () => {
 
     render(
       <ItemsProvider>
-        <ManageItems />
+        <MemoryRouter>
+          <ManageItems />
+        </MemoryRouter>
       </ItemsProvider>
     );
 
@@ -70,7 +73,9 @@ describe("itemList - tests suite", () => {
 
     render(
       <ItemsProvider>
-        <ManageItems />
+        <MemoryRouter>
+          <ManageItems />
+        </MemoryRouter>
       </ItemsProvider>
     );
 
@@ -106,7 +111,9 @@ describe("itemList - tests suite", () => {
 
     render(
       <ItemsProvider>
-        <ManageItems />
+        <MemoryRouter>
+          <ManageItems />
+        </MemoryRouter>
       </ItemsProvider>
     );
 
