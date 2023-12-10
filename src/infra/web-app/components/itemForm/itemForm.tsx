@@ -21,7 +21,9 @@ const ItemForm = ({
   };
 
   useEffect(() => {
-    setItem(previousItem);
+    if (previousItem) {
+      setItem(previousItem);
+    }
   }, [previousItem]);
 
   return (
@@ -35,7 +37,7 @@ const ItemForm = ({
           setItem((item) => ({ ...item, title: e.target.value }));
         }}
       />
-      <label htmlFor="text">Description</label>
+      <label htmlFor="text">Text</label>
       <textarea
         id="text"
         value={item.text}

@@ -15,7 +15,7 @@ describe("createForm - tests suite", () => {
     );
 
     expect(screen.getByLabelText("Title")).toBeInTheDocument();
-    expect(screen.getByLabelText("Description")).toBeInTheDocument();
+    expect(screen.getByLabelText("Text")).toBeInTheDocument();
     expect(screen.getByLabelText("IsFixed")).toBeInTheDocument();
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
@@ -45,21 +45,21 @@ describe("createForm - tests suite", () => {
     );
 
     const titleInput = screen.getByLabelText("Title");
-    const descriptionInput = screen.getByLabelText("Description");
+    const textInput = screen.getByLabelText("Text");
     const fixedCheckbox = screen.getByLabelText("IsFixed");
     const button = screen.getByRole("button");
 
     const title = "foo",
-      description = "baa";
+      text = "baa";
 
     await userEvent.type(titleInput, title);
-    await userEvent.type(descriptionInput, description);
+    await userEvent.type(textInput, text);
     await userEvent.click(fixedCheckbox);
     await userEvent.click(button);
 
     expect(handleClickMock).toBeCalledWith({
       title,
-      text: description,
+      text,
       isFixed: true,
     });
   });
