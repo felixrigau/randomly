@@ -9,11 +9,12 @@ import SideBar from "../../components/sideBar/sideBar";
 import { VisitedItemIdStorageRepository } from "../../../adapters/VisitedItemIdStorageRepository/VisitedItemIdStorageRepository";
 import { Link } from "react-router-dom";
 import { StyledHeader } from "../shared/styles.styled";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const respository = new VisitedItemIdStorageRepository();
 
 export const MainPage = () => {
-  const { toggleSideBar, isSideBarOpen } = useItemsContext();
+  const { isSideBarOpen } = useItemsContext();
   const useCases = useRef({
     wereItemsVisitedToday: new WereItemsVisitedToday(respository),
     clearPreviousVisitedItems: new ClearPreviousVisitedItems(respository),
@@ -34,7 +35,9 @@ export const MainPage = () => {
     <>
       <StyledHeader>
         <div />
-        <MenuButton>menu</MenuButton>
+        <MenuButton>
+          <MenuIcon />
+        </MenuButton>
       </StyledHeader>
       <ShowItem />
       <SideBar isOpen={isSideBarOpen}>
