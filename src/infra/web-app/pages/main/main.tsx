@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, PropsWithChildren } from "react";
 import { ClearPreviousVisitedItems } from "../../../../application/useCases/ClearPreviousVisitedItems/ClearPreviousVisitedItems";
 import { SaveLastVisitDate } from "../../../../application/useCases/UpdateLastVisitDate/SaveLastVisitDate";
 import { WereItemsVisitedToday } from "../../../../application/useCases/WereItemsVisitedToday/WereItemsVisitedToday";
@@ -10,8 +10,36 @@ import { VisitedItemIdStorageRepository } from "../../../adapters/VisitedItemIdS
 import { Link } from "react-router-dom";
 import { StyledHeader } from "../shared/styles.styled";
 import MenuIcon from "@mui/icons-material/Menu";
+import styled from "styled-components";
 
 const respository = new VisitedItemIdStorageRepository();
+
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: auto 1fr;
+`;
+
+const Layout = ({ children }: PropsWithChildren) => {
+  const { isSideBarOpen } = useItemsContext();
+  return (
+    <>
+      <Container>
+        <StyledHeader>
+          <div />
+          <MenuButton>
+            <MenuIcon />
+          </MenuButton>
+        </StyledHeader>
+        <div style={{ border: "1px solid red" }}>
+          <SideBar isOpen={isSideBarOpen}>
+            <Link to={"/items"}>Manage Items</Link>
+          </SideBar>
+          {children}
+        </div>
+      </Container>
+    </>
+  );
+};
 
 export const MainPage = () => {
   const { isSideBarOpen } = useItemsContext();
@@ -32,17 +60,8 @@ export const MainPage = () => {
   }, []);
 
   return (
-    <>
-      <StyledHeader>
-        <div />
-        <MenuButton>
-          <MenuIcon />
-        </MenuButton>
-      </StyledHeader>
+    <Layout>
       <ShowItem />
-      <SideBar isOpen={isSideBarOpen}>
-        <Link to={"/items"}>Manage Items</Link>
-      </SideBar>
-    </>
+    </Layout>
   );
 };
