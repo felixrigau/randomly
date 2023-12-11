@@ -8,7 +8,9 @@ const close = css`
 `;
 
 export const StyledSideBar = styled.div`
-  height: inherit;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 `;
 
 export const StyledBackground = styled.div<{ $isOpen: boolean }>`
