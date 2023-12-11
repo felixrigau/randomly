@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const StyledItem = styled.section`
   width: 100vw;
-  height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -21,7 +21,6 @@ export const Layout = ({ children }: PropsWithChildren) => {
     setIsHome(location.pathname === "/");
   }, [location.pathname]);
 
-  console.log("location", location);
   return (
     <StyledContainer>
       <StyledHeader>
@@ -38,10 +37,10 @@ export const Layout = ({ children }: PropsWithChildren) => {
         )}
       </StyledHeader>
       <StyledMain>
+        {children}
         <SideBar isOpen={isSideBarOpen}>
           <Link to={"/items"}>Manage Items</Link>
         </SideBar>
-        {children}
       </StyledMain>
     </StyledContainer>
   );
