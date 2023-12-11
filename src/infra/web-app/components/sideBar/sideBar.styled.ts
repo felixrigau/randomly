@@ -11,6 +11,7 @@ export const StyledSideBar = styled.div`
   height: 100%;
   width: 100%;
   position: absolute;
+  z-index: 2;
 `;
 
 export const StyledBackground = styled.div<{ $isOpen: boolean }>`
