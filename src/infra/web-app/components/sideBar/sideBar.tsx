@@ -1,5 +1,9 @@
 import { PropsWithChildren } from "react";
-import { Background, Container } from "./sideBar.styled";
+import {
+  StyledBackground,
+  StyledContainer,
+  StyledSideBar,
+} from "./sideBar.styled";
 import { useItemsContext } from "../../contexts/Items/useItemContext";
 
 type SideBarType = {
@@ -10,10 +14,10 @@ const SideBar = ({ children, isOpen }: PropsWithChildren<SideBarType>) => {
   const { toggleSideBar } = useItemsContext();
 
   return (
-    <>
-      <Background $isOpen={isOpen} onClick={toggleSideBar} />
-      <Container $isOpen={isOpen}>{children}</Container>
-    </>
+    <StyledSideBar>
+      <StyledBackground $isOpen={isOpen} onClick={toggleSideBar} />
+      <StyledContainer $isOpen={isOpen}>{children}</StyledContainer>
+    </StyledSideBar>
   );
 };
 
