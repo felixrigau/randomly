@@ -9,6 +9,7 @@ export const StyledForm = styled.div`
     margin-top: 0.5rem;
     padding: 0.5rem;
     border: 1px solid #aeaeae;
+    font-size: 1rem;
   }
 
   & > label:first-child {
