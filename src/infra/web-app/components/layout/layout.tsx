@@ -3,33 +3,38 @@
 // https://github.com/jsdom/jsdom/pull/3403
 
 import { PropsWithChildren, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SideBar from "../sideBar/sideBar";
 import { StyledContainer, StyledHeader, StyledMain } from "./layout.styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useGoTo } from "../../hooks/useItemCRUD/useGoTo";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const [isHome, setIsHome] = useState(false);
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
-  const location = useLocation();
+  const { pathname } = useLocation();
+  const { goToHome, goToItems } = useGoTo();
 
   useEffect(() => {
-    setIsHome(location.pathname === "/");
-  }, [location.pathname]);
+    setIsHome(pathname === "/");
+  }, [pathname]);
 
   return (
     <StyledContainer>
       <StyledHeader>
         {!isHome && (
-          <Link to="/">
+          <button aria-label="go home" onClick={goToHome}>
             <ArrowBackIcon />
-          </Link>
+          </button>
         )}
         <div />
         {isHome && (
-          <button onClick={() => setIsSideBarOpen(!isSideBarOpen)}>
+          <button
+            aria-label="handle menu"
+            onClick={() => setIsSideBarOpen(!isSideBarOpen)}
+          >
             <MenuIcon />
           </button>
         )}
@@ -37,7 +42,9 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <StyledMain>
         {children}
         <SideBar isOpen={isSideBarOpen}>
-          <Link to={"/items"}>Manage Items</Link>
+          <button aria-label="go to items" onClick={goToItems}>
+            Manage Items
+          </button>
         </SideBar>
       </StyledMain>
     </StyledContainer>
