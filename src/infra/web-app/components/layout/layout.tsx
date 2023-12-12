@@ -4,17 +4,14 @@
 
 import { PropsWithChildren, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useItemsContext } from "../../contexts/Items/useItemContext";
-import { MenuButton } from "../menuButton/menuButton";
 import SideBar from "../sideBar/sideBar";
 import { StyledContainer, StyledHeader, StyledMain } from "./layout.styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export const Layout = ({ children }: PropsWithChildren) => {
-  const { isSideBarOpen } = useItemsContext();
   const [isHome, setIsHome] = useState(false);
-  // const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
   const location = useLocation();
 
@@ -32,9 +29,9 @@ export const Layout = ({ children }: PropsWithChildren) => {
         )}
         <div />
         {isHome && (
-          <MenuButton>
+          <button onClick={() => setIsSideBarOpen(!isSideBarOpen)}>
             <MenuIcon />
-          </MenuButton>
+          </button>
         )}
       </StyledHeader>
       <StyledMain>
