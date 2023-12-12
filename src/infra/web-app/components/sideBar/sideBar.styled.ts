@@ -14,13 +14,6 @@ export const StyledSideBar = styled.div`
   left: 100vh;
 `;
 
-export const StyledBackground = styled.div<{ $isOpen: boolean }>`
-  height: inherit;
-  width: 100vw;
-  display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
-  z-index: 2;
-`;
-
 export const StyledContainer = styled.div<{ $isOpen: boolean }>`
   position: absolute;
   top: 0;
