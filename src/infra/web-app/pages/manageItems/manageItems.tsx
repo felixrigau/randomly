@@ -28,12 +28,14 @@ export const ManageItems = () => {
     create(newItem);
     addItem(newItem);
     setIsCreateModalOpen(false);
+    setItem(null);
   };
 
   const handleUpdateClick = ({ title, text, isFixed }: Partial<Item>) => {
     update(item.id, { title, text, isFixed });
     setItems(getAll());
     setIsUpdateModalOpen(false);
+    setItem(null);
   };
 
   const removeItemBy = (id: string) => {
