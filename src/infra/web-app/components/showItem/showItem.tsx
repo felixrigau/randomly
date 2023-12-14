@@ -3,7 +3,7 @@ import { Item } from "../../../../application/model/Item";
 import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
 import { StyledItem, Title } from "./showItem.styled";
 import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
-import { StyledFixedButtonContainer } from "../../pages/shared/styles.styled";
+import { StyledFixedButtonContainer } from "../../shared/styles.styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const ShowItem = () => {

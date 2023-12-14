@@ -1,4 +1,5 @@
 import styled from "styled-components";
+export const HEADER_HEIGHT = "4rem";
 
 export const StyledContainer = styled.div`
   display: grid;
@@ -8,6 +9,7 @@ export const StyledContainer = styled.div`
 export const StyledMain = styled.main`
   display: flex;
   position: relative;
+  padding-top: ${HEADER_HEIGHT};
 `;
 
 export const StyledHeader = styled.header`
@@ -15,10 +17,11 @@ export const StyledHeader = styled.header`
   top: 0;
   left: 0;
   width: 100%;
+  height: ${HEADER_HEIGHT};
   background-color: #f1f1f1;
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0 1rem;
   border-bottom: 1px solid #bebebe;
   z-index: 2;
 `;

@@ -8,7 +8,7 @@ import SideBar from "../sideBar/sideBar";
 import { StyledContainer, StyledHeader, StyledMain } from "./layout.styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useGoTo } from "../../hooks/useItemCRUD/useGoTo";
+import { useGoTo } from "../../hooks/useGoTo";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const [isHome, setIsHome] = useState(false);
