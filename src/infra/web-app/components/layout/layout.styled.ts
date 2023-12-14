@@ -11,11 +11,14 @@ export const StyledMain = styled.main`
 `;
 
 export const StyledHeader = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f1f1f1;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
   border-bottom: 1px solid #bebebe;
   z-index: 2;
-  position: relative;
-  background-color: #f1f1f1;
 `;
