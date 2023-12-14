@@ -13,7 +13,8 @@
     // Specify the module resolution strategy
     "moduleResolution": "nodenext",
     //Do not emit compiler output files like JavaScript source code, source-maps or declarations
-    "noEmit": false
+    "noEmit": false,
+    "baseUrl": "./src"
   },
   "include": ["src/**/*", "jest-setup.ts"]
 }
