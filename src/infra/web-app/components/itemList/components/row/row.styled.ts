@@ -5,7 +5,7 @@ export const StyledRow = styled.div`
   justify-content: space-between;
   align-items: center;
   background: #f6f6f6;
-  padding: 0.75rem;
+  padding: 1rem;
   margin-bottom: 0.75rem;
   border-radius: 0.75rem;
 

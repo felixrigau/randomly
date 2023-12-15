@@ -9,6 +9,13 @@ export const StyledFixedButtonContainer = styled.div`
 
   & > button {
     margin: auto;
+    background-color: rgb(0 56 255 / 35%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
   }
 `;
 
