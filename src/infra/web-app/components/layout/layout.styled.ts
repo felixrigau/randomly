@@ -9,7 +9,8 @@ export const StyledContainer = styled.div`
 export const StyledMain = styled.main`
   display: flex;
   position: relative;
-  padding-top: ${HEADER_HEIGHT};
+  height: calc(100% - ${HEADER_HEIGHT});
+  margin-top: ${HEADER_HEIGHT};
 `;
 
 export const StyledHeader = styled.header`
