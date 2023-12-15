@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledContainer = styled.div`
   padding: 2rem;
   position: relative;
-  height: 100vh;
+  height: auto;
   width: 100vw;
 `;
 
