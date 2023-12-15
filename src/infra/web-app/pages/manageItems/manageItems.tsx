@@ -9,7 +9,14 @@ import { StyledModalContent } from "../../components/modal/modal.styled";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import { ButtonsContainer, StyledContainer } from "./manageItems.styled";
+import PushPinIcon from "@mui/icons-material/PushPin";
+import {
+  ButtonsContainer,
+  StyledActionButton,
+  StyledActionButtonsContainer,
+  StyledContainer,
+  StyledPinButton,
+} from "./manageItems.styled";
 import {
   StyledButton,
   StyledFixedButtonContainer,
@@ -20,8 +27,13 @@ export const ManageItems = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const { create, update, remove, getAll } = useItemCRUD();
+  const { create, update, remove, getAll, markFixed } = useItemCRUD();
   const { addItem, setItems, setItem, item } = useItemsContext();
+
+  const handlePinClick = (id: string, isFixed: boolean) => {
+    markFixed(id, isFixed);
+    setItems(getAll());
+  };
 
   const handleCreateClick = ({ title, text, isFixed }: Partial<Item>) => {
     const newItem = new Item(title, text, isFixed);
@@ -62,15 +74,27 @@ export const ManageItems = () => {
             {(items) =>
               items.map((item) => (
                 <ItemList.Row key={item.id} item={item}>
-                  <button
-                    aria-label="open remove modal"
-                    onClick={() => openDeleteConfirmationModal(item)}
-                  >
-                    <DeleteOutlineIcon />
-                  </button>
-                  <button aria-label="edit item" onClick={() => editItem(item)}>
-                    <EditIcon />
-                  </button>
+                  <StyledActionButtonsContainer>
+                    <StyledPinButton
+                      aria-label="pin item"
+                      $isFixed={item.isFixed}
+                      onClick={() => handlePinClick(item.id, !item.isFixed)}
+                    >
+                      <PushPinIcon />
+                    </StyledPinButton>
+                    <StyledActionButton
+                      aria-label="open remove modal"
+                      onClick={() => openDeleteConfirmationModal(item)}
+                    >
+                      <DeleteOutlineIcon />
+                    </StyledActionButton>
+                    <StyledActionButton
+                      aria-label="edit item"
+                      onClick={() => editItem(item)}
+                    >
+                      <EditIcon />
+                    </StyledActionButton>
+                  </StyledActionButtonsContainer>
                 </ItemList.Row>
               ))
             }

@@ -20,3 +20,29 @@ export const ButtonsContainer = styled.div`
     margin-left: 0.5rem;
   }
 `;
+
+export const StyledActionButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+`;
+
+export const StyledActionButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+type StyledPinButtonType = {
+  $isFixed: boolean;
+};
+
+export const StyledPinButton = styled(StyledActionButton)<StyledPinButtonType>`
+  & > svg {
+    transform: rotate(45deg);
+    background: ${({ $isFixed }) => ($isFixed ? "#e0e0e0" : "transparent")};
+    border-radius: 50%;
+    padding: 0.25rem;
+  }
+`;
