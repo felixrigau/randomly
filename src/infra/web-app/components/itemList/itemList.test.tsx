@@ -18,7 +18,9 @@ describe("itemList - tests suite", () => {
       <ItemsProvider>
         <ItemList>
           {(items) =>
-            items.map((item) => <ItemList.Row key={item.id} item={item} />)
+            items.map((item) => (
+              <ItemList.Row key={item.id} title={item.title} />
+            ))
           }
         </ItemList>
       </ItemsProvider>
@@ -37,7 +39,9 @@ describe("itemList - tests suite", () => {
       <ItemsProvider>
         <ItemList>
           {(items) =>
-            items.map((item) => <ItemList.Row key={item.id} item={item} />)
+            items.map((item) => (
+              <ItemList.Row key={item.id} title={item.title} />
+            ))
           }
         </ItemList>
       </ItemsProvider>

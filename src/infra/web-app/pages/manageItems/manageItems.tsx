@@ -74,7 +74,11 @@ export const ManageItems = () => {
           <ItemList>
             {(items) =>
               items.map((item) => (
-                <ItemList.Row key={item.id} item={item}>
+                <ItemList.Row
+                  key={item.id}
+                  title={item.title}
+                  allowDragAndDrop={item.isFixed}
+                >
                   <StyledActionButtonsContainer>
                     <StyledPinButton
                       aria-label="pin item"
