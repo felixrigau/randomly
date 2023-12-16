@@ -53,6 +53,7 @@ export const ManageItems = () => {
   const removeItemBy = (id: string) => {
     remove(id);
     setItems(getAll());
+    setItem(null);
     setIsDeleteModalOpen(false);
   };
 
