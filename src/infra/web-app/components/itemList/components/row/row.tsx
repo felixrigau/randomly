@@ -12,9 +12,12 @@ const Row = ({
   title,
   allowDragAndDrop = false,
 }: PropsWithChildren<RowType>) => {
-  console.log("allowDragAndDrop", allowDragAndDrop);
   return (
-    <StyledRow role="listitem">
+    <StyledRow
+      role="listitem"
+      draggable={allowDragAndDrop}
+      onDrag={(ev) => console.log("ev", ev)}
+    >
       <LeftContainer>
         {allowDragAndDrop && <DragHandleIcon />}
         <StyledTitle $isTextAlong={!allowDragAndDrop}>{title}</StyledTitle>
