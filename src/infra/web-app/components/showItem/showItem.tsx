@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Item } from "../../../../application/model/Item";
 import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
-import { StyledItem, Title } from "./showItem.styled";
+import { StyledItem, StyledMessage, StyledTitle } from "./showItem.styled";
 import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
 import { StyledFixedButtonContainer } from "../../shared/styles.styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -30,9 +30,15 @@ const ShowItem = () => {
   return (
     <StyledItem>
       <div></div>
-      {existItems && item && hasMoreItems && <Title>{item.title}</Title>}
-      {!hasMoreItems && <p>All items were visited today</p>}
-      {!existItems && <p>Create at least one item, please</p>}
+      {existItems && item && hasMoreItems && (
+        <StyledTitle>{item.title}</StyledTitle>
+      )}
+      {!hasMoreItems && (
+        <StyledMessage>All items were visited today</StyledMessage>
+      )}
+      {!existItems && (
+        <StyledMessage>Create at least one item, please</StyledMessage>
+      )}
       {existItems && (
         <StyledFixedButtonContainer>
           <button onClick={getItem} aria-label="get next item">

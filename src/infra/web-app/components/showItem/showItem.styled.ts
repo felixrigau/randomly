@@ -10,6 +10,10 @@ export const StyledItem = styled.section`
   text-align: center;
 `;
 
-export const Title = styled.p`
-  font-size: 48px;
+export const StyledTitle = styled.p`
+  font-size: 3rem;
+`;
+
+export const StyledMessage = styled.p`
+  font-size: 1.5rem;
 `;
