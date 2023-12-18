@@ -4,8 +4,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { MainPage } from "./pages/main/main";
 import { ManageItems } from "./pages/manageItems/manageItems";
 
-// commit test
-
 const router = createBrowserRouter([
   {
     path: "/",
