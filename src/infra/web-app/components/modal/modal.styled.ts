@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledBackground = styled.div`
   background: #0442aed1;
   width: 100vw;
-  height: 100vh;
+  height: ${window.innerHeight}px;
   display: flex;
   justify-content: center;
   align-items: center;
