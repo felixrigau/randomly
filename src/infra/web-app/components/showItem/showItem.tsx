@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { Item } from "../../../../application/model/Item";
 import { NoMoreItemsError } from "../../../../application/useCases/GetItemRandomly/NoMoreItemsError";
-import { StyledItem, StyledMessage, StyledTitle } from "./showItem.styled";
+import {
+  StyledButton,
+  StyledIconWrapper,
+  StyledItem,
+  StyledMessage,
+  StyledText,
+  StyledTitle,
+} from "./showItem.styled";
 import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
 import { StyledFixedButtonContainer } from "../../shared/styles.styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const ShowItem = () => {
   const [existItems, setExistItems] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [item, setItem] = useState<Item>(null);
   const [hasMoreItems, setHasMoreItems] = useState<boolean>(true);
   const { getAll, getRandom } = useItemCRUD();
@@ -31,7 +40,16 @@ const ShowItem = () => {
     <StyledItem>
       <div></div>
       {existItems && item && hasMoreItems && (
-        <StyledTitle>{item.title}</StyledTitle>
+        <>
+          <StyledTitle>{item.title}</StyledTitle>
+          <StyledButton onClick={() => setIsOpen(!isOpen)}>
+            <StyledIconWrapper isOpen={isOpen}>
+              <ExpandMoreIcon />
+            </StyledIconWrapper>
+            {isOpen ? "hide" : "show more"}
+          </StyledButton>
+          <StyledText isOpen={isOpen}>{item.text}</StyledText>
+        </>
       )}
       {!hasMoreItems && (
         <StyledMessage>All items were visited today</StyledMessage>
