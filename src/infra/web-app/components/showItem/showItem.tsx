@@ -34,10 +34,12 @@ const ShowItem = () => {
       {existItems && item && hasMoreItems && (
         <>
           <StyledTitle>{item.title}</StyledTitle>
-          <Accordion>
-            <Accordion.Button />
-            <Accordion.Content>{item.text}</Accordion.Content>
-          </Accordion>
+          {item.text && (
+            <Accordion>
+              <Accordion.Button />
+              <Accordion.Content>{item.text}</Accordion.Content>
+            </Accordion>
+          )}
         </>
       )}
       {!hasMoreItems && (

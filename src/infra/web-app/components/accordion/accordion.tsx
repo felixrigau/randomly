@@ -7,6 +7,7 @@ const { Provider } = accordionContext;
 
 export const Accordion = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return <Provider value={{ isOpen, setIsOpen }}>{children}</Provider>;
 };
 
