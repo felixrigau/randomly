@@ -4,8 +4,10 @@ export const StyledFixedButtonContainer = styled.div`
   position: fixed;
   bottom: 3rem;
   left: 0;
-  width: 100%;
+  width: 3rem;
   display: flex;
+  left: 50%;
+  transform: translateX(-50%);
 
   & > button {
     margin: auto;
