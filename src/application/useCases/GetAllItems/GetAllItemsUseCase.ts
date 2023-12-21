@@ -7,16 +7,20 @@ export class GetAllItemsUseCase {
   execute(): Item[] {
     const items = this.repository.getAll();
 
-    const firstFixedItems = items.sort((a, b) => {
-      if (a.isFixed > b.isFixed) {
-        return -1;
-      } else if (a.isFixed < b.isFixed) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+    const { fixedItems, noFixedItems } = items.reduce(
+      (result, item: Item) => {
+        if (item.isFixed) {
+          result.fixedItems.push(item);
+        } else {
+          result.noFixedItems.push(item);
+        }
+        return result;
+      },
+      { fixedItems: [], noFixedItems: [] }
+    );
 
-    return firstFixedItems;
+    fixedItems.sort((a, b) => a.order - b.order);
+
+    return fixedItems.concat(noFixedItems);
   }
 }
