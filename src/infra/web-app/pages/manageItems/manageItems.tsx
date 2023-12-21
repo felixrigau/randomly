@@ -48,8 +48,13 @@ export const ManageItems = () => {
     setItem(null);
   };
 
-  const handleUpdateClick = ({ title, text, isFixed }: Partial<Item>) => {
-    update(item.id, { title, text, isFixed });
+  const handleUpdateClick = ({
+    title,
+    text,
+    isFixed,
+    order,
+  }: Partial<Item>) => {
+    update(item.id, { title, text, isFixed, order });
     setItems(getAll());
     setIsUpdateModalOpen(false);
     setItem(null);
@@ -152,12 +157,7 @@ export const ManageItems = () => {
           <StyledButton
             disabled={!item?.title}
             onClick={() => {
-              handleUpdateClick({
-                title: item.title,
-                text: item.text,
-                order: item.order,
-                isFixed: item.isFixed,
-              });
+              handleUpdateClick(item);
             }}
           >
             Update
