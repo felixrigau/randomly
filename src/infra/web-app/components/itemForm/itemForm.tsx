@@ -23,6 +23,15 @@ const ItemForm = () => {
           setItem((item) => ({ ...item, text: e.target.value }));
         }}
       />
+      <label htmlFor="order">Order</label>
+      <input
+        id="order"
+        type="number"
+        value={item?.order}
+        onChange={(e) => {
+          setItem((item) => ({ ...item, order: parseInt(e.target.value) }));
+        }}
+      />
       <label htmlFor="isFixed">
         <input
           id="isFixed"

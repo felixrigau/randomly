@@ -35,8 +35,13 @@ export const ManageItems = () => {
     setItems(getAll());
   };
 
-  const handleCreateClick = ({ title, text, isFixed }: Partial<Item>) => {
-    const newItem = new Item(title, text, isFixed);
+  const handleCreateClick = ({
+    title,
+    text,
+    isFixed,
+    order,
+  }: Partial<Item>) => {
+    const newItem = new Item(title, text, isFixed, order);
     create(newItem);
     addItem(newItem);
     setIsCreateModalOpen(false);
@@ -126,6 +131,7 @@ export const ManageItems = () => {
               handleCreateClick({
                 title: item.title,
                 text: item.text,
+                order: item.order,
                 isFixed: item.isFixed,
               });
             }}
@@ -149,6 +155,7 @@ export const ManageItems = () => {
               handleUpdateClick({
                 title: item.title,
                 text: item.text,
+                order: item.order,
                 isFixed: item.isFixed,
               });
             }}

@@ -38,9 +38,9 @@ const useItemCRUD = () => {
   };
   const update = (
     id: string,
-    { title, text, isFixed }: Partial<Item>
+    { title, text, isFixed, order }: Partial<Item>
   ): void => {
-    useCases.current.updateItem.execute(id, { title, text, isFixed });
+    useCases.current.updateItem.execute(id, { title, text, isFixed, order });
   };
   const markFixed = (id: string, isFixed: boolean): void => {
     useCases.current.markItemFixed.execute(id, isFixed);
