@@ -2,7 +2,7 @@ import { ItemRepository } from "../../model/IItemRepository";
 import { IVisitedItemRepository } from "../../model/IVisitedItemRepository";
 import { Item } from "../../model/Item";
 import { getBoundedRandomNumber } from "../../utilities/getBoundedRandomNumber";
-import { GetAllItemsUseCase } from "../GetAllItems/GetAllItemsUseCase";
+import { GetOrderedItemsUseCase } from "../GetOrderedItems/GetOrderedItemsUseCase";
 import { NoMoreItemsError } from "./NoMoreItemsError";
 
 export class GetItemRandomlyUseCase {
@@ -12,8 +12,8 @@ export class GetItemRandomlyUseCase {
   ) {}
 
   execute(): Item {
-    const getAllUseCase = new GetAllItemsUseCase(this.itemRepository);
-    const items = getAllUseCase.execute();
+    const getOrderedItems = new GetOrderedItemsUseCase(this.itemRepository);
+    const items = getOrderedItems.execute();
 
     if (!items.length) return null;
     if (items.length === this.visitedItemRepository.size())

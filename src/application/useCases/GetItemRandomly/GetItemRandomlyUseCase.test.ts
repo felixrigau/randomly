@@ -6,7 +6,7 @@ import { Item } from "../../model/Item";
 import { IVisitedItemRepository } from "../../model/IVisitedItemRepository";
 import { NoMoreItemsError } from "./NoMoreItemsError";
 
-describe("get all items use case - tests suite", () => {
+describe("get item randomly use case - tests suite", () => {
   const itemRepository: jest.Mocked<ItemRepository> = new ItemRepositoryMock(),
     visitedItemRepository: jest.Mocked<IVisitedItemRepository> =
       new VisitedItemRepositoryMock();
