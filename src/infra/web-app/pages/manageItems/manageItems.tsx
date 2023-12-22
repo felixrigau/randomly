@@ -27,12 +27,12 @@ export const ManageItems = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const { create, update, remove, getAll, markFixed } = useItemCRUD();
+  const { create, update, remove, getOrderedItems, markFixed } = useItemCRUD();
   const { addItem, setItems, setItem, item } = useItemsContext();
 
   const handlePinClick = (id: string, isFixed: boolean) => {
     markFixed(id, isFixed);
-    setItems(getAll());
+    setItems(getOrderedItems());
   };
 
   const handleCreateClick = ({
@@ -55,14 +55,14 @@ export const ManageItems = () => {
     order,
   }: Partial<Item>) => {
     update(item.id, { title, text, isFixed, order });
-    setItems(getAll());
+    setItems(getOrderedItems());
     setIsUpdateModalOpen(false);
     setItem(null);
   };
 
   const removeItemBy = (id: string) => {
     remove(id);
-    setItems(getAll());
+    setItems(getOrderedItems());
     setItem(null);
     setIsDeleteModalOpen(false);
   };

@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { GetAllItemsUseCase } from "../../../../application/useCases/GetAllItems/GetAllItemsUseCase";
 import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/ItemStorageRepository";
 import { useItemsContext } from "../../contexts/Items/useItemContext";
 import { Item } from "../../../../application/model/Item";
 import Row from "./components/row/row";
+import { GetOrderedItemsUseCase } from "../../../../application/useCases/GetOrderedItems/GetOrderedItemsUseCase";
 
 const itemRepository = new ItemStorageRepository();
 
@@ -14,11 +14,11 @@ type ItemListType = {
 const ItemList = ({ children }: ItemListType) => {
   const { items, setItems } = useItemsContext();
   const useCases = useRef({
-    getAllItems: new GetAllItemsUseCase(itemRepository),
+    getOrderedItems: new GetOrderedItemsUseCase(itemRepository),
   });
 
   useEffect(() => {
-    setItems(useCases.current.getAllItems.execute());
+    setItems(useCases.current.getOrderedItems.execute());
   }, []);
 
   return (
