@@ -10,7 +10,7 @@ export class Item {
     title: string,
     text: string = "",
     isFixed: boolean = false,
-    order: number = -1
+    order: number = 100
   ) {
     this.id = Math.random().toString();
     this.title = title;
