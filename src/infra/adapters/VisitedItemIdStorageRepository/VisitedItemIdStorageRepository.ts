@@ -9,14 +9,14 @@ const localStorage = new LocalStorage<VisitedItemIdsType>(VISITED_ITEMS, {
 });
 
 export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
-  exist = (id: string): boolean => {
+  exist = async (id: string) => {
     const storage = localStorage.getLocalStorageData();
     return storage.visitedItemIds.includes(id);
   };
 
-  size = (): number => localStorage.getLocalStorageData().visitedItemIds.length;
+  size = async () => localStorage.getLocalStorageData().visitedItemIds.length;
 
-  save = (id: string) => {
+  save = async (id: string) => {
     const storage = localStorage.getLocalStorageData();
 
     storage.visitedItemIds.push(id);
@@ -24,7 +24,7 @@ export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
     localStorage.updateLocalStorageData(storage);
   };
 
-  remove = (id: string) => {
+  remove = async (id: string) => {
     const storage = localStorage.getLocalStorageData();
 
     const listWhitoutItem = storage.visitedItemIds.filter(
@@ -37,17 +37,17 @@ export class VisitedItemIdStorageRepository implements IVisitedItemRepository {
     });
   };
 
-  clear = () => {
+  clear = async () => {
     const storage = localStorage.getLocalStorageData();
 
     localStorage.updateLocalStorageData({ ...storage, visitedItemIds: [] });
   };
 
-  getLastRequestDate = (): Date => {
+  getLastRequestDate = async () => {
     return new Date(localStorage.getLocalStorageData().lastRequestDate);
   };
 
-  saveLastRequestDate = (currentDate: Date) => {
+  saveLastRequestDate = async (currentDate: Date) => {
     const storage = localStorage.getLocalStorageData();
 
     localStorage.updateLocalStorageData({
