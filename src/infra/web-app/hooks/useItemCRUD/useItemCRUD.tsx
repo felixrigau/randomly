@@ -29,24 +29,24 @@ const useItemCRUD = () => {
     ),
   });
 
-  const create = (item: Item): void => {
+  const create = (item: Item) => {
     useCases.current.createItem.execute(item);
   };
-  const getAll = (): Item[] => useCases.current.getAllItems.execute();
-  const getOrderedItems = (): Item[] =>
+  const getAll = async () => useCases.current.getAllItems.execute();
+  const getOrderedItems = async () =>
     useCases.current.getOrderedItems.execute();
-  const getRandom = (): Item => useCases.current.getItemRandomly.execute();
-  const remove = (id: string): void => {
+  const getRandom = async () => useCases.current.getItemRandomly.execute();
+  const remove = async (id: string) => {
     useCases.current.removeItem.execute(id);
     useCases.current.removeVisitedItemId.execute(id);
   };
-  const update = (
+  const update = async (
     id: string,
     { title, text, isFixed, order }: Partial<Item>
-  ): void => {
+  ) => {
     useCases.current.updateItem.execute(id, { title, text, isFixed, order });
   };
-  const markFixed = (id: string, isFixed: boolean): void => {
+  const markFixed = async (id: string, isFixed: boolean) => {
     useCases.current.markItemFixed.execute(id, isFixed);
   };
 
