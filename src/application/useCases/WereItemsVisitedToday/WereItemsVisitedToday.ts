@@ -3,10 +3,8 @@ import { IVisitedItemRepository } from "../../model/IVisitedItemRepository";
 export class WereItemsVisitedToday {
   constructor(private repository: IVisitedItemRepository) {}
 
-  execute(): boolean {
-    return (
-      this.repository.getLastRequestDate().toDateString() ===
-      new Date().toDateString()
-    );
+  async execute() {
+    const lastRequestDate = await this.repository.getLastRequestDate();
+    return lastRequestDate.toDateString() === new Date().toDateString();
   }
 }

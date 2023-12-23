@@ -4,7 +4,7 @@ import { Item } from "../../model/Item";
 export class GetAllItemsUseCase {
   constructor(private repository: ItemRepository) {}
 
-  execute(): Item[] {
+  async execute(): Promise<Item[]> {
     return this.repository.getAll();
   }
 }

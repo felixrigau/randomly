@@ -5,9 +5,9 @@ import { GetAllItemsUseCase } from "../GetAllItems/GetAllItemsUseCase";
 export class GetOrderedItemsUseCase {
   constructor(private repository: ItemRepository) {}
 
-  execute(): Item[] {
+  async execute(): Promise<Item[]> {
     const getAllItems = new GetAllItemsUseCase(this.repository);
-    const items = getAllItems.execute();
+    const items = await getAllItems.execute();
 
     const { fixedItems, noFixedItems } = items.reduce(
       (result, item: Item) => {
