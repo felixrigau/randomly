@@ -9,7 +9,7 @@ const localStorage = new LocalStorage<DataBaseSchema>(DB_STORAGE_KEY, {
 });
 
 export class ItemStorageRepository implements ItemRepository {
-  save = (item: Item) => {
+  save = async (item: Item) => {
     const randomlyDB = localStorage.getLocalStorageData();
 
     randomlyDB.items.push(item);
@@ -17,7 +17,7 @@ export class ItemStorageRepository implements ItemRepository {
     localStorage.updateLocalStorageData(randomlyDB);
   };
 
-  remove = (id: string) => {
+  remove = async (id: string) => {
     if (!id)
       throw new Error(
         `Error: it was expected a parameter with value, and it got ${id} instead`
@@ -29,9 +29,9 @@ export class ItemStorageRepository implements ItemRepository {
     });
   };
 
-  getAll = (): Item[] => localStorage.getLocalStorageData().items;
+  getAll = async () => localStorage.getLocalStorageData().items;
 
-  findBy = (id: string): Item | undefined => {
+  findBy = async (id: string) => {
     if (!id)
       throw new Error(
         `Error: it was expected a parameter with value, and it got ${id} instead`
@@ -42,7 +42,7 @@ export class ItemStorageRepository implements ItemRepository {
       .items.find((item: Item) => item.id === id);
   };
 
-  update = (id: string, updateItem: Partial<Item>): void => {
+  update = async (id: string, updateItem: Partial<Item>) => {
     if (!id)
       throw new Error(
         `Error: it was expected a parameter with value, and it got ${id} instead`
