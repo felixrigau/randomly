@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import ShowItem from "./showItem";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
@@ -13,7 +13,7 @@ jest.mock("../../contexts/Items/useItemContext");
 describe("itemList - tests suite", () => {
   test("should render a button if it exists at least one item", () => {
     (useItemCRUD as jest.Mock).mockImplementation(() => ({
-      getAll: () => [new Item("John")],
+      getAll: async () => [new Item("John")],
     }));
     render(
       <ItemsProvider>
@@ -28,7 +28,7 @@ describe("itemList - tests suite", () => {
 
   test("should not render a button if it does not exist a item", () => {
     (useItemCRUD as jest.Mock).mockImplementation(() => ({
-      getAll: (): Item[] => [],
+      getAll: async (): Promise<Item[]> => [],
     }));
     render(
       <ItemsProvider>
@@ -48,11 +48,11 @@ describe("itemList - tests suite", () => {
 
     const getRandomMock = jest
       .fn()
-      .mockReturnValueOnce(item)
-      .mockReturnValueOnce(item2);
+      .mockImplementationOnce(async () => item)
+      .mockImplementationOnce(async () => item2);
 
     (useItemCRUD as jest.Mock).mockImplementation(() => ({
-      getAll: () => [item3],
+      getAll: async () => [item3],
       getRandom: getRandomMock,
     }));
 
@@ -76,11 +76,11 @@ describe("itemList - tests suite", () => {
   });
 
   test("should show a message when there is no more items to show", async () => {
-    const getRandomMock = jest.fn().mockImplementation(() => {
-      throw new NoMoreItemsError();
-    });
+    const getRandomMock = jest
+      .fn()
+      .mockImplementation(() => Promise.reject(new NoMoreItemsError()));
     (useItemCRUD as jest.Mock).mockImplementation(() => ({
-      getAll: () => [new Item("")],
+      getAll: async () => [new Item("")],
       getRandom: getRandomMock,
     }));
 
@@ -90,18 +90,17 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    await userEvent.click(
-      screen.getByRole("button", { name: "get next item" })
-    );
-
-    expect(
-      screen.getByText("All items were visited today")
-    ).toBeInTheDocument();
+    await waitFor(() => {
+      userEvent.click(screen.getByRole("button", { name: "get next item" }));
+      expect(
+        screen.getByText("All items were visited today")
+      ).toBeInTheDocument();
+    });
   });
 
   test("should show a message when there is no items", async () => {
     (useItemCRUD as jest.Mock).mockImplementation(() => ({
-      getAll: (): Item[] => [],
+      getAll: async (): Promise<Item[]> => [],
     }));
 
     render(

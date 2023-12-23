@@ -30,7 +30,7 @@ describe("MainPage tests suite", () => {
   test("should clear visited item list from storage if items were not visited today", () => {
     const itemsWereVisitedToday = false;
     (WereItemsVisitedToday as jest.Mock).mockImplementation(() => ({
-      execute: () => itemsWereVisitedToday,
+      execute: async () => itemsWereVisitedToday,
     }));
 
     render(
@@ -51,7 +51,7 @@ describe("MainPage tests suite", () => {
   test("should not clear visited item list from storage if items were visited today", () => {
     const itemsWereVisitedToday = true;
     (WereItemsVisitedToday as jest.Mock).mockImplementation(() => ({
-      execute: () => itemsWereVisitedToday,
+      execute: async () => itemsWereVisitedToday,
     }));
 
     render(
