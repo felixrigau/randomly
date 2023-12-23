@@ -30,39 +30,44 @@ export const ManageItems = () => {
   const { create, update, remove, getOrderedItems, markFixed } = useItemCRUD();
   const { addItem, setItems, setItem, item } = useItemsContext();
 
-  const handlePinClick = (id: string, isFixed: boolean) => {
-    markFixed(id, isFixed);
-    setItems(getOrderedItems());
+  const updateItemList = async () => {
+    const items = await getOrderedItems();
+    setItems(items);
   };
 
-  const handleCreateClick = ({
+  const handlePinClick = async (id: string, isFixed: boolean) => {
+    await markFixed(id, isFixed);
+    await updateItemList();
+  };
+
+  const handleCreateClick = async ({
     title,
     text,
     isFixed,
     order,
   }: Partial<Item>) => {
     const newItem = new Item(title, text, isFixed, order);
-    create(newItem);
-    addItem(newItem);
+    await create(newItem);
+    await addItem(newItem);
     setIsCreateModalOpen(false);
     setItem(null);
   };
 
-  const handleUpdateClick = ({
+  const handleUpdateClick = async ({
     title,
     text,
     isFixed,
     order,
   }: Partial<Item>) => {
-    update(item.id, { title, text, isFixed, order });
-    setItems(getOrderedItems());
+    await update(item.id, { title, text, isFixed, order });
+    await updateItemList();
     setIsUpdateModalOpen(false);
     setItem(null);
   };
 
-  const removeItemBy = (id: string) => {
-    remove(id);
-    setItems(getOrderedItems());
+  const removeItemBy = async (id: string) => {
+    await remove(id);
+    await updateItemList();
     setItem(null);
     setIsDeleteModalOpen(false);
   };

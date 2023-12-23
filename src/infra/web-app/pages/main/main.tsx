@@ -16,13 +16,14 @@ export const MainPage = () => {
   });
 
   useEffect(() => {
-    const wereItemsVisitedToday =
-      useCases.current.wereItemsVisitedToday.execute();
-
-    if (!wereItemsVisitedToday) {
-      useCases.current.clearPreviousVisitedItems.execute();
-      useCases.current.saveLastVisitDate.execute(new Date());
-    }
+    useCases.current.wereItemsVisitedToday
+      .execute()
+      .then((areThereVisitedItems) => {
+        if (!areThereVisitedItems) {
+          useCases.current.clearPreviousVisitedItems.execute();
+          useCases.current.saveLastVisitDate.execute(new Date());
+        }
+      });
   }, []);
 
   return (

@@ -14,13 +14,16 @@ const ShowItem = () => {
   const { getAll, getRandom } = useItemCRUD();
 
   useEffect(() => {
-    const exist = getAll().length !== 0;
-    setExistItems(exist);
+    getAll().then((items) => {
+      const exist = items.length !== 0;
+      setExistItems(exist);
+    });
   }, []);
 
-  const getItem = () => {
+  const getItem = async () => {
     try {
-      setItem(getRandom());
+      const randomItem = await getRandom();
+      setItem(randomItem);
     } catch (error: unknown) {
       if (error instanceof NoMoreItemsError) {
         setHasMoreItems(false);
