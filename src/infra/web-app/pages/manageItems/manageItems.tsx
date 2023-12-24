@@ -92,7 +92,6 @@ export const ManageItems = () => {
                 <ItemList.Row
                   key={item.id}
                   title={item.title}
-                  allowDragAndDrop={item.isFixed}
                 >
                   <StyledActionButtonsContainer>
                     <StyledPinButton

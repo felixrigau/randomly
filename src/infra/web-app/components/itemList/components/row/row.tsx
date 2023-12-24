@@ -4,13 +4,11 @@ import DragHandleIcon from "@mui/icons-material/DragHandle";
 
 type RowType = {
   title: string;
-  allowDragAndDrop?: boolean;
 };
 
 const Row = ({
   children,
   title,
-  allowDragAndDrop = false,
 }: PropsWithChildren<RowType>) => {
   return (
     <StyledRow
@@ -19,7 +17,6 @@ const Row = ({
       onDrag={(ev) => console.log("ev", ev)}
     >
       <LeftContainer>
-        {allowDragAndDrop && <DragHandleIcon />}
         <StyledTitle $isTextAlong={!allowDragAndDrop}>{title}</StyledTitle>
       </LeftContainer>
       <div>{children}</div>
