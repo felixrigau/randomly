@@ -1,23 +1,15 @@
 import { PropsWithChildren } from "react";
-import { LeftContainer, StyledRow, StyledTitle } from "./row.styled";
-import DragHandleIcon from "@mui/icons-material/DragHandle";
+import { LeftContainer, StyledRow } from "./row.styled";
 
 type RowType = {
   title: string;
 };
 
-const Row = ({
-  children,
-  title,
-}: PropsWithChildren<RowType>) => {
+const Row = ({ children, title }: PropsWithChildren<RowType>) => {
   return (
-    <StyledRow
-      role="listitem"
-      draggable={allowDragAndDrop}
-      onDrag={(ev) => console.log("ev", ev)}
-    >
+    <StyledRow role="listitem" onDrag={(ev) => console.log("ev", ev)}>
       <LeftContainer>
-        <StyledTitle $isTextAlong={!allowDragAndDrop}>{title}</StyledTitle>
+        <p>{title}</p>
       </LeftContainer>
       <div>{children}</div>
     </StyledRow>
