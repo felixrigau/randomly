@@ -3,14 +3,14 @@ import { ItemRepositoryMock } from "../../model/ItemRepository.mock";
 import { Item } from "../../model/Item";
 
 describe("find item by id  use case - tests suite", () => {
-  test("execute method should call the findBy repository method receiving the id as a parameter and return the found item", () => {
+  test("execute method should call the findBy repository method receiving the id as a parameter and return the found item", async () => {
     const itemRepository = new ItemRepositoryMock(),
       findItemById = new FindItemByIdUseCase(itemRepository),
       id = "baa";
 
-    const found = findItemById.execute(id);
+    const foundItem = await findItemById.execute(id);
 
     expect(itemRepository.findBy).toBeCalledWith(id);
-    expect(found).toBeInstanceOf(Item);
+    expect(foundItem).toBeInstanceOf(Item);
   });
 });

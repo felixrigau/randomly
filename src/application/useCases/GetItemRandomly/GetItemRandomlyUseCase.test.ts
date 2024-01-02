@@ -11,24 +11,26 @@ describe("get item randomly use case - tests suite", () => {
     visitedItemRepository: jest.Mocked<IVisitedItemRepository> =
       new VisitedItemRepositoryMock();
 
-  test("execute method should return null if there are not element to return", () => {
-    itemRepository.getAll.mockImplementation(() => []);
+  test("execute method should return null if there are not element to return", async () => {
+    itemRepository.getAll.mockImplementation(async () => []);
 
     const getItemRandomly = new GetItemRandomlyUseCase(
       itemRepository,
       visitedItemRepository
     );
 
-    expect(getItemRandomly.execute()).toBe(null);
+    const result = await getItemRandomly.execute();
+
+    expect(result).toBe(null);
   });
 
-  test("execute method should return a random item that has not been visited yet", () => {
+  test("execute method should return a random item that has not been visited yet", async () => {
     const item1 = new Item("abc"),
       visitedItem = new Item("foo");
 
-    itemRepository.getAll.mockImplementation(() => [item1, visitedItem]);
+    itemRepository.getAll.mockImplementation(async () => [item1, visitedItem]);
 
-    visitedItemRepository.exist.mockImplementation((id: string) => {
+    visitedItemRepository.exist.mockImplementation(async (id: string) => {
       return id === visitedItem.id;
     });
 
@@ -37,13 +39,15 @@ describe("get item randomly use case - tests suite", () => {
       visitedItemRepository
     );
 
-    expect(getItemRandomly.execute().id).toBe(item1.id);
+    const randomItem = await getItemRandomly.execute();
+
+    expect(randomItem.id).toBe(item1.id);
   });
 
-  test("execute method should try one or many times to get a random item until finding a no visited one", () => {
+  test("execute method should try one or many times to get a random item until finding a no visited one", async () => {
     const visitedItem = new Item("abc"),
       item = new Item("123");
-    itemRepository.getAll.mockImplementation(() => [
+    itemRepository.getAll.mockImplementation(async () => [
       item,
       visitedItem,
       visitedItem,
@@ -52,7 +56,7 @@ describe("get item randomly use case - tests suite", () => {
       visitedItem,
     ]);
 
-    visitedItemRepository.exist.mockImplementation((id: string) => {
+    visitedItemRepository.exist.mockImplementation(async (id: string) => {
       return id === visitedItem.id;
     });
 
@@ -61,24 +65,24 @@ describe("get item randomly use case - tests suite", () => {
       visitedItemRepository
     );
 
-    const randomItem = getItemRandomly.execute();
+    const randomItem = await getItemRandomly.execute();
 
     expect(randomItem.id).toBe(item.id);
     expect(visitedItemRepository.exist.mock.calls.length).toBeGreaterThan(0);
   });
 
-  test("execute method should save the item id as visited", () => {
+  test("execute method should save the item id as visited", async () => {
     const item = new Item("123");
-    itemRepository.getAll.mockImplementation(() => [item]);
+    itemRepository.getAll.mockImplementation(async () => [item]);
 
-    visitedItemRepository.exist.mockImplementation(() => false);
+    visitedItemRepository.exist.mockImplementation(async () => false);
 
     const getItemRandomly = new GetItemRandomlyUseCase(
       itemRepository,
       visitedItemRepository
     );
 
-    const randomItem = getItemRandomly.execute();
+    const randomItem = await getItemRandomly.execute();
 
     expect(randomItem.id).toBe(item.id);
     expect(visitedItemRepository.save).toBeCalledWith(item.id);
@@ -89,18 +93,20 @@ describe("get item randomly use case - tests suite", () => {
       visitedItem2 = new Item("123");
     const items = [visitedItem1, visitedItem2];
 
-    itemRepository.getAll.mockImplementation(() => [
+    itemRepository.getAll.mockImplementation(async () => [
       visitedItem1,
       visitedItem2,
     ]);
 
-    visitedItemRepository.size.mockImplementation(() => items.length);
+    visitedItemRepository.size.mockImplementation(async () => items.length);
 
     const getItemRandomly = new GetItemRandomlyUseCase(
       itemRepository,
       visitedItemRepository
     );
 
-    expect(() => getItemRandomly.execute()).toThrowError(NoMoreItemsError);
+    getItemRandomly.execute().catch((error) => {
+      expect(error).toBeInstanceOf(NoMoreItemsError);
+    });
   });
 });
