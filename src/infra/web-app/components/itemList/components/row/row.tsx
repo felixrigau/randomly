@@ -17,4 +17,3 @@ const Row = ({ children, title }: PropsWithChildren<RowType>) => {
 };
 
 export default Row;
-// comment
