@@ -36,7 +36,7 @@ describe("VisitedItemIdStorageRepository", () => {
     expect(visitedItemIds[0]).toBe("abc");
   });
 
-  test("exist method should return false if the item id is not storaged", () => {
+  test("exist method should return false if the item id is not storaged", async () => {
     window.localStorage.setItem(
       VISITED_ITEMS,
       JSON.stringify({ visitedItemIds: ["abc"] })
@@ -44,10 +44,12 @@ describe("VisitedItemIdStorageRepository", () => {
 
     const repository = new VisitedItemIdStorageRepository();
 
-    expect(repository.exist("123")).toBe(false);
+    const result = await repository.exist("123");
+
+    expect(result).toBe(false);
   });
 
-  test("exist method should return true if the item id is storaged", () => {
+  test("exist method should return true if the item id is storaged", async () => {
     window.localStorage.setItem(
       VISITED_ITEMS,
       JSON.stringify({ visitedItemIds: ["abc"] })
@@ -55,7 +57,9 @@ describe("VisitedItemIdStorageRepository", () => {
 
     const repository = new VisitedItemIdStorageRepository();
 
-    expect(repository.exist("abc")).toBe(true);
+    const result = await repository.exist("abc");
+
+    expect(result).toBe(true);
   });
 
   test("clear method should return clear the storage list", () => {
@@ -74,7 +78,7 @@ describe("VisitedItemIdStorageRepository", () => {
     ).toBe(0);
   });
 
-  test("getLastRequestDate method should return the last requested date", () => {
+  test("getLastRequestDate method should return the last requested date", async () => {
     const lastRequestDate = new Date(2022, 11, 31);
     window.localStorage.setItem(
       VISITED_ITEMS,
@@ -83,13 +87,13 @@ describe("VisitedItemIdStorageRepository", () => {
 
     const repository = new VisitedItemIdStorageRepository();
 
-    const date = repository.getLastRequestDate();
+    const date = await repository.getLastRequestDate();
 
     expect(date).toEqual(lastRequestDate);
     expect(date).toBeInstanceOf(Date);
   });
 
-  test("saveLastRequestDate method should save the current requested date", () => {
+  test("saveLastRequestDate method should save the current requested date", async () => {
     const current = new Date(2022, 11, 31);
     window.localStorage.setItem(VISITED_ITEMS, JSON.stringify({}));
 
@@ -97,6 +101,8 @@ describe("VisitedItemIdStorageRepository", () => {
 
     repository.saveLastRequestDate(current);
 
-    expect(repository.getLastRequestDate()).toEqual(current);
+    const date = await repository.getLastRequestDate();
+
+    expect(date).toEqual(current);
   });
 });

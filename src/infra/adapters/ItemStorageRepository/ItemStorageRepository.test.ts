@@ -42,10 +42,12 @@ describe("ItemStorageRepository", () => {
   test("remove method should throw a error if the parameter has no value", () => {
     const repository = new ItemStorageRepository();
 
-    expect(() => repository.remove("")).toThrowError();
+    repository.remove("").catch((error: unknown) => {
+      expect(error).toBeInstanceOf(Error);
+    });
   });
 
-  test("findBy method should find in localstorage an item by its id", () => {
+  test("findBy method should find in localstorage an item by its id", async () => {
     const item = new Item("foo");
 
     window.localStorage.setItem(
@@ -55,12 +57,12 @@ describe("ItemStorageRepository", () => {
 
     const repository = new ItemStorageRepository();
 
-    repository.findBy(item.id);
+    const foundItem = await repository.findBy(item.id);
 
-    expect(repository.findBy(item.id)).toEqual(item);
+    expect(foundItem).toEqual(item);
   });
 
-  test("findBy method should return undefined it could not find the element", () => {
+  test("findBy method should return undefined it could not find the element", async () => {
     const item = new Item("foo");
 
     window.localStorage.setItem(
@@ -70,16 +72,20 @@ describe("ItemStorageRepository", () => {
 
     const repository = new ItemStorageRepository();
 
-    expect(repository.findBy("baafoo")).toBeUndefined();
+    const foundItem = await repository.findBy("baafoo");
+
+    expect(foundItem).toBeUndefined();
   });
 
   test("findBy method should throw a error if the parameter has no value", () => {
     const repository = new ItemStorageRepository();
 
-    expect(() => repository.findBy("")).toThrowError();
+    repository.findBy("").catch((error: unknown) => {
+      expect(error).toBeInstanceOf(Error);
+    });
   });
 
-  test("getAll method should get all items from localstorage", () => {
+  test("getAll method should get all items from localstorage", async () => {
     const title1 = "foo";
     const title2 = "baa";
     const item1 = new Item(title1);
@@ -92,7 +98,7 @@ describe("ItemStorageRepository", () => {
 
     const repository = new ItemStorageRepository();
 
-    const items = repository.getAll();
+    const items = await repository.getAll();
 
     expect(items[0].title).toBe(title1);
     expect(items[1].title).toBe(title2);
@@ -124,6 +130,8 @@ describe("ItemStorageRepository", () => {
   test("update method should throw a error if the parameter has no value", () => {
     const repository = new ItemStorageRepository();
 
-    expect(() => repository.update("", {})).toThrowError();
+    repository.update("", {}).catch((error: unknown) => {
+      expect(error).toBeInstanceOf(Error);
+    });
   });
 });
