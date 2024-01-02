@@ -89,10 +89,7 @@ export const ManageItems = () => {
           <ItemList>
             {(items) =>
               items.map((item) => (
-                <ItemList.Row
-                  key={item.id}
-                  title={item.title}
-                >
+                <ItemList.Row key={item.id} title={item.title}>
                   <StyledActionButtonsContainer>
                     <StyledPinButton
                       aria-label="pin item"

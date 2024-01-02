@@ -23,10 +23,8 @@ const ShowItem = () => {
   const getItem = async () => {
     try {
       const randomItem = await getRandom();
-      console.log("randomItem", randomItem);
       setItem(randomItem);
     } catch (error: unknown) {
-      console.log("error", error);
       if (error instanceof NoMoreItemsError) {
         setHasMoreItems(false);
       }

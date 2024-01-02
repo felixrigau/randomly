@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import ShowItem from "./showItem";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
@@ -11,7 +11,7 @@ jest.mock("../../hooks/useItemCRUD/useItemCRUD");
 jest.mock("../../contexts/Items/useItemContext");
 
 describe("itemList - tests suite", () => {
-  test("should render a button if it exists at least one item", () => {
+  test("should render a button if it exists at least one item", async () => {
     (useItemCRUD as jest.Mock).mockImplementation(() => ({
       getAll: async () => [new Item("John")],
     }));
@@ -21,9 +21,9 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    expect(
-      screen.getByRole("button", { name: "get next item" })
-    ).toBeInTheDocument();
+    const button = await screen.findByRole("button", { name: "get next item" });
+
+    expect(button).toBeInTheDocument();
   });
 
   test("should not render a button if it does not exist a item", () => {
@@ -62,7 +62,7 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    const button = screen.getByRole("button", { name: "get next item" });
+    const button = await screen.findByRole("button", { name: "get next item" });
 
     await userEvent.click(button);
 
@@ -90,12 +90,13 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    await waitFor(() => {
-      userEvent.click(screen.getByRole("button", { name: "get next item" }));
-      expect(
-        screen.getByText("All items were visited today")
-      ).toBeInTheDocument();
-    });
+    const button = await screen.findByRole("button", { name: "get next item" });
+
+    await userEvent.click(button);
+
+    expect(
+      screen.getByText("All items were visited today")
+    ).toBeInTheDocument();
   });
 
   test("should show a message when there is no items", async () => {

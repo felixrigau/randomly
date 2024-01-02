@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 
-import { GetAllItemsUseCase } from "../../../../application/useCases/GetAllItems/GetAllItemsUseCase";
 import { Item } from "../../../../application/model/Item";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
 import { RemoveItemUseCase } from "../../../../application/useCases/RemoveItem/RemoveItemUseCase";
@@ -8,8 +7,11 @@ import userEvent from "@testing-library/user-event";
 import { RemoveVisitedItemIdUseCase } from "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase";
 import { ManageItems } from "./manageItems";
 import { MemoryRouter } from "react-router-dom";
+import { GetOrderedItemsUseCase } from "../../../../application/useCases/GetOrderedItems/GetOrderedItemsUseCase";
 
-jest.mock("../../../../application/useCases/GetAllItems/GetAllItemsUseCase");
+jest.mock(
+  "../../../../application/useCases/GetOrderedItems/GetOrderedItemsUseCase"
+);
 jest.mock("../../../../application/useCases/RemoveItem/RemoveItemUseCase");
 jest.mock(
   "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase"
@@ -24,11 +26,13 @@ describe("itemList - tests suite", () => {
 
   test("clicking remove item button should open the delete confirmation modal", async () => {
     const item = new Item("abc");
-    const getAllItemsMock = jest.fn().mockImplementation((): Item[] => [item]);
-    const removeItemMock = jest.fn();
-    (GetAllItemsUseCase as jest.Mock).mockImplementation(() => {
+    const getOrderedItemsMock = jest
+      .fn()
+      .mockImplementation(async (): Promise<Item[]> => [item]);
+    const removeItemMock = jest.fn().mockImplementation(async () => {});
+    (GetOrderedItemsUseCase as jest.Mock).mockImplementation(() => {
       return {
-        execute: getAllItemsMock,
+        execute: getOrderedItemsMock,
       };
     });
     (RemoveItemUseCase as jest.Mock).mockImplementation(() => {
@@ -45,7 +49,7 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    const openModalButton = screen.getByRole("button", {
+    const openModalButton = await screen.findByRole("button", {
       name: "open remove modal",
     });
 
@@ -58,11 +62,13 @@ describe("itemList - tests suite", () => {
 
   test("clicking the yes button on the delete confirmation modal should remove the item and update the items list", async () => {
     const item = new Item("abc");
-    const getAllItemsMock = jest.fn().mockImplementation((): Item[] => [item]);
-    const removeItemMock = jest.fn();
-    (GetAllItemsUseCase as jest.Mock).mockImplementation(() => {
+    const getOrderedItemsMock = jest
+      .fn()
+      .mockImplementation(async (): Promise<Item[]> => [item]);
+    const removeItemMock = jest.fn().mockImplementation(async () => {});
+    (GetOrderedItemsUseCase as jest.Mock).mockImplementation(() => {
       return {
-        execute: getAllItemsMock,
+        execute: getOrderedItemsMock,
       };
     });
     (RemoveItemUseCase as jest.Mock).mockImplementation(() => {
@@ -79,7 +85,7 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    const openModalButton = screen.getByRole("button", {
+    const openModalButton = await screen.findByRole("button", {
       name: "open remove modal",
     });
 
@@ -91,21 +97,23 @@ describe("itemList - tests suite", () => {
 
     await userEvent.click(yesButton);
 
-    expect(getAllItemsMock).toBeCalledTimes(2);
+    expect(getOrderedItemsMock).toBeCalledTimes(2);
     expect(removeItemMock).toBeCalledWith(item.id);
   });
 
   test("should remove item button clicking the delete button and then the confirm one", async () => {
     const item = new Item("abc");
-    const removeVisitedItemIdMock = jest.fn();
+    const removeVisitedItemIdMock = jest
+      .fn()
+      .mockImplementation(async () => {});
     (RemoveVisitedItemIdUseCase as jest.Mock).mockImplementation(() => {
       return {
         execute: removeVisitedItemIdMock,
       };
     });
-    (GetAllItemsUseCase as jest.Mock).mockImplementation(() => {
+    (GetOrderedItemsUseCase as jest.Mock).mockImplementation(() => {
       return {
-        execute: (): Item[] => [item],
+        execute: async (): Promise<Item[]> => [item],
       };
     });
 
@@ -117,7 +125,7 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    const openModalButton = screen.getByRole("button", {
+    const openModalButton = await screen.findByRole("button", {
       name: "open remove modal",
     });
 

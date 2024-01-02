@@ -8,10 +8,10 @@ import { ItemsProvider } from "../../contexts/Items/itemContext";
 jest.mock("../../../../application/useCases/GetAllItems/GetAllItemsUseCase");
 
 describe("itemList - tests suite", () => {
-  test("should show as many items exist", () => {
+  test("should show as many items exist", async () => {
     (GetAllItemsUseCase as jest.Mock).mockImplementation(() => {
       return {
-        execute: () => [new Item("foo"), new Item("baa")],
+        execute: async () => [new Item("foo"), new Item("baa")],
       };
     });
     render(
@@ -26,13 +26,15 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    expect(screen.getAllByRole("listitem").length).toBe(2);
+    const itemList = await screen.findAllByRole("listitem");
+
+    expect(itemList.length).toBe(2);
   });
 
   test("should show a message when there are not items", () => {
     (GetAllItemsUseCase as jest.Mock).mockImplementation(() => {
       return {
-        execute: (): Item[] => [],
+        execute: async (): Promise<Item[]> => [],
       };
     });
     render(

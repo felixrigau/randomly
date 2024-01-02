@@ -18,7 +18,7 @@ const ItemList = ({ children }: ItemListType) => {
   });
 
   useEffect(() => {
-    setItems(useCases.current.getOrderedItems.execute());
+    useCases.current.getOrderedItems.execute().then((items) => setItems(items));
   }, []);
 
   return (
