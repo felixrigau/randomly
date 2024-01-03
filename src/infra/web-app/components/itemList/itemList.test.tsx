@@ -14,6 +14,7 @@ describe("itemList - tests suite", () => {
         execute: async () => [new Item("foo"), new Item("baa")],
       };
     });
+
     render(
       <ItemsProvider>
         <ItemList>
@@ -31,7 +32,7 @@ describe("itemList - tests suite", () => {
     expect(itemList.length).toBe(2);
   });
 
-  test("should show a message when there are not items", () => {
+  test("should show a message when there are not items", async () => {
     (GetAllItemsUseCase as jest.Mock).mockImplementation(() => {
       return {
         execute: async (): Promise<Item[]> => [],
@@ -49,7 +50,7 @@ describe("itemList - tests suite", () => {
       </ItemsProvider>
     );
 
-    expect(screen.queryAllByRole("listitem").length).toBe(0);
-    expect(screen.getByText("There are no items")).toBeInTheDocument();
+    expect(await screen.queryAllByRole("listitem").length).toBe(0);
+    expect(await screen.findByText("There are no items")).toBeInTheDocument();
   });
 });
