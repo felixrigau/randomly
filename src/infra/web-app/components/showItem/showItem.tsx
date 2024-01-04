@@ -22,6 +22,7 @@ const ShowItem = () => {
 
   const getItem = async () => {
     try {
+      setItem(null);
       const randomItem = await getRandom();
       setItem(randomItem);
     } catch (error: unknown) {
