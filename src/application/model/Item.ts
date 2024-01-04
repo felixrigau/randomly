@@ -12,7 +12,7 @@ export class Item {
     isFixed: boolean = false,
     order: number = 100
   ) {
-    this.id = Math.random().toString();
+    this.id = crypto.randomUUID();
     this.title = title;
     this.text = text;
     this.isFixed = isFixed;
