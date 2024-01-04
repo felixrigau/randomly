@@ -1,6 +1,6 @@
 import { FindItemByIdUseCase } from "./FindItemByIdUseCase";
-import { ItemRepositoryMock } from "../../model/ItemRepository.mock";
-import { Item } from "../../model/Item";
+import { ItemRepositoryMock } from "../../../model/ItemRepository.mock";
+import { Item } from "../../../model/Item";
 
 describe("find item by id  use case - tests suite", () => {
   test("execute method should call the findBy repository method receiving the id as a parameter and return the found item", async () => {

@@ -1,11 +1,13 @@
 import { render, screen } from "@testing-library/react";
 
 import ItemList from "./itemList";
-import { GetAllItemsUseCase } from "../../../../application/useCases/GetAllItems/GetAllItemsUseCase";
+import { GetAllItemsUseCase } from "../../../../application/useCases/itemCRUD/GetAllItems/GetAllItemsUseCase";
 import { Item } from "../../../../application/model/Item";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
 
-jest.mock("../../../../application/useCases/GetAllItems/GetAllItemsUseCase");
+jest.mock(
+  "../../../../application/useCases/itemCRUD/GetAllItems/GetAllItemsUseCase"
+);
 
 describe("itemList - tests suite", () => {
   test("should show as many items exist", async () => {

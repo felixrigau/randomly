@@ -1,5 +1,5 @@
-import { ItemRepository } from "../../model/IItemRepository";
-import { Item } from "../../model/Item";
+import { ItemRepository } from "../../../model/IItemRepository";
+import { Item } from "../../../model/Item";
 
 export class UpdateItemUseCase {
   constructor(private repository: ItemRepository) {}

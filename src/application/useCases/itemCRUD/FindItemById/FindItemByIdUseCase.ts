@@ -1,4 +1,4 @@
-import { ItemRepository } from "../../model/IItemRepository";
+import { ItemRepository } from "../../../model/IItemRepository";
 
 export class FindItemByIdUseCase {
   constructor(private repository: ItemRepository) {}

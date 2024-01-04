@@ -1,6 +1,6 @@
 import { ItemRepository } from "../../model/IItemRepository";
 import { Item } from "../../model/Item";
-import { GetAllItemsUseCase } from "../GetAllItems/GetAllItemsUseCase";
+import { GetAllItemsUseCase } from "../itemCRUD/GetAllItems/GetAllItemsUseCase";
 
 export class GetOrderedItemsUseCase {
   constructor(private repository: ItemRepository) {}

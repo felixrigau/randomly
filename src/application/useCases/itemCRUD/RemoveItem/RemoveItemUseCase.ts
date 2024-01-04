@@ -1,4 +1,4 @@
-import { ItemRepository } from "../../model/IItemRepository";
+import { ItemRepository } from "../../../model/IItemRepository";
 
 export class RemoveItemUseCase {
   constructor(private repository: ItemRepository) {}

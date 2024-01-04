@@ -1,5 +1,5 @@
 import { RemoveItemUseCase } from "./RemoveItemUseCase";
-import { ItemRepositoryMock } from "../../model/ItemRepository.mock";
+import { ItemRepositoryMock } from "../../../model/ItemRepository.mock";
 
 describe("remove item use case - tests suite", () => {
   test("execute method should call the remove repository method receiving the id as a parameter", () => {

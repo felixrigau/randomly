@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import { Item } from "../../../../application/model/Item";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
-import { RemoveItemUseCase } from "../../../../application/useCases/RemoveItem/RemoveItemUseCase";
+import { RemoveItemUseCase } from "../../../../application/useCases/itemCRUD/RemoveItem/RemoveItemUseCase";
 import userEvent from "@testing-library/user-event";
 import { RemoveVisitedItemIdUseCase } from "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase";
 import { ManageItems } from "./manageItems";
@@ -12,7 +12,9 @@ import { GetOrderedItemsUseCase } from "../../../../application/useCases/GetOrde
 jest.mock(
   "../../../../application/useCases/GetOrderedItems/GetOrderedItemsUseCase"
 );
-jest.mock("../../../../application/useCases/RemoveItem/RemoveItemUseCase");
+jest.mock(
+  "../../../../application/useCases/itemCRUD/RemoveItem/RemoveItemUseCase"
+);
 jest.mock(
   "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase"
 );

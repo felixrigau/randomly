@@ -1,12 +1,12 @@
 import { useRef } from "react";
-import { GetAllItemsUseCase } from "../../../../application/useCases/GetAllItems/GetAllItemsUseCase";
-import { RemoveItemUseCase } from "../../../../application/useCases/RemoveItem/RemoveItemUseCase";
+import { GetAllItemsUseCase } from "../../../../application/useCases/itemCRUD/GetAllItems/GetAllItemsUseCase";
+import { RemoveItemUseCase } from "../../../../application/useCases/itemCRUD/RemoveItem/RemoveItemUseCase";
 import { RemoveVisitedItemIdUseCase } from "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase";
 import { ItemStorageRepository } from "../../../adapters/ItemStorageRepository/ItemStorageRepository";
 import { VisitedItemIdStorageRepository } from "../../../adapters/VisitedItemIdStorageRepository/VisitedItemIdStorageRepository";
 import { Item } from "../../../../application/model/Item";
-import { CreateItemUseCase } from "../../../../application/useCases/CreateItem/CreateItemUseCase";
-import { UpdateItemUseCase } from "../../../../application/useCases/UpdateItem/UpdateItemUseCase";
+import { CreateItemUseCase } from "../../../../application/useCases/itemCRUD/CreateItem/CreateItemUseCase";
+import { UpdateItemUseCase } from "../../../../application/useCases/itemCRUD/UpdateItem/UpdateItemUseCase";
 import { GetItemRandomlyUseCase } from "../../../../application/useCases/GetItemRandomly/GetItemRandomlyUseCase";
 import { MarkItemFixedUseCase } from "../../../../application/useCases/MarkItemFixed/MarkItemFixedUseCase";
 import { GetOrderedItemsUseCase } from "../../../../application/useCases/GetOrderedItems/GetOrderedItemsUseCase";
