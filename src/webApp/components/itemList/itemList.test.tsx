@@ -6,7 +6,7 @@ import { Item } from "../../../entities/item/application/domain/Item";
 import { ItemsProvider } from "../../contexts/Items/itemContext";
 
 jest.mock(
-  "../../../../application/useCases/itemCRUD/GetAllItems/GetAllItemsUseCase"
+  "../../../entities/item/application/useCases/itemCRUD/GetAllItems/GetAllItemsUseCase"
 );
 
 describe("itemList - tests suite", () => {

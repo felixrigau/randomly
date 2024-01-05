@@ -10,13 +10,13 @@ import { MemoryRouter } from "react-router-dom";
 import { GetOrderedItemsUseCase } from "../../../entities/item/application/useCases/GetOrderedItems/GetOrderedItemsUseCase";
 
 jest.mock(
-  "../../../../application/useCases/GetOrderedItems/GetOrderedItemsUseCase"
+  "../../../entities/item/application/useCases/GetOrderedItems/GetOrderedItemsUseCase"
 );
 jest.mock(
-  "../../../../application/useCases/itemCRUD/RemoveItem/RemoveItemUseCase"
+  "../../../entities/item/application/useCases/itemCRUD/RemoveItem/RemoveItemUseCase"
 );
 jest.mock(
-  "../../../../application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase"
+  "../../../entities/visitedItem/application/useCases/RemoveVisitedItemId/RemoveVisitedItemIdUseCase"
 );
 
 describe("itemList - tests suite", () => {

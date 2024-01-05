@@ -6,10 +6,10 @@ import { ItemsProvider } from "../../contexts/Items/itemContext";
 import { MemoryRouter } from "react-router-dom";
 
 jest.mock(
-  "../../../../application/useCases/WereItemsVisitedToday/WereItemsVisitedToday"
+  "../../../entities/visitedItem/application/useCases/WereItemsVisitedToday/WereItemsVisitedToday"
 );
 jest.mock(
-  "../../../../application/useCases/ClearPreviousVisitedItems/ClearPreviousVisitedItems"
+  "../../../entities/visitedItem/application/useCases/ClearPreviousVisitedItems/ClearPreviousVisitedItems"
 );
 
 describe("MainPage tests suite", () => {
