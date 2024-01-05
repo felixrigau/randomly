@@ -133,7 +133,10 @@ const config = {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  setupFiles: ["./src/setupTests/localStorage.mock.ts"],
+  setupFiles: [
+    "./src/setupTests/localStorage.mock.ts",
+    "./src/setupTests/crypto.mock.ts",
+  ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: ["./jest-setup.ts"],
