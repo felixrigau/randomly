@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
-import { App } from "./infra/web-app/App";
-import { ItemsProvider } from "./infra/web-app/contexts/Items/itemContext";
+import { App } from "./webApp/App";
+import { ItemsProvider } from "./webApp/contexts/Items/itemContext";
 
 // Clear the existing HTML content
 document.body.innerHTML = '<div id="app"></div>';
