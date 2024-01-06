@@ -4,11 +4,15 @@
 
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import SideBar from "../sideBar/sideBar";
-import { StyledContainer, StyledHeader, StyledMain } from "./layout.styled";
-import MenuIcon from "@mui/icons-material/Menu";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {
+  StyledContainer,
+  StyledFooter,
+  StyledHeader,
+  StyledMain,
+} from "./layout.styled";
 import { useGoTo } from "../../hooks/useGoTo";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import HomeIcon from "@mui/icons-material/Home";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const [isHome, setIsHome] = useState(false);
@@ -23,30 +27,16 @@ export const Layout = ({ children }: PropsWithChildren) => {
 
   return (
     <StyledContainer>
-      <StyledHeader>
-        {!isHome && (
-          <button aria-label="go home" onClick={goToHome}>
-            <ArrowBackIcon />
-          </button>
-        )}
-        <div />
-        {isHome && (
-          <button
-            aria-label="handle menu"
-            onClick={() => setIsSideBarOpen(!isSideBarOpen)}
-          >
-            <MenuIcon />
-          </button>
-        )}
-      </StyledHeader>
-      <StyledMain>
-        {children}
-        <SideBar isOpen={isSideBarOpen}>
-          <button aria-label="go to items" onClick={goToItems}>
-            Manage Items
-          </button>
-        </SideBar>
-      </StyledMain>
+      <StyledHeader>Rezando por</StyledHeader>
+      <StyledMain>{children}</StyledMain>
+      <StyledFooter>
+        <button onClick={goToHome}>
+          <HomeIcon />
+        </button>
+        <button onClick={goToItems}>
+          <PeopleAltIcon />
+        </button>
+      </StyledFooter>
     </StyledContainer>
   );
 };
