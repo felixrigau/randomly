@@ -3,7 +3,7 @@ import { Item } from "../../../entities/item/application/domain/Item";
 import { NoMoreItemsError } from "../../../entities/item/application/useCases/GetItemRandomly/NoMoreItemsError";
 import { StyledItem, StyledMessage, StyledTitle } from "./showItem.styled";
 import useItemCRUD from "../../hooks/useItemCRUD/useItemCRUD";
-import { StyledFixedButtonContainer } from "../../shared/styles.styled";
+import { StyledFixedButtonContainer } from "../../shared/styles/styles.styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Accordion } from "../accordion/accordion";
 

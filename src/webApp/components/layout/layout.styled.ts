@@ -1,6 +1,6 @@
 import styled from "styled-components";
+import { FOOTER_HEIGHT } from "../../shared/styles/constants";
 export const HEADER_HEIGHT = "4rem";
-export const FOOTER_HEIGHT = "4rem";
 
 export const StyledContainer = styled.div`
   display: grid;
@@ -10,7 +10,7 @@ export const StyledContainer = styled.div`
 export const StyledMain = styled.main`
   display: flex;
   position: relative;
-  height: calc(100% - ${HEADER_HEIGHT});
+  height: calc(100% - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT});
   margin-top: ${HEADER_HEIGHT};
 `;
 
@@ -22,7 +22,8 @@ export const StyledHeader = styled.header`
   height: ${HEADER_HEIGHT};
   background-color: #f1f1f1;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   padding: 0 1rem;
   border-bottom: 1px solid #bebebe;
   z-index: 2;
@@ -34,9 +35,18 @@ export const StyledFooter = styled.header`
   width: 100%;
   height: ${FOOTER_HEIGHT};
   background-color: #f1f1f1;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  padding: 1rem;
   border-top: 1px solid #bebebe;
   z-index: 2;
+
+  & > button {
+    border-left: 1px solid #bebebe;
+  }
+
+  & > button:first-child {
+    border-left: none;
+  }
 `;

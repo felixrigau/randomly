@@ -20,7 +20,7 @@ import {
 import {
   StyledButton,
   StyledFixedButtonContainer,
-} from "../../shared/styles.styled";
+} from "../../shared/styles/styles.styled";
 import { Layout } from "../../components/layout/layout";
 
 export const ManageItems = () => {

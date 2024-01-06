@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { FOOTER_HEIGHT } from "./constants";
 
 export const StyledFixedButtonContainer = styled.div`
   position: fixed;
-  bottom: 3rem;
+  bottom: calc(3rem + ${FOOTER_HEIGHT});
   left: 0;
   width: 3rem;
   display: flex;
