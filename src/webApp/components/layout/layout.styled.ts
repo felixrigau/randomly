@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FOOTER_HEIGHT } from "../../shared/styles/constants";
-export const HEADER_HEIGHT = "4rem";
+export const HEADER_HEIGHT = "5rem";
 
 export const StyledContainer = styled.div`
   display: grid;
