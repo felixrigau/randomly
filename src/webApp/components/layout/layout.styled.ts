@@ -38,7 +38,7 @@ export const StyledFooter = styled.header`
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: space-around;
-  padding: 1rem;
+  padding: 1rem 0;
   border-top: 1px solid #bebebe;
   z-index: 2;
 
